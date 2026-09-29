@@ -1,0 +1,21 @@
+{
+  "name": "juego-jep-don-jacinto",
+  "version": "1.0.0",
+  "description": "Juego JEP: Don Jacinto y la Memoria Histórica (1958–1978) - Experiencia Educativa Interactiva",
+  "main": "index.html",
+  "scripts": {
+    "build": "python build_index.py",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "jep",
+    "colombia",
+    "memoria-historica",
+    "educacion",
+    "juego-de-mesa",
+    "don-jacinto",
+    "react"
+  ],
+  "author": "Comunidad de Indagación 3 / Scibaru AI",
+  "license": "MIT"
+}

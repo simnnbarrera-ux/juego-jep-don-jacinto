@@ -1,0 +1,331 @@
+
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" class="jacinto-svg-canvas">
+        
+    <defs>
+      <!-- Gradientes de Cielo -->
+      <linearGradient id="skyDayGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2980B9"/>
+        <stop offset="35%" stop-color="#6DD5FA"/>
+        <stop offset="70%" stop-color="#B8E994"/>
+        <stop offset="100%" stop-color="#FCE38A"/>
+      </linearGradient>
+
+      <linearGradient id="skySunsetGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4A00E0"/>
+        <stop offset="30%" stop-color="#8E2DE2"/>
+        <stop offset="65%" stop-color="#F27121"/>
+        <stop offset="85%" stop-color="#E94057"/>
+        <stop offset="100%" stop-color="#FEE140"/>
+      </linearGradient>
+
+      <!-- Gradientes de Montañas Andinas -->
+      <linearGradient id="cordilleraFarGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4B6584"/>
+        <stop offset="100%" stop-color="#778CA3"/>
+      </linearGradient>
+      
+      <linearGradient id="nevadoSnowGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FFFFFF"/>
+        <stop offset="60%" stop-color="#E4F1FE"/>
+        <stop offset="100%" stop-color="#A5C4D4"/>
+      </linearGradient>
+
+      <linearGradient id="cordilleraMidGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1E6B37"/>
+        <stop offset="100%" stop-color="#2E8B57"/>
+      </linearGradient>
+
+      <linearGradient id="cordilleraNearGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#145A32"/>
+        <stop offset="100%" stop-color="#27AE60"/>
+      </linearGradient>
+
+      <linearGradient id="terrenoGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2ECC71"/>
+        <stop offset="40%" stop-color="#27AE60"/>
+        <stop offset="100%" stop-color="#1E8449"/>
+      </linearGradient>
+
+      <linearGradient id="caminoTierraGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#C49A6C"/>
+        <stop offset="50%" stop-color="#B58757"/>
+        <stop offset="100%" stop-color="#93683A"/>
+      </linearGradient>
+
+      <!-- Materiales de Construcción Finca -->
+      <linearGradient id="adobeWallGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#C89D66"/>
+        <stop offset="30%" stop-color="#DBB27E"/>
+        <stop offset="70%" stop-color="#D2A46F"/>
+        <stop offset="100%" stop-color="#BA8854"/>
+      </linearGradient>
+
+      <linearGradient id="whiteStuccoGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#ECEFF1"/>
+        <stop offset="20%" stop-color="#FFFFFF"/>
+        <stop offset="80%" stop-color="#F8FAFC"/>
+        <stop offset="100%" stop-color="#E2E8F0"/>
+      </linearGradient>
+
+      <linearGradient id="zocaloRojoGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#C0392B"/>
+        <stop offset="50%" stop-color="#96281B"/>
+        <stop offset="100%" stop-color="#641E16"/>
+      </linearGradient>
+
+      <linearGradient id="tejasBarroGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#E65100"/>
+        <stop offset="40%" stop-color="#BF360C"/>
+        <stop offset="80%" stop-color="#A82B06"/>
+        <stop offset="100%" stop-color="#701C02"/>
+      </linearGradient>
+
+      <linearGradient id="techoPajaGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#D4AC0D"/>
+        <stop offset="40%" stop-color="#B7950B"/>
+        <stop offset="80%" stop-color="#9A7D0A"/>
+        <stop offset="100%" stop-color="#7D6608"/>
+      </linearGradient>
+
+      <linearGradient id="woodColonialBlue" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#1E88E5"/>
+        <stop offset="50%" stop-color="#1565C0"/>
+        <stop offset="100%" stop-color="#0D47A1"/>
+      </linearGradient>
+
+      <linearGradient id="woodColonialYellow" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FDD835"/>
+        <stop offset="50%" stop-color="#FBC02D"/>
+        <stop offset="100%" stop-color="#F57F17"/>
+      </linearGradient>
+
+      <linearGradient id="woodRichBrown" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#6D4C41"/>
+        <stop offset="50%" stop-color="#8D6E63"/>
+        <stop offset="100%" stop-color="#4E342E"/>
+      </linearGradient>
+
+      <linearGradient id="goldCoffeeBeanGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FFF9C4"/>
+        <stop offset="30%" stop-color="#FBC02D"/>
+        <stop offset="70%" stop-color="#F57F17"/>
+        <stop offset="100%" stop-color="#E65100"/>
+      </linearGradient>
+
+      <linearGradient id="redCherryGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FF5252"/>
+        <stop offset="40%" stop-color="#D50000"/>
+        <stop offset="80%" stop-color="#B71C1C"/>
+        <stop offset="100%" stop-color="#5F0909"/>
+      </linearGradient>
+
+      <!-- Gradientes de Don Jacinto -->
+      <linearGradient id="skinGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F8C291"/>
+        <stop offset="60%" stop-color="#E59866"/>
+        <stop offset="100%" stop-color="#BA6835"/>
+      </linearGradient>
+
+      <linearGradient id="skinShadowGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#E59866"/>
+        <stop offset="100%" stop-color="#A04000"/>
+      </linearGradient>
+
+      <linearGradient id="ruanaWoolGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FDFEFE"/>
+        <stop offset="30%" stop-color="#F4F6F6"/>
+        <stop offset="70%" stop-color="#E5E8E8"/>
+        <stop offset="100%" stop-color="#CCD1D1"/>
+      </linearGradient>
+
+      <linearGradient id="sombreroStrawGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#FEF9E7"/>
+        <stop offset="40%" stop-color="#FCF3CF"/>
+        <stop offset="80%" stop-color="#F9E79F"/>
+        <stop offset="100%" stop-color="#F7DC6F"/>
+      </linearGradient>
+
+      <linearGradient id="carrielLeatherGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#795548"/>
+        <stop offset="50%" stop-color="#5D4037"/>
+        <stop offset="100%" stop-color="#3E2723"/>
+      </linearGradient>
+
+      <!-- Filtros para Sombras y Resplandores -->
+      <filter id="dropShadow" x="-20%" y="-20%" width="150%" height="150%">
+        <feDropShadow dx="3" dy="6" stdDeviation="4" flood-opacity="0.35" flood-color="#0F172A"/>
+      </filter>
+
+      <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+        <feOffset dx="1" dy="4" result="offsetblur"/>
+        <feComponentTransfer>
+          <feFuncA type="linear" slope="0.3"/>
+        </feComponentTransfer>
+        <feMerge> 
+          <feMergeNode/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+
+      <filter id="goldGlow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="5" result="blur"/>
+        <feComponentTransfer in="blur" result="glow">
+          <feFuncA type="linear" slope="0.7"/>
+        </feComponentTransfer>
+        <feMerge>
+          <feMergeNode in="glow"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+
+      <!-- Patrón de tejas coloniales -->
+      <pattern id="clayTilePattern" width="24" height="16" patternUnits="userSpaceOnUse">
+        <path d="M0,0 Q12,8 24,0 L24,16 Q12,24 0,16 Z" fill="#D84315" stroke="#871A00" stroke-width="1"/>
+        <path d="M2,1 Q12,7 22,1" fill="none" stroke="#FF7043" stroke-width="0.8"/>
+      </pattern>
+    </defs>
+  
+        <g id="jacinto-character" transform="translate(200, 260)">
+          <!-- Piernas y Pantalón de Dril Azul Campesino -->
+          <g id="jacinto-legs">
+            <!-- Pantalón de trabajo -->
+            <path d="M-30,170 L-28,260 L-8,260 L-10,180 L10,180 L8,260 L28,260 L30,170 Z" fill="#2C3E50" stroke="#1A252F" stroke-width="2"/>
+            <!-- Botas de Cuero Campesinas -->
+            <g fill="#4E342E" stroke="#271C19" stroke-width="1.5">
+              <rect x="-30" y="255" width="24" height="18" rx="4"/>
+              <rect x="6" y="255" width="24" height="18" rx="4"/>
+            </g>
+          </g>
+
+          <!-- Brazos (Capa trasera o conectores) -->
+          
+        <path d="M-35,90 Q-65,70 -42,30" stroke="url(#skinGrad)" stroke-width="20" stroke-linecap="round" fill="none"/>
+        <circle cx="-42" cy="30" r="12" fill="url(#skinGrad)"/>
+      
+          
+        <path d="M35,90 Q65,110 50,145" stroke="url(#skinGrad)" stroke-width="20" stroke-linecap="round" fill="none"/>
+        <circle cx="50" cy="145" r="12" fill="url(#skinGrad)"/>
+      
+
+          <!-- Torso y Ruana Colombiana Tradicional de Lana Virgen -->
+          <g id="jacinto-torso" filter="url(#dropShadow)">
+            <!-- Camisa blanca bajo la ruana -->
+            <rect x="-25" y="55" width="50" height="30" fill="#FFFFFF" stroke="#CFD8DC" stroke-width="1"/>
+
+            <!-- Ruana de lana blanca con ribetes rojizos y flecos -->
+            <path d="M-45,65 Q0,78 45,65 L55,160 Q0,180 -55,160 Z" fill="url(#ruanaWoolGrad)" stroke="#B0BEC5" stroke-width="1.5"/>
+            
+            <!-- Franja decorativa tradicional de la ruana (cenefa roja y negra) -->
+            <path d="M-52,145 Q0,165 52,145 L54,155 Q0,175 -54,155 Z" fill="#8B0000"/>
+            <path d="M-50,138 Q0,158 50,138" stroke="#F1C40F" stroke-width="1.8" fill="none"/>
+
+            <!-- Abertura central del cuello de la ruana -->
+            <polygon points="-8,68 8,68 0,105" fill="#37474F"/>
+          </g>
+
+          <!-- Carriel Antioqueño Tradicional (Bolsa de cuero con múltiples bolsillos) -->
+          <g id="carriel-antioqueno" transform="translate(18, 110)" filter="url(#dropShadow)">
+            <!-- Correa terciada cruzada al hombro -->
+            <path d="M-45,-45 L0,20" stroke="url(#carrielLeatherGrad)" stroke-width="5" fill="none"/>
+            <!-- Caja del carriel de cuero charolado -->
+            <rect x="-8" y="15" width="34" height="38" rx="4" fill="url(#carrielLeatherGrad)" stroke="#271C19" stroke-width="1.5"/>
+            <!-- Tapa de piel con pelo / ribetes amarillos y verdes -->
+            <path d="M-9,15 Q9,35 27,15" fill="#5D4037" stroke="#FDD835" stroke-width="1.5"/>
+            <!-- Hebilla dorada -->
+            <rect x="7" y="26" width="5" height="7" fill="#FFD700" stroke="#B7950B" stroke-width="0.8"/>
+          </g>
+
+          <!-- Accesorios adicionales (canastos, manchas, destellos) -->
+          
+          
+        <!-- Ondas de temblor / preocupación cómica -->
+        <g stroke="#29B6F6" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8">
+          <path d="M-45,-40 Q-55,-30 -45,-20"/>
+          <path d="M45,-40 Q55,-30 45,-20"/>
+        </g>
+      
+
+          <!-- Cabeza de Don Jacinto -->
+          <g transform="translate(0, 0)">
+            
+      <g id="jacinto-head" filter="url(#dropShadow)">
+        <!-- Cuello y Pañuelo Rabo e' Gallo Rojo -->
+        <path d="M-15,35 L15,35 L12,65 L-12,65 Z" fill="url(#skinShadowGrad)"/>
+        <!-- Pañuelo campesino rojo anudado al cuello -->
+        <path d="M-22,50 Q0,65 22,50 Q18,75 0,80 Q-18,75 -22,50 Z" fill="#C62828" stroke="#8E0000" stroke-width="1.5"/>
+        <circle cx="0" cy="74" r="4" fill="#B71C1C"/>
+        <path d="M0,74 L-8,92 L0,86 L8,92 Z" fill="#C62828"/>
+
+        <!-- Rostro de Don Jacinto -->
+        <path d="M-28,0 Q-32,35 0,46 Q32,35 28,0 Q24,-30 0,-30 Q-24,-30 -28,0 Z" fill="url(#skinGrad)" stroke="#B3541E" stroke-width="1.5"/>
+
+        <!-- Orejas con detalle anatómico -->
+        <ellipse cx="-29" cy="5" rx="6" ry="10" fill="url(#skinGrad)" stroke="#B3541E" stroke-width="1"/>
+        <ellipse cx="29" cy="5" rx="6" ry="10" fill="url(#skinGrad)" stroke="#B3541E" stroke-width="1"/>
+        <path d="M-28,3 Q-25,7 -28,10" fill="none" stroke="#A04000" stroke-width="1"/>
+        <path d="M28,3 Q25,7 28,10" fill="none" stroke="#A04000" stroke-width="1"/>
+
+        <!-- Mejillas sonrosadas por el sol de montaña -->
+        <circle cx="-16" cy="14" r="8" fill="#E74C3C" opacity="0.25"/>
+        <circle cx="16" cy="14" r="8" fill="#E74C3C" opacity="0.25"/>
+
+        <!-- Nariz noble campesina -->
+        <path d="M0,-8 Q4,8 7,12 Q0,17 -7,12 Q-4,8 0,-8" fill="url(#skinShadowGrad)" stroke="#A04000" stroke-width="1"/>
+
+        <!-- Ojos y Cejas -->
+        
+          <ellipse cx="-13" cy="-3" rx="5" ry="5.5" fill="#FFFFFF" stroke="#2C3E50" stroke-width="1.5"/>
+          <circle cx="-12" cy="-2" r="2.8" fill="#1A252F"/>
+          <circle cx="-13" cy="-3.5" r="1" fill="#FFFFFF"/>
+
+          <ellipse cx="13" cy="-3" rx="5" ry="5.5" fill="#FFFFFF" stroke="#2C3E50" stroke-width="1.5"/>
+          <circle cx="12" cy="-2" r="2.8" fill="#1A252F"/>
+          <circle cx="11" cy="-3.5" r="1" fill="#FFFFFF"/>
+        
+
+        <!-- Cejas tupidas -->
+        <g fill="#3E2723">
+          <path d="M-22,-8 Q-12,-16 -4,-10 Q-12,-12 -22,-8" transform="rotate(-25 -13 -10)"/>
+          <path d="M22,-8 Q12,-16 4,-10 Q12,-12 22,-8" transform="rotate(25 13 -10)"/>
+        </g>
+
+        <!-- Bigote Paisa Colombiano Frondoso y Legendario -->
+        <path d="M0,18 Q-15,10 -30,22 Q-18,32 0,23 Q18,32 30,22 Q15,10 0,18 Z" fill="#2D1D17" stroke="#1B100C" stroke-width="1.2"/>
+        <!-- Detalle de canas en el bigote -->
+        <path d="M-15,18 Q-5,22 0,20" stroke="#D7CCC8" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M15,18 Q5,22 0,20" stroke="#D7CCC8" stroke-width="1" fill="none" opacity="0.6"/>
+
+        <!-- Boca / Sonrisa -->
+        <path d="M-12,30 Q-6,24 0,28 Q6,32 12,26" fill="none" stroke="#A04000" stroke-width="2.5" stroke-linecap="round"/>
+
+        <!-- Gota de Sudor Cósmica / Preocupación (si aplica) -->
+        
+          <g transform="translate(24, -22)" filter="url(#dropShadow)">
+            <path d="M0,0 Q-6,10 0,16 Q6,10 0,0 Z" fill="#29B6F6" stroke="#0288D1" stroke-width="1"/>
+            <circle cx="-1.5" cy="10" r="1.5" fill="#FFFFFF"/>
+          </g>
+        
+
+        <!-- Sombrero Aguadeño Tradicional (Fina paja jipijapa) -->
+        <g id="sombrero-aguadeno" transform="translate(0, -26)" filter="url(#dropShadow)">
+          <!-- Ala ancha del sombrero -->
+          <ellipse cx="0" cy="0" rx="72" ry="22" fill="url(#sombreroStrawGrad)" stroke="#D4AC0D" stroke-width="1.8"/>
+          <!-- Sombra bajo el ala -->
+          <ellipse cx="0" cy="4" rx="42" ry="12" fill="#7D6608" opacity="0.3"/>
+          
+          <!-- Copa del sombrero -->
+          <path d="M-36,0 Q-40,-38 0,-42 Q40,-38 36,0 Z" fill="url(#sombreroStrawGrad)" stroke="#D4AC0D" stroke-width="1.8"/>
+          <!-- Hendidura superior clásica de la copa -->
+          <path d="M-20,-36 Q0,-30 20,-36" fill="none" stroke="#B7950B" stroke-width="2.5"/>
+
+          <!-- Cinta negra de terciopelo tradicional -->
+          <path d="M-36,-2 Q0,4 36,-2 L36,-10 Q0,-4 -36,-10 Z" fill="#1A1A1A" stroke="#000000" stroke-width="1"/>
+          <rect x="-8" y="-10" width="16" height="8" fill="#FDD835" rx="1"/>
+        </g>
+      </g>
+    
+          </g>
+        </g>
+      </svg>
+    

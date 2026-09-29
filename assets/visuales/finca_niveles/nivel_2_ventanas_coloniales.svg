@@ -1,0 +1,888 @@
+
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" class="farm-svg-canvas">
+        
+    <defs>
+      <!-- Gradientes de Cielo -->
+      <linearGradient id="skyDayGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2980B9"/>
+        <stop offset="35%" stop-color="#6DD5FA"/>
+        <stop offset="70%" stop-color="#B8E994"/>
+        <stop offset="100%" stop-color="#FCE38A"/>
+      </linearGradient>
+
+      <linearGradient id="skySunsetGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4A00E0"/>
+        <stop offset="30%" stop-color="#8E2DE2"/>
+        <stop offset="65%" stop-color="#F27121"/>
+        <stop offset="85%" stop-color="#E94057"/>
+        <stop offset="100%" stop-color="#FEE140"/>
+      </linearGradient>
+
+      <!-- Gradientes de Montañas Andinas -->
+      <linearGradient id="cordilleraFarGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4B6584"/>
+        <stop offset="100%" stop-color="#778CA3"/>
+      </linearGradient>
+      
+      <linearGradient id="nevadoSnowGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FFFFFF"/>
+        <stop offset="60%" stop-color="#E4F1FE"/>
+        <stop offset="100%" stop-color="#A5C4D4"/>
+      </linearGradient>
+
+      <linearGradient id="cordilleraMidGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1E6B37"/>
+        <stop offset="100%" stop-color="#2E8B57"/>
+      </linearGradient>
+
+      <linearGradient id="cordilleraNearGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#145A32"/>
+        <stop offset="100%" stop-color="#27AE60"/>
+      </linearGradient>
+
+      <linearGradient id="terrenoGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2ECC71"/>
+        <stop offset="40%" stop-color="#27AE60"/>
+        <stop offset="100%" stop-color="#1E8449"/>
+      </linearGradient>
+
+      <linearGradient id="caminoTierraGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#C49A6C"/>
+        <stop offset="50%" stop-color="#B58757"/>
+        <stop offset="100%" stop-color="#93683A"/>
+      </linearGradient>
+
+      <!-- Materiales de Construcción Finca -->
+      <linearGradient id="adobeWallGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#C89D66"/>
+        <stop offset="30%" stop-color="#DBB27E"/>
+        <stop offset="70%" stop-color="#D2A46F"/>
+        <stop offset="100%" stop-color="#BA8854"/>
+      </linearGradient>
+
+      <linearGradient id="whiteStuccoGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#ECEFF1"/>
+        <stop offset="20%" stop-color="#FFFFFF"/>
+        <stop offset="80%" stop-color="#F8FAFC"/>
+        <stop offset="100%" stop-color="#E2E8F0"/>
+      </linearGradient>
+
+      <linearGradient id="zocaloRojoGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#C0392B"/>
+        <stop offset="50%" stop-color="#96281B"/>
+        <stop offset="100%" stop-color="#641E16"/>
+      </linearGradient>
+
+      <linearGradient id="tejasBarroGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#E65100"/>
+        <stop offset="40%" stop-color="#BF360C"/>
+        <stop offset="80%" stop-color="#A82B06"/>
+        <stop offset="100%" stop-color="#701C02"/>
+      </linearGradient>
+
+      <linearGradient id="techoPajaGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#D4AC0D"/>
+        <stop offset="40%" stop-color="#B7950B"/>
+        <stop offset="80%" stop-color="#9A7D0A"/>
+        <stop offset="100%" stop-color="#7D6608"/>
+      </linearGradient>
+
+      <linearGradient id="woodColonialBlue" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#1E88E5"/>
+        <stop offset="50%" stop-color="#1565C0"/>
+        <stop offset="100%" stop-color="#0D47A1"/>
+      </linearGradient>
+
+      <linearGradient id="woodColonialYellow" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FDD835"/>
+        <stop offset="50%" stop-color="#FBC02D"/>
+        <stop offset="100%" stop-color="#F57F17"/>
+      </linearGradient>
+
+      <linearGradient id="woodRichBrown" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#6D4C41"/>
+        <stop offset="50%" stop-color="#8D6E63"/>
+        <stop offset="100%" stop-color="#4E342E"/>
+      </linearGradient>
+
+      <linearGradient id="goldCoffeeBeanGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FFF9C4"/>
+        <stop offset="30%" stop-color="#FBC02D"/>
+        <stop offset="70%" stop-color="#F57F17"/>
+        <stop offset="100%" stop-color="#E65100"/>
+      </linearGradient>
+
+      <linearGradient id="redCherryGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FF5252"/>
+        <stop offset="40%" stop-color="#D50000"/>
+        <stop offset="80%" stop-color="#B71C1C"/>
+        <stop offset="100%" stop-color="#5F0909"/>
+      </linearGradient>
+
+      <!-- Gradientes de Don Jacinto -->
+      <linearGradient id="skinGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F8C291"/>
+        <stop offset="60%" stop-color="#E59866"/>
+        <stop offset="100%" stop-color="#BA6835"/>
+      </linearGradient>
+
+      <linearGradient id="skinShadowGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#E59866"/>
+        <stop offset="100%" stop-color="#A04000"/>
+      </linearGradient>
+
+      <linearGradient id="ruanaWoolGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FDFEFE"/>
+        <stop offset="30%" stop-color="#F4F6F6"/>
+        <stop offset="70%" stop-color="#E5E8E8"/>
+        <stop offset="100%" stop-color="#CCD1D1"/>
+      </linearGradient>
+
+      <linearGradient id="sombreroStrawGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#FEF9E7"/>
+        <stop offset="40%" stop-color="#FCF3CF"/>
+        <stop offset="80%" stop-color="#F9E79F"/>
+        <stop offset="100%" stop-color="#F7DC6F"/>
+      </linearGradient>
+
+      <linearGradient id="carrielLeatherGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#795548"/>
+        <stop offset="50%" stop-color="#5D4037"/>
+        <stop offset="100%" stop-color="#3E2723"/>
+      </linearGradient>
+
+      <!-- Filtros para Sombras y Resplandores -->
+      <filter id="dropShadow" x="-20%" y="-20%" width="150%" height="150%">
+        <feDropShadow dx="3" dy="6" stdDeviation="4" flood-opacity="0.35" flood-color="#0F172A"/>
+      </filter>
+
+      <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+        <feOffset dx="1" dy="4" result="offsetblur"/>
+        <feComponentTransfer>
+          <feFuncA type="linear" slope="0.3"/>
+        </feComponentTransfer>
+        <feMerge> 
+          <feMergeNode/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+
+      <filter id="goldGlow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="5" result="blur"/>
+        <feComponentTransfer in="blur" result="glow">
+          <feFuncA type="linear" slope="0.7"/>
+        </feComponentTransfer>
+        <feMerge>
+          <feMergeNode in="glow"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+
+      <!-- Patrón de tejas coloniales -->
+      <pattern id="clayTilePattern" width="24" height="16" patternUnits="userSpaceOnUse">
+        <path d="M0,0 Q12,8 24,0 L24,16 Q12,24 0,16 Z" fill="#D84315" stroke="#871A00" stroke-width="1"/>
+        <path d="M2,1 Q12,7 22,1" fill="none" stroke="#FF7043" stroke-width="0.8"/>
+      </pattern>
+    </defs>
+  
+        
+      <!-- 1. CIELO -->
+      <rect x="0" y="0" width="1200" height="800" fill="url(#skyDayGrad)"/>
+
+      <!-- Sol de la Mañana / Atardecer Andino -->
+      <g transform="translate(600, 160)">
+        <circle cx="0" cy="0" r="90" fill="#F39C12" opacity="0.25" filter="url(#goldGlow)"/>
+        <circle cx="0" cy="0" r="60" fill="#F39C12" opacity="0.4"/>
+        <circle cx="0" cy="0" r="40" fill="#FFF9C4" filter="url(#dropShadow)"/>
+      </g>
+
+      <!-- Nubes Estilizadas de Algodón -->
+      <g fill="#FFFFFF" opacity="0.85" filter="url(#softShadow)">
+        <!-- Nube 1 -->
+        <g transform="translate(180, 110)">
+          <ellipse cx="0" cy="0" rx="55" ry="22"/>
+          <ellipse cx="28" cy="-12" rx="35" ry="26"/>
+          <ellipse cx="-25" cy="-8" rx="30" ry="20"/>
+          <ellipse cx="50" cy="2" rx="25" ry="16"/>
+        </g>
+        <!-- Nube 2 -->
+        <g transform="translate(920, 130)">
+          <ellipse cx="0" cy="0" rx="65" ry="25"/>
+          <ellipse cx="35" cy="-14" rx="40" ry="28"/>
+          <ellipse cx="-30" cy="-10" rx="35" ry="22"/>
+          <ellipse cx="-55" cy="2" rx="25" ry="16"/>
+        </g>
+        <!-- Nube 3 lejana -->
+        <g transform="translate(480, 80) scale(0.65)" opacity="0.7">
+          <ellipse cx="0" cy="0" rx="50" ry="18"/>
+          <ellipse cx="25" cy="-10" rx="30" ry="22"/>
+          <ellipse cx="-20" cy="-6" rx="28" ry="18"/>
+        </g>
+      </g>
+
+      <!-- Cóndor Andino / Aves en el horizonte -->
+      <g stroke="#2C3E50" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.6">
+        <path d="M380,140 Q390,130 400,140 Q410,130 420,140"/>
+        <path d="M425,152 Q432,145 440,152 Q448,145 455,152" stroke-width="2"/>
+        <path d="M780,105 Q792,95 805,105 Q818,95 830,105"/>
+      </g>
+
+      <!-- 2. CORDILLERA LEJANA CON NEVADO DEL RUIZ -->
+      <path d="M0,420 L0,260 Q180,240 320,290 Q480,220 620,270 L700,200 L760,250 Q920,210 1080,280 L1200,240 L1200,500 L0,500 Z" fill="url(#cordilleraFarGrad)" opacity="0.9"/>
+      
+      <!-- Pico Nevado Majestuoso -->
+      <g transform="translate(700, 200)">
+        <polygon points="0,0 -50,60 60,50" fill="url(#nevadoSnowGrad)"/>
+        <path d="M0,0 L-18,35 L-6,28 L8,42 L25,25 L60,50 L-50,60 Z" fill="#FFFFFF"/>
+        <!-- Sombra glacial -->
+        <polygon points="0,0 8,42 60,50" fill="#90CAF9" opacity="0.5"/>
+      </g>
+
+      <!-- 3. CORDILLERA MEDIA (Laderas Verdes Cafeteras) -->
+      <path d="M0,480 L0,320 Q220,380 440,310 Q680,410 900,320 Q1060,360 1200,330 L1200,600 L0,600 Z" fill="url(#cordilleraMidGrad)"/>
+
+      <!-- Surcos de Café en la ladera lejana -->
+      <g stroke="#145A32" stroke-width="2" opacity="0.4" stroke-dasharray="6,8">
+        <path d="M100,370 Q300,410 440,340"/>
+        <path d="M80,390 Q280,430 420,360"/>
+        <path d="M700,380 Q900,340 1100,370"/>
+        <path d="M720,400 Q920,360 1120,390"/>
+      </g>
+
+      <!-- Palmas de Cera en las Colinas Lejanas -->
+      
+      <g transform="translate(90, 410) scale(0.45) rotate(-3)" filter="url(#softShadow)">
+        <!-- Tronco esbelto anillado característico -->
+        <path d="M-3,0 Q-1,-120 -2,-240 Q-1,-300 0,-340 Q1,-300 2,-240 Q3,-120 3,0 Z" fill="#D5DBDB" stroke="#95A5A6" stroke-width="1"/>
+        <!-- Anillos del tronco -->
+        <ellipse cx="0" cy="-40" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-80" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-120" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-160" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-200" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-240" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-280" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-310" rx="2.5" ry="1" fill="#7F8C8D"/>
+        
+        <!-- Corona de Hojas de Palma de Cera -->
+        <g transform="translate(0, -340)">
+          <!-- Racimos de frutos anaranjados -->
+          <circle cx="-4" cy="5" r="4" fill="#E67E22"/>
+          <circle cx="0" cy="8" r="4.5" fill="#D35400"/>
+          <circle cx="4" cy="6" r="4" fill="#E67E22"/>
+          
+          <!-- Hojas curvadas en todas direcciones -->
+          <path d="M0,0 Q-30,-20 -60,-10 Q-35,-5 0,0" fill="#1E8449"/>
+          <path d="M0,0 Q-45,-40 -70,-50 Q-40,-30 0,0" fill="#27AE60"/>
+          <path d="M0,0 Q-25,-60 -40,-90 Q-20,-55 0,0" fill="#2ECC71"/>
+          <path d="M0,0 Q0,-75 0,-105 Q10,-65 0,0" fill="#58D68D"/>
+          <path d="M0,0 Q25,-60 40,-90 Q20,-55 0,0" fill="#2ECC71"/>
+          <path d="M0,0 Q45,-40 70,-50 Q40,-30 0,0" fill="#27AE60"/>
+          <path d="M0,0 Q30,-20 60,-10 Q35,-5 0,0" fill="#1E8449"/>
+          <path d="M0,0 Q-15,15 -35,25 Q-15,10 0,0" fill="#145A32"/>
+          <path d="M0,0 Q15,15 35,25 Q15,10 0,0" fill="#145A32"/>
+        </g>
+      </g>
+    
+      
+      <g transform="translate(140, 430) scale(0.55) rotate(2)" filter="url(#softShadow)">
+        <!-- Tronco esbelto anillado característico -->
+        <path d="M-3,0 Q-1,-120 -2,-240 Q-1,-300 0,-340 Q1,-300 2,-240 Q3,-120 3,0 Z" fill="#D5DBDB" stroke="#95A5A6" stroke-width="1"/>
+        <!-- Anillos del tronco -->
+        <ellipse cx="0" cy="-40" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-80" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-120" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-160" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-200" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-240" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-280" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-310" rx="2.5" ry="1" fill="#7F8C8D"/>
+        
+        <!-- Corona de Hojas de Palma de Cera -->
+        <g transform="translate(0, -340)">
+          <!-- Racimos de frutos anaranjados -->
+          <circle cx="-4" cy="5" r="4" fill="#E67E22"/>
+          <circle cx="0" cy="8" r="4.5" fill="#D35400"/>
+          <circle cx="4" cy="6" r="4" fill="#E67E22"/>
+          
+          <!-- Hojas curvadas en todas direcciones -->
+          <path d="M0,0 Q-30,-20 -60,-10 Q-35,-5 0,0" fill="#1E8449"/>
+          <path d="M0,0 Q-45,-40 -70,-50 Q-40,-30 0,0" fill="#27AE60"/>
+          <path d="M0,0 Q-25,-60 -40,-90 Q-20,-55 0,0" fill="#2ECC71"/>
+          <path d="M0,0 Q0,-75 0,-105 Q10,-65 0,0" fill="#58D68D"/>
+          <path d="M0,0 Q25,-60 40,-90 Q20,-55 0,0" fill="#2ECC71"/>
+          <path d="M0,0 Q45,-40 70,-50 Q40,-30 0,0" fill="#27AE60"/>
+          <path d="M0,0 Q30,-20 60,-10 Q35,-5 0,0" fill="#1E8449"/>
+          <path d="M0,0 Q-15,15 -35,25 Q-15,10 0,0" fill="#145A32"/>
+          <path d="M0,0 Q15,15 35,25 Q15,10 0,0" fill="#145A32"/>
+        </g>
+      </g>
+    
+      
+      <g transform="translate(210, 420) scale(0.4) rotate(-1)" filter="url(#softShadow)">
+        <!-- Tronco esbelto anillado característico -->
+        <path d="M-3,0 Q-1,-120 -2,-240 Q-1,-300 0,-340 Q1,-300 2,-240 Q3,-120 3,0 Z" fill="#D5DBDB" stroke="#95A5A6" stroke-width="1"/>
+        <!-- Anillos del tronco -->
+        <ellipse cx="0" cy="-40" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-80" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-120" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-160" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-200" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-240" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-280" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-310" rx="2.5" ry="1" fill="#7F8C8D"/>
+        
+        <!-- Corona de Hojas de Palma de Cera -->
+        <g transform="translate(0, -340)">
+          <!-- Racimos de frutos anaranjados -->
+          <circle cx="-4" cy="5" r="4" fill="#E67E22"/>
+          <circle cx="0" cy="8" r="4.5" fill="#D35400"/>
+          <circle cx="4" cy="6" r="4" fill="#E67E22"/>
+          
+          <!-- Hojas curvadas en todas direcciones -->
+          <path d="M0,0 Q-30,-20 -60,-10 Q-35,-5 0,0" fill="#1E8449"/>
+          <path d="M0,0 Q-45,-40 -70,-50 Q-40,-30 0,0" fill="#27AE60"/>
+          <path d="M0,0 Q-25,-60 -40,-90 Q-20,-55 0,0" fill="#2ECC71"/>
+          <path d="M0,0 Q0,-75 0,-105 Q10,-65 0,0" fill="#58D68D"/>
+          <path d="M0,0 Q25,-60 40,-90 Q20,-55 0,0" fill="#2ECC71"/>
+          <path d="M0,0 Q45,-40 70,-50 Q40,-30 0,0" fill="#27AE60"/>
+          <path d="M0,0 Q30,-20 60,-10 Q35,-5 0,0" fill="#1E8449"/>
+          <path d="M0,0 Q-15,15 -35,25 Q-15,10 0,0" fill="#145A32"/>
+          <path d="M0,0 Q15,15 35,25 Q15,10 0,0" fill="#145A32"/>
+        </g>
+      </g>
+    
+      
+      <g transform="translate(1020, 390) scale(0.5) rotate(3)" filter="url(#softShadow)">
+        <!-- Tronco esbelto anillado característico -->
+        <path d="M-3,0 Q-1,-120 -2,-240 Q-1,-300 0,-340 Q1,-300 2,-240 Q3,-120 3,0 Z" fill="#D5DBDB" stroke="#95A5A6" stroke-width="1"/>
+        <!-- Anillos del tronco -->
+        <ellipse cx="0" cy="-40" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-80" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-120" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-160" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-200" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-240" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-280" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-310" rx="2.5" ry="1" fill="#7F8C8D"/>
+        
+        <!-- Corona de Hojas de Palma de Cera -->
+        <g transform="translate(0, -340)">
+          <!-- Racimos de frutos anaranjados -->
+          <circle cx="-4" cy="5" r="4" fill="#E67E22"/>
+          <circle cx="0" cy="8" r="4.5" fill="#D35400"/>
+          <circle cx="4" cy="6" r="4" fill="#E67E22"/>
+          
+          <!-- Hojas curvadas en todas direcciones -->
+          <path d="M0,0 Q-30,-20 -60,-10 Q-35,-5 0,0" fill="#1E8449"/>
+          <path d="M0,0 Q-45,-40 -70,-50 Q-40,-30 0,0" fill="#27AE60"/>
+          <path d="M0,0 Q-25,-60 -40,-90 Q-20,-55 0,0" fill="#2ECC71"/>
+          <path d="M0,0 Q0,-75 0,-105 Q10,-65 0,0" fill="#58D68D"/>
+          <path d="M0,0 Q25,-60 40,-90 Q20,-55 0,0" fill="#2ECC71"/>
+          <path d="M0,0 Q45,-40 70,-50 Q40,-30 0,0" fill="#27AE60"/>
+          <path d="M0,0 Q30,-20 60,-10 Q35,-5 0,0" fill="#1E8449"/>
+          <path d="M0,0 Q-15,15 -35,25 Q-15,10 0,0" fill="#145A32"/>
+          <path d="M0,0 Q15,15 35,25 Q15,10 0,0" fill="#145A32"/>
+        </g>
+      </g>
+    
+      
+      <g transform="translate(1080, 410) scale(0.6) rotate(-2)" filter="url(#softShadow)">
+        <!-- Tronco esbelto anillado característico -->
+        <path d="M-3,0 Q-1,-120 -2,-240 Q-1,-300 0,-340 Q1,-300 2,-240 Q3,-120 3,0 Z" fill="#D5DBDB" stroke="#95A5A6" stroke-width="1"/>
+        <!-- Anillos del tronco -->
+        <ellipse cx="0" cy="-40" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-80" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-120" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-160" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-200" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-240" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-280" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-310" rx="2.5" ry="1" fill="#7F8C8D"/>
+        
+        <!-- Corona de Hojas de Palma de Cera -->
+        <g transform="translate(0, -340)">
+          <!-- Racimos de frutos anaranjados -->
+          <circle cx="-4" cy="5" r="4" fill="#E67E22"/>
+          <circle cx="0" cy="8" r="4.5" fill="#D35400"/>
+          <circle cx="4" cy="6" r="4" fill="#E67E22"/>
+          
+          <!-- Hojas curvadas en todas direcciones -->
+          <path d="M0,0 Q-30,-20 -60,-10 Q-35,-5 0,0" fill="#1E8449"/>
+          <path d="M0,0 Q-45,-40 -70,-50 Q-40,-30 0,0" fill="#27AE60"/>
+          <path d="M0,0 Q-25,-60 -40,-90 Q-20,-55 0,0" fill="#2ECC71"/>
+          <path d="M0,0 Q0,-75 0,-105 Q10,-65 0,0" fill="#58D68D"/>
+          <path d="M0,0 Q25,-60 40,-90 Q20,-55 0,0" fill="#2ECC71"/>
+          <path d="M0,0 Q45,-40 70,-50 Q40,-30 0,0" fill="#27AE60"/>
+          <path d="M0,0 Q30,-20 60,-10 Q35,-5 0,0" fill="#1E8449"/>
+          <path d="M0,0 Q-15,15 -35,25 Q-15,10 0,0" fill="#145A32"/>
+          <path d="M0,0 Q15,15 35,25 Q15,10 0,0" fill="#145A32"/>
+        </g>
+      </g>
+    
+      
+      <g transform="translate(1140, 400) scale(0.45) rotate(1)" filter="url(#softShadow)">
+        <!-- Tronco esbelto anillado característico -->
+        <path d="M-3,0 Q-1,-120 -2,-240 Q-1,-300 0,-340 Q1,-300 2,-240 Q3,-120 3,0 Z" fill="#D5DBDB" stroke="#95A5A6" stroke-width="1"/>
+        <!-- Anillos del tronco -->
+        <ellipse cx="0" cy="-40" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-80" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-120" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-160" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-200" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-240" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-280" rx="2.5" ry="1" fill="#7F8C8D"/><ellipse cx="0" cy="-310" rx="2.5" ry="1" fill="#7F8C8D"/>
+        
+        <!-- Corona de Hojas de Palma de Cera -->
+        <g transform="translate(0, -340)">
+          <!-- Racimos de frutos anaranjados -->
+          <circle cx="-4" cy="5" r="4" fill="#E67E22"/>
+          <circle cx="0" cy="8" r="4.5" fill="#D35400"/>
+          <circle cx="4" cy="6" r="4" fill="#E67E22"/>
+          
+          <!-- Hojas curvadas en todas direcciones -->
+          <path d="M0,0 Q-30,-20 -60,-10 Q-35,-5 0,0" fill="#1E8449"/>
+          <path d="M0,0 Q-45,-40 -70,-50 Q-40,-30 0,0" fill="#27AE60"/>
+          <path d="M0,0 Q-25,-60 -40,-90 Q-20,-55 0,0" fill="#2ECC71"/>
+          <path d="M0,0 Q0,-75 0,-105 Q10,-65 0,0" fill="#58D68D"/>
+          <path d="M0,0 Q25,-60 40,-90 Q20,-55 0,0" fill="#2ECC71"/>
+          <path d="M0,0 Q45,-40 70,-50 Q40,-30 0,0" fill="#27AE60"/>
+          <path d="M0,0 Q30,-20 60,-10 Q35,-5 0,0" fill="#1E8449"/>
+          <path d="M0,0 Q-15,15 -35,25 Q-15,10 0,0" fill="#145A32"/>
+          <path d="M0,0 Q15,15 35,25 Q15,10 0,0" fill="#145A32"/>
+        </g>
+      </g>
+    
+
+      <!-- 4. CORDILLERA CERCANA / COLINAS ONDULADAS -->
+      <path d="M0,540 Q280,460 560,510 Q840,450 1200,530 L1200,800 L0,800 Z" fill="url(#cordilleraNearGrad)"/>
+
+      <!-- 5. TERRENO FRONTAL DE LA FINCA -->
+      <path d="M0,590 Q300,560 600,580 Q900,560 1200,600 L1200,800 L0,800 Z" fill="url(#terrenoGrad)"/>
+
+      <!-- Camino empedrado / huella campesina -->
+      <path d="M580,620 Q560,690 520,800 L720,800 Q660,700 640,620 Z" fill="url(#caminoTierraGrad)" filter="url(#dropShadow)"/>
+      <!-- Piedras del camino -->
+      <g fill="#795548" opacity="0.6">
+        <ellipse cx="570" cy="650" rx="8" ry="4"/>
+        <ellipse cx="610" cy="660" rx="10" ry="5"/>
+        <ellipse cx="585" cy="690" rx="12" ry="6"/>
+        <ellipse cx="625" cy="710" rx="14" ry="7"/>
+        <ellipse cx="560" cy="740" rx="15" ry="7"/>
+        <ellipse cx="610" cy="760" rx="18" ry="8"/>
+        <ellipse cx="660" cy="780" rx="16" ry="8"/>
+      </g>
+    
+        <g id="farm-scene-container">
+          
+      <!-- ================= NIVEL 0: CASA BÁSICA DE ADOBE ================= -->
+      <g id="farm-lvl0" filter="url(#dropShadow)">
+        <!-- Cimientos de piedra rústica -->
+        <rect x="420" y="550" width="380" height="40" rx="4" fill="#795548" stroke="#4E342E" stroke-width="2"/>
+        <line x1="420" y1="570" x2="800" y2="570" stroke="#3E2723" stroke-width="1.5" stroke-dasharray="15,10"/>
+        
+        <!-- Muros de Adobe rústico -->
+        <rect x="430" y="380" width="360" height="180" rx="2" fill="url(#adobeWallGrad)" stroke="#8D6E63" stroke-width="2"/>
+        
+        <!-- Líneas de bloques de adobe / ladrillo de barro -->
+        <g stroke="#A1887F" stroke-width="1" opacity="0.6">
+          <line x1="430" y1="410" x2="790" y2="410"/>
+          <line x1="430" y1="440" x2="790" y2="440"/>
+          <line x1="430" y1="470" x2="790" y2="470"/>
+          <line x1="430" y1="500" x2="790" y2="500"/>
+          <line x1="430" y1="530" x2="790" y2="530"/>
+        </g>
+
+        <!-- Puerta rústica de madera básica -->
+        <g id="rustic-door" transform="translate(580, 430)">
+          <rect x="0" y="0" width="60" height="130" rx="3" fill="#5D4037" stroke="#3E2723" stroke-width="2"/>
+          <!-- Tablones de madera -->
+          <line x1="20" y1="0" x2="20" y2="130" stroke="#3E2723" stroke-width="1.5"/>
+          <line x1="40" y1="0" x2="40" y2="130" stroke="#3E2723" stroke-width="1.5"/>
+          <!-- Cerrojo de hierro y manija -->
+          <circle cx="12" cy="70" r="4" fill="#212121"/>
+          <circle cx="12" cy="70" r="2" fill="#BDBDBD"/>
+          <!-- Bisagras de hierro forjado -->
+          <rect x="2" y="20" width="12" height="6" fill="#212121"/>
+          <rect x="2" y="100" width="12" height="6" fill="#212121"/>
+        </g>
+
+        <!-- Ventanuco rústico simple -->
+        <g transform="translate(470, 440)">
+          <rect x="0" y="0" width="55" height="55" fill="#3E2723" stroke="#271C19" stroke-width="3"/>
+          <rect x="4" y="4" width="47" height="47" fill="#8D6E63"/>
+          <line x1="27" y1="4" x2="27" y2="51" stroke="#3E2723" stroke-width="2"/>
+          <line x1="4" y1="27" x2="51" y2="27" stroke="#3E2723" stroke-width="2"/>
+        </g>
+
+        <!-- Techo simple de paja / bahareque (Solo visible en lvl < 5) -->
+        
+          <polygon points="390,390 610,260 830,390" fill="url(#techoPajaGrad)" stroke="#7D6608" stroke-width="3" filter="url(#dropShadow)"/>
+          <!-- Flecos de paja rústica -->
+          <path d="M380,390 Q400,405 420,390 Q440,405 460,390 Q480,405 500,390 Q520,405 540,390 Q560,405 580,390 Q600,405 620,390 Q640,405 660,390 Q680,405 700,390 Q720,405 740,390 Q760,405 780,390 Q800,405 820,390 Q840,405 850,390" fill="none" stroke="#D4AC0D" stroke-width="4"/>
+          <!-- Viga cumbrera de madera -->
+          <line x1="610" y1="260" x2="610" y2="390" stroke="#5D4037" stroke-width="4"/>
+        
+
+        <!-- Escoba de paja y machete en funda junto a la puerta -->
+        <g transform="translate(650, 490)">
+          <line x1="0" y1="0" x2="15" y2="65" stroke="#8D6E63" stroke-width="3.5"/>
+          <polygon points="12,50 25,75 5,70" fill="#D4AC0D" stroke="#9A7D0A" stroke-width="1"/>
+        </g>
+      </g>
+    
+
+        <!-- ================= NIVEL 1: JARDÍN Y FLORA COLOMBIANA ================= -->
+        <g id="farm-lvl1">
+          <!-- Cafetales frondosos a los lados de la casa -->
+          
+      <g transform="translate(360, 580) scale(1.2)" filter="url(#softShadow)">
+        <!-- Follaje denso en capas -->
+        <ellipse cx="0" cy="-25" rx="35" ry="25" fill="#145A32"/>
+        <ellipse cx="-18" cy="-35" rx="28" ry="22" fill="#1E8449"/>
+        <ellipse cx="18" cy="-35" rx="28" ry="22" fill="#229954"/>
+        <ellipse cx="0" cy="-48" rx="25" ry="20" fill="#27AE60"/>
+        <ellipse cx="0" cy="-30" rx="22" ry="18" fill="#2ECC71" opacity="0.8"/>
+
+        <!-- Racimos de granos de café rojo cereza (maduros) -->
+        <g>
+          <!-- Racimo izquierdo -->
+          <circle cx="-20" cy="-25" r="4.5" fill="url(#redCherryGrad)"/>
+          <circle cx="-25" cy="-22" r="4" fill="url(#redCherryGrad)"/>
+          <circle cx="-16" cy="-20" r="4.2" fill="url(#redCherryGrad)"/>
+          <circle cx="-22" cy="-28" r="3.8" fill="url(#redCherryGrad)"/>
+          <circle cx="-20" cy="-26" r="1.5" fill="#FFE5E5"/>
+
+          <!-- Racimo central -->
+          <circle cx="2" cy="-35" r="5" fill="url(#redCherryGrad)"/>
+          <circle cx="-4" cy="-32" r="4.5" fill="url(#redCherryGrad)"/>
+          <circle cx="7" cy="-30" r="4.8" fill="url(#redCherryGrad)"/>
+          <circle cx="0" cy="-40" r="4" fill="url(#redCherryGrad)"/>
+          <circle cx="2" cy="-36" r="1.6" fill="#FFE5E5"/>
+
+          <!-- Racimo derecho -->
+          <circle cx="22" cy="-25" r="4.5" fill="url(#redCherryGrad)"/>
+          <circle cx="27" cy="-28" r="4.2" fill="url(#redCherryGrad)"/>
+          <circle cx="18" cy="-20" r="4.3" fill="url(#redCherryGrad)"/>
+          <circle cx="24" cy="-18" r="3.8" fill="url(#redCherryGrad)"/>
+          <circle cx="22" cy="-26" r="1.5" fill="#FFE5E5"/>
+        </g>
+
+        <!-- Flores blancas de café (aromáticas) -->
+        <g fill="#FFFFFF" stroke="#D5D8DC" stroke-width="0.5">
+          <circle cx="-10" cy="-45" r="3"/>
+          <circle cx="-8" cy="-47" r="2.5"/>
+          <circle cx="-12" cy="-46" r="2.5"/>
+          
+          <circle cx="14" cy="-42" r="3"/>
+          <circle cx="16" cy="-44" r="2.5"/>
+          <circle cx="12" cy="-43" r="2.5"/>
+        </g>
+      </g>
+    
+          
+      <g transform="translate(410, 610) scale(1)" filter="url(#softShadow)">
+        <!-- Follaje denso en capas -->
+        <ellipse cx="0" cy="-25" rx="35" ry="25" fill="#145A32"/>
+        <ellipse cx="-18" cy="-35" rx="28" ry="22" fill="#1E8449"/>
+        <ellipse cx="18" cy="-35" rx="28" ry="22" fill="#229954"/>
+        <ellipse cx="0" cy="-48" rx="25" ry="20" fill="#27AE60"/>
+        <ellipse cx="0" cy="-30" rx="22" ry="18" fill="#2ECC71" opacity="0.8"/>
+
+        <!-- Racimos de granos de café rojo cereza (maduros) -->
+        <g>
+          <!-- Racimo izquierdo -->
+          <circle cx="-20" cy="-25" r="4.5" fill="url(#redCherryGrad)"/>
+          <circle cx="-25" cy="-22" r="4" fill="url(#redCherryGrad)"/>
+          <circle cx="-16" cy="-20" r="4.2" fill="url(#redCherryGrad)"/>
+          <circle cx="-22" cy="-28" r="3.8" fill="url(#redCherryGrad)"/>
+          <circle cx="-20" cy="-26" r="1.5" fill="#FFE5E5"/>
+
+          <!-- Racimo central -->
+          <circle cx="2" cy="-35" r="5" fill="url(#redCherryGrad)"/>
+          <circle cx="-4" cy="-32" r="4.5" fill="url(#redCherryGrad)"/>
+          <circle cx="7" cy="-30" r="4.8" fill="url(#redCherryGrad)"/>
+          <circle cx="0" cy="-40" r="4" fill="url(#redCherryGrad)"/>
+          <circle cx="2" cy="-36" r="1.6" fill="#FFE5E5"/>
+
+          <!-- Racimo derecho -->
+          <circle cx="22" cy="-25" r="4.5" fill="url(#redCherryGrad)"/>
+          <circle cx="27" cy="-28" r="4.2" fill="url(#redCherryGrad)"/>
+          <circle cx="18" cy="-20" r="4.3" fill="url(#redCherryGrad)"/>
+          <circle cx="24" cy="-18" r="3.8" fill="url(#redCherryGrad)"/>
+          <circle cx="22" cy="-26" r="1.5" fill="#FFE5E5"/>
+        </g>
+
+        <!-- Flores blancas de café (aromáticas) -->
+        <g fill="#FFFFFF" stroke="#D5D8DC" stroke-width="0.5">
+          <circle cx="-10" cy="-45" r="3"/>
+          <circle cx="-8" cy="-47" r="2.5"/>
+          <circle cx="-12" cy="-46" r="2.5"/>
+          
+          <circle cx="14" cy="-42" r="3"/>
+          <circle cx="16" cy="-44" r="2.5"/>
+          <circle cx="12" cy="-43" r="2.5"/>
+        </g>
+      </g>
+    
+          
+      <g transform="translate(810, 590) scale(1.15)" filter="url(#softShadow)">
+        <!-- Follaje denso en capas -->
+        <ellipse cx="0" cy="-25" rx="35" ry="25" fill="#145A32"/>
+        <ellipse cx="-18" cy="-35" rx="28" ry="22" fill="#1E8449"/>
+        <ellipse cx="18" cy="-35" rx="28" ry="22" fill="#229954"/>
+        <ellipse cx="0" cy="-48" rx="25" ry="20" fill="#27AE60"/>
+        <ellipse cx="0" cy="-30" rx="22" ry="18" fill="#2ECC71" opacity="0.8"/>
+
+        <!-- Racimos de granos de café rojo cereza (maduros) -->
+        <g>
+          <!-- Racimo izquierdo -->
+          <circle cx="-20" cy="-25" r="4.5" fill="url(#redCherryGrad)"/>
+          <circle cx="-25" cy="-22" r="4" fill="url(#redCherryGrad)"/>
+          <circle cx="-16" cy="-20" r="4.2" fill="url(#redCherryGrad)"/>
+          <circle cx="-22" cy="-28" r="3.8" fill="url(#redCherryGrad)"/>
+          <circle cx="-20" cy="-26" r="1.5" fill="#FFE5E5"/>
+
+          <!-- Racimo central -->
+          <circle cx="2" cy="-35" r="5" fill="url(#redCherryGrad)"/>
+          <circle cx="-4" cy="-32" r="4.5" fill="url(#redCherryGrad)"/>
+          <circle cx="7" cy="-30" r="4.8" fill="url(#redCherryGrad)"/>
+          <circle cx="0" cy="-40" r="4" fill="url(#redCherryGrad)"/>
+          <circle cx="2" cy="-36" r="1.6" fill="#FFE5E5"/>
+
+          <!-- Racimo derecho -->
+          <circle cx="22" cy="-25" r="4.5" fill="url(#redCherryGrad)"/>
+          <circle cx="27" cy="-28" r="4.2" fill="url(#redCherryGrad)"/>
+          <circle cx="18" cy="-20" r="4.3" fill="url(#redCherryGrad)"/>
+          <circle cx="24" cy="-18" r="3.8" fill="url(#redCherryGrad)"/>
+          <circle cx="22" cy="-26" r="1.5" fill="#FFE5E5"/>
+        </g>
+
+        <!-- Flores blancas de café (aromáticas) -->
+        <g fill="#FFFFFF" stroke="#D5D8DC" stroke-width="0.5">
+          <circle cx="-10" cy="-45" r="3"/>
+          <circle cx="-8" cy="-47" r="2.5"/>
+          <circle cx="-12" cy="-46" r="2.5"/>
+          
+          <circle cx="14" cy="-42" r="3"/>
+          <circle cx="16" cy="-44" r="2.5"/>
+          <circle cx="12" cy="-43" r="2.5"/>
+        </g>
+      </g>
+    
+          
+      <g transform="translate(870, 615) scale(0.95)" filter="url(#softShadow)">
+        <!-- Follaje denso en capas -->
+        <ellipse cx="0" cy="-25" rx="35" ry="25" fill="#145A32"/>
+        <ellipse cx="-18" cy="-35" rx="28" ry="22" fill="#1E8449"/>
+        <ellipse cx="18" cy="-35" rx="28" ry="22" fill="#229954"/>
+        <ellipse cx="0" cy="-48" rx="25" ry="20" fill="#27AE60"/>
+        <ellipse cx="0" cy="-30" rx="22" ry="18" fill="#2ECC71" opacity="0.8"/>
+
+        <!-- Racimos de granos de café rojo cereza (maduros) -->
+        <g>
+          <!-- Racimo izquierdo -->
+          <circle cx="-20" cy="-25" r="4.5" fill="url(#redCherryGrad)"/>
+          <circle cx="-25" cy="-22" r="4" fill="url(#redCherryGrad)"/>
+          <circle cx="-16" cy="-20" r="4.2" fill="url(#redCherryGrad)"/>
+          <circle cx="-22" cy="-28" r="3.8" fill="url(#redCherryGrad)"/>
+          <circle cx="-20" cy="-26" r="1.5" fill="#FFE5E5"/>
+
+          <!-- Racimo central -->
+          <circle cx="2" cy="-35" r="5" fill="url(#redCherryGrad)"/>
+          <circle cx="-4" cy="-32" r="4.5" fill="url(#redCherryGrad)"/>
+          <circle cx="7" cy="-30" r="4.8" fill="url(#redCherryGrad)"/>
+          <circle cx="0" cy="-40" r="4" fill="url(#redCherryGrad)"/>
+          <circle cx="2" cy="-36" r="1.6" fill="#FFE5E5"/>
+
+          <!-- Racimo derecho -->
+          <circle cx="22" cy="-25" r="4.5" fill="url(#redCherryGrad)"/>
+          <circle cx="27" cy="-28" r="4.2" fill="url(#redCherryGrad)"/>
+          <circle cx="18" cy="-20" r="4.3" fill="url(#redCherryGrad)"/>
+          <circle cx="24" cy="-18" r="3.8" fill="url(#redCherryGrad)"/>
+          <circle cx="22" cy="-26" r="1.5" fill="#FFE5E5"/>
+        </g>
+
+        <!-- Flores blancas de café (aromáticas) -->
+        <g fill="#FFFFFF" stroke="#D5D8DC" stroke-width="0.5">
+          <circle cx="-10" cy="-45" r="3"/>
+          <circle cx="-8" cy="-47" r="2.5"/>
+          <circle cx="-12" cy="-46" r="2.5"/>
+          
+          <circle cx="14" cy="-42" r="3"/>
+          <circle cx="16" cy="-44" r="2.5"/>
+          <circle cx="12" cy="-43" r="2.5"/>
+        </g>
+      </g>
+    
+
+          <!-- Heliconias (Platanillos) en el jardín frontal -->
+          
+      <g transform="translate(460, 630) scale(0.9)">
+        <!-- Hojas tipo plátano verde brillante -->
+        <path d="M0,0 Q-25,-50 -20,-110 Q-5,-60 0,0" fill="#229954"/>
+        <path d="M0,0 Q25,-45 15,-100 Q5,-55 0,0" fill="#27AE60"/>
+        <!-- Tallo central de la flor -->
+        <path d="M0,0 Q-10,-40 -5,-90" fill="none" stroke="#1E8449" stroke-width="4"/>
+        <!-- Bracteas colgantes rojo fuego con puntas amarillas/verdes -->
+        <path d="M-8,-40 Q-25,-35 -32,-48 Q-18,-48 -6,-44" fill="#C0392B"/>
+        <path d="M-32,-48 Q-34,-50 -28,-49" fill="#F1C40F" stroke="#27AE60" stroke-width="0.8"/>
+
+        <path d="M-5,-55 Q12,-50 20,-63 Q6,-63 -4,-59" fill="#E74C3C"/>
+        <path d="M20,-63 Q22,-65 16,-64" fill="#F1C40F" stroke="#27AE60" stroke-width="0.8"/>
+
+        <path d="M-6,-70 Q-22,-65 -28,-78 Q-15,-78 -4,-74" fill="#C0392B"/>
+        <path d="M-28,-78 Q-30,-80 -24,-79" fill="#F1C40F" stroke="#27AE60" stroke-width="0.8"/>
+
+        <path d="M-4,-85 Q10,-80 16,-92 Q3,-92 -3,-89" fill="#E74C3C"/>
+      </g>
+    
+          
+      <g transform="translate(770, 630) scale(0.85)">
+        <!-- Hojas tipo plátano verde brillante -->
+        <path d="M0,0 Q-25,-50 -20,-110 Q-5,-60 0,0" fill="#229954"/>
+        <path d="M0,0 Q25,-45 15,-100 Q5,-55 0,0" fill="#27AE60"/>
+        <!-- Tallo central de la flor -->
+        <path d="M0,0 Q-10,-40 -5,-90" fill="none" stroke="#1E8449" stroke-width="4"/>
+        <!-- Bracteas colgantes rojo fuego con puntas amarillas/verdes -->
+        <path d="M-8,-40 Q-25,-35 -32,-48 Q-18,-48 -6,-44" fill="#C0392B"/>
+        <path d="M-32,-48 Q-34,-50 -28,-49" fill="#F1C40F" stroke="#27AE60" stroke-width="0.8"/>
+
+        <path d="M-5,-55 Q12,-50 20,-63 Q6,-63 -4,-59" fill="#E74C3C"/>
+        <path d="M20,-63 Q22,-65 16,-64" fill="#F1C40F" stroke="#27AE60" stroke-width="0.8"/>
+
+        <path d="M-6,-70 Q-22,-65 -28,-78 Q-15,-78 -4,-74" fill="#C0392B"/>
+        <path d="M-28,-78 Q-30,-80 -24,-79" fill="#F1C40F" stroke="#27AE60" stroke-width="0.8"/>
+
+        <path d="M-4,-85 Q10,-80 16,-92 Q3,-92 -3,-89" fill="#E74C3C"/>
+      </g>
+    
+
+          <!-- Orquídeas Cattleya en soporte rústico de tronco -->
+          <g transform="translate(490, 580)">
+            <rect x="0" y="0" width="10" height="30" fill="#5D4037" rx="2"/>
+            
+      <g transform="translate(5, 5) scale(0.9)" filter="url(#softShadow)">
+        <!-- Tallo y hojas carnosas -->
+        <path d="M0,0 Q-15,-20 -30,-25 Q-15,-10 0,0" fill="#27AE60"/>
+        <path d="M0,0 Q15,-18 28,-22 Q12,-8 0,0" fill="#1E8449"/>
+        <!-- Pétalos dorsales lilas/magenta -->
+        <ellipse cx="0" cy="-35" rx="8" ry="20" fill="#D980FA" transform="rotate(-30 0 -35)"/>
+        <ellipse cx="0" cy="-35" rx="8" ry="20" fill="#D980FA" transform="rotate(30 0 -35)"/>
+        <ellipse cx="0" cy="-45" rx="7" ry="18" fill="#C56CF0"/>
+        <!-- Pétalos laterales ondulados -->
+        <path d="M0,-35 Q-25,-50 -32,-35 Q-20,-20 0,-35" fill="#E056FD"/>
+        <path d="M0,-35 Q25,-50 32,-35 Q20,-20 0,-35" fill="#E056FD"/>
+        <!-- Labelo (labio) tubular fucsia con centro amarillo oro -->
+        <ellipse cx="0" cy="-25" rx="14" ry="16" fill="#B53471"/>
+        <ellipse cx="0" cy="-24" rx="8" ry="9" fill="#FFC312"/>
+        <circle cx="0" cy="-24" r="3" fill="#EE5A24"/>
+      </g>
+    
+          </g>
+          <g transform="translate(730, 580)">
+            <rect x="0" y="0" width="10" height="30" fill="#5D4037" rx="2"/>
+            
+      <g transform="translate(5, 5) scale(0.85)" filter="url(#softShadow)">
+        <!-- Tallo y hojas carnosas -->
+        <path d="M0,0 Q-15,-20 -30,-25 Q-15,-10 0,0" fill="#27AE60"/>
+        <path d="M0,0 Q15,-18 28,-22 Q12,-8 0,0" fill="#1E8449"/>
+        <!-- Pétalos dorsales lilas/magenta -->
+        <ellipse cx="0" cy="-35" rx="8" ry="20" fill="#D980FA" transform="rotate(-30 0 -35)"/>
+        <ellipse cx="0" cy="-35" rx="8" ry="20" fill="#D980FA" transform="rotate(30 0 -35)"/>
+        <ellipse cx="0" cy="-45" rx="7" ry="18" fill="#C56CF0"/>
+        <!-- Pétalos laterales ondulados -->
+        <path d="M0,-35 Q-25,-50 -32,-35 Q-20,-20 0,-35" fill="#E056FD"/>
+        <path d="M0,-35 Q25,-50 32,-35 Q20,-20 0,-35" fill="#E056FD"/>
+        <!-- Labelo (labio) tubular fucsia con centro amarillo oro -->
+        <ellipse cx="0" cy="-25" rx="14" ry="16" fill="#B53471"/>
+        <ellipse cx="0" cy="-24" rx="8" ry="9" fill="#FFC312"/>
+        <circle cx="0" cy="-24" r="3" fill="#EE5A24"/>
+      </g>
+    
+          </g>
+
+          <!-- Macetas de barro adicionales en el suelo -->
+          <g transform="translate(540, 560)">
+            <polygon points="0,15 15,15 12,0 3,0" fill="#D35400" stroke="#A04000" stroke-width="1"/>
+            <circle cx="7" cy="-4" r="7" fill="#E91E63"/>
+            <circle cx="7" cy="-4" r="3" fill="#FFF176"/>
+          </g>
+          <g transform="translate(670, 560)">
+            <polygon points="0,15 15,15 12,0 3,0" fill="#D35400" stroke="#A04000" stroke-width="1"/>
+            <circle cx="7" cy="-4" r="7" fill="#9C27B0"/>
+            <circle cx="7" cy="-4" r="3" fill="#FFF176"/>
+          </g>
+        </g>
+      
+
+        <!-- ================= NIVEL 2: VENTANAS COLONIALES VIVAS ================= -->
+        <g id="farm-lvl2">
+          <!-- Ventana Colonial Izquierda -->
+          <g id="colonial-window-left" transform="translate(460, 420)" filter="url(#dropShadow)">
+            <!-- Marco exterior azul colonial -->
+            <rect x="0" y="0" width="75" height="95" rx="4" fill="url(#woodColonialBlue)" stroke="#0D47A1" stroke-width="2.5"/>
+            <!-- Postigos amarillos vivos -->
+            <rect x="6" y="6" width="30" height="83" rx="2" fill="url(#woodColonialYellow)" stroke="#E65100" stroke-width="1.5"/>
+            <rect x="39" y="6" width="30" height="83" rx="2" fill="url(#woodColonialYellow)" stroke="#E65100" stroke-width="1.5"/>
+            
+            <!-- Celosías / Calados coloniales -->
+            
+              <line x1="10" y1="18" x2="32" y2="18" stroke="#F57F17" stroke-width="1.5"/>
+              <line x1="43" y1="18" x2="65" y2="18" stroke="#F57F17" stroke-width="1.5"/>
+            
+              <line x1="10" y1="30" x2="32" y2="30" stroke="#F57F17" stroke-width="1.5"/>
+              <line x1="43" y1="30" x2="65" y2="30" stroke="#F57F17" stroke-width="1.5"/>
+            
+              <line x1="10" y1="42" x2="32" y2="42" stroke="#F57F17" stroke-width="1.5"/>
+              <line x1="43" y1="42" x2="65" y2="42" stroke="#F57F17" stroke-width="1.5"/>
+            
+              <line x1="10" y1="54" x2="32" y2="54" stroke="#F57F17" stroke-width="1.5"/>
+              <line x1="43" y1="54" x2="65" y2="54" stroke="#F57F17" stroke-width="1.5"/>
+            
+              <line x1="10" y1="66" x2="32" y2="66" stroke="#F57F17" stroke-width="1.5"/>
+              <line x1="43" y1="66" x2="65" y2="66" stroke="#F57F17" stroke-width="1.5"/>
+            
+              <line x1="10" y1="76" x2="32" y2="76" stroke="#F57F17" stroke-width="1.5"/>
+              <line x1="43" y1="76" x2="65" y2="76" stroke="#F57F17" stroke-width="1.5"/>
+            
+
+            <!-- Cerrojos y aldabas de hierro -->
+            <circle cx="33" cy="48" r="2.5" fill="#212121"/>
+            <circle cx="42" cy="48" r="2.5" fill="#212121"/>
+
+            <!-- Matera de flores bajo la ventana -->
+            <g transform="translate(2, 88)">
+              <rect x="0" y="0" width="71" height="18" rx="3" fill="#D35400" stroke="#871A00" stroke-width="1.5"/>
+              <!-- Flores rojas y fucsias desbordantes (Geranios / Novios) -->
+              <circle cx="10" cy="-3" r="7" fill="#E74C3C"/>
+              <circle cx="10" cy="-3" r="2.5" fill="#FFF59D"/>
+              <circle cx="25" cy="-5" r="8" fill="#C0392B"/>
+              <circle cx="25" cy="-5" r="3" fill="#FFF59D"/>
+              <circle cx="42" cy="-4" r="7.5" fill="#E91E63"/>
+              <circle cx="42" cy="-4" r="2.5" fill="#FFF59D"/>
+              <circle cx="58" cy="-3" r="7" fill="#E74C3C"/>
+              <circle cx="58" cy="-3" r="2.5" fill="#FFF59D"/>
+              <!-- Hojitas verdes -->
+              <ellipse cx="18" cy="2" rx="5" ry="3" fill="#2ECC71"/>
+              <ellipse cx="34" cy="1" rx="6" ry="3" fill="#27AE60"/>
+              <ellipse cx="50" cy="2" rx="5" ry="3" fill="#2ECC71"/>
+            </g>
+          </g>
+
+          <!-- Ventana Colonial Derecha -->
+          <g id="colonial-window-right" transform="translate(685, 420)" filter="url(#dropShadow)">
+            <!-- Marco exterior azul colonial -->
+            <rect x="0" y="0" width="75" height="95" rx="4" fill="url(#woodColonialBlue)" stroke="#0D47A1" stroke-width="2.5"/>
+            <!-- Postigos amarillos vivos -->
+            <rect x="6" y="6" width="30" height="83" rx="2" fill="url(#woodColonialYellow)" stroke="#E65100" stroke-width="1.5"/>
+            <rect x="39" y="6" width="30" height="83" rx="2" fill="url(#woodColonialYellow)" stroke="#E65100" stroke-width="1.5"/>
+            
+            <!-- Celosías / Calados coloniales -->
+            
+              <line x1="10" y1="18" x2="32" y2="18" stroke="#F57F17" stroke-width="1.5"/>
+              <line x1="43" y1="18" x2="65" y2="18" stroke="#F57F17" stroke-width="1.5"/>
+            
+              <line x1="10" y1="30" x2="32" y2="30" stroke="#F57F17" stroke-width="1.5"/>
+              <line x1="43" y1="30" x2="65" y2="30" stroke="#F57F17" stroke-width="1.5"/>
+            
+              <line x1="10" y1="42" x2="32" y2="42" stroke="#F57F17" stroke-width="1.5"/>
+              <line x1="43" y1="42" x2="65" y2="42" stroke="#F57F17" stroke-width="1.5"/>
+            
+              <line x1="10" y1="54" x2="32" y2="54" stroke="#F57F17" stroke-width="1.5"/>
+              <line x1="43" y1="54" x2="65" y2="54" stroke="#F57F17" stroke-width="1.5"/>
+            
+              <line x1="10" y1="66" x2="32" y2="66" stroke="#F57F17" stroke-width="1.5"/>
+              <line x1="43" y1="66" x2="65" y2="66" stroke="#F57F17" stroke-width="1.5"/>
+            
+              <line x1="10" y1="76" x2="32" y2="76" stroke="#F57F17" stroke-width="1.5"/>
+              <line x1="43" y1="76" x2="65" y2="76" stroke="#F57F17" stroke-width="1.5"/>
+            
+
+            <!-- Cerrojos -->
+            <circle cx="33" cy="48" r="2.5" fill="#212121"/>
+            <circle cx="42" cy="48" r="2.5" fill="#212121"/>
+
+            <!-- Matera de flores bajo la ventana -->
+            <g transform="translate(2, 88)">
+              <rect x="0" y="0" width="71" height="18" rx="3" fill="#D35400" stroke="#871A00" stroke-width="1.5"/>
+              <!-- Flores -->
+              <circle cx="12" cy="-4" r="7.5" fill="#9C27B0"/>
+              <circle cx="12" cy="-4" r="2.5" fill="#FFF59D"/>
+              <circle cx="28" cy="-5" r="8" fill="#E74C3C"/>
+              <circle cx="28" cy="-5" r="3" fill="#FFF59D"/>
+              <circle cx="45" cy="-4" r="7.5" fill="#FF5722"/>
+              <circle cx="45" cy="-4" r="2.5" fill="#FFF59D"/>
+              <circle cx="60" cy="-3" r="7" fill="#E91E63"/>
+              <circle cx="60" cy="-3" r="2.5" fill="#FFF59D"/>
+              <ellipse cx="20" cy="2" rx="6" ry="3" fill="#2ECC71"/>
+              <ellipse cx="38" cy="1" rx="5" ry="3" fill="#27AE60"/>
+              <ellipse cx="53" cy="2" rx="5" ry="3" fill="#2ECC71"/>
+            </g>
+          </g>
+        </g>
+      
+          
+        </g>
+      </svg>
+    

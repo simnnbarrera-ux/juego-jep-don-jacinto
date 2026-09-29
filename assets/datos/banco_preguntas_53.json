@@ -1,0 +1,723 @@
+[
+  {
+    "id": "MC1",
+    "type": "multiple_choice",
+    "category": "🟦 Opción Múltiple",
+    "question": "¿Qué acontecimiento de 1959 impulsó la política anticomunista de EE. UU. en la región?",
+    "options": [
+      "A) El Frente Nacional",
+      "B) La Revolución Cubana",
+      "C) La creación de las FARC",
+      "D) El Paro Cívico"
+    ],
+    "correct": 1,
+    "explanation": "El triunfo de la Revolución Cubana en 1959 demostró la viabilidad de la vía armada en América Latina y aceleró las doctrinas anticomunistas de EE. UU.",
+    "citation": "📖 Cap. 7: Los paradigmas de la Guerra Fría, p. 80"
+  },
+  {
+    "id": "MC2",
+    "type": "multiple_choice",
+    "category": "🟦 Opción Múltiple",
+    "question": "Bajo el lente de la Doctrina de Seguridad Nacional, ¿cómo vio el Estado las marchas campesinas y sindicales?",
+    "options": [
+      "A) Como derechos democráticos legítimos",
+      "B) Como una amenaza comunista o enemigo interno",
+      "C) Como simples reclamos económicos",
+      "D) Como apoyo al gobierno"
+    ],
+    "correct": 1,
+    "explanation": "Bajo la Doctrina de Seguridad Nacional (DSN), la protesta social y las demandas legítimas fueron leídas como conspiraciones subversivas del «enemigo interno».",
+    "citation": "📖 Cap. 7 y 8: Pacificación sin paz, pp. 80-84"
+  },
+  {
+    "id": "MC3",
+    "type": "multiple_choice",
+    "category": "🟦 Opción Múltiple",
+    "question": "¿Cuál fue la principal consecuencia de aplicar la lógica de la Guerra Fría a los reclamos sociales?",
+    "options": [
+      "A) La erradicación del narcotráfico",
+      "B) La solución del conflicto agrario",
+      "C) La criminalización de la protesta y la aceleración de la violencia",
+      "D) La firma inmediata de la paz"
+    ],
+    "correct": 2,
+    "explanation": "Al estigmatizar y criminalizar las exigencias campesinas y sindicales, se cerraron vías políticas y se aceleró el escalamiento de la violencia.",
+    "citation": "📖 No matarás: Relato histórico del conflicto, p. 80"
+  },
+  {
+    "id": "ABC1",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué buscaba principalmente el Frente Nacional iniciado en 1958?",
+    "options": [
+      "A. Eliminar las elecciones presidenciales",
+      "B. Poner fin a la confrontación bipartidista entre liberales y conservadores",
+      "C. Crear las primeras guerrillas comunistas"
+    ],
+    "correct": 1,
+    "explanation": "El pacto buscaba sellar la paz entre las élites de los partidos Liberal y Conservador tras la época de «La Violencia» y la dictadura de Rojas Pinilla.",
+    "citation": "📖 No matarás, contexto del Frente Nacional, pp. 75-84"
+  },
+  {
+    "id": "ABC2",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "Una característica fundamental del Frente Nacional fue:",
+    "options": [
+      "A. La alternancia y distribución del poder entre liberales y conservadores",
+      "B. La eliminación de los partidos tradicionales",
+      "C. El gobierno exclusivo de las Fuerzas Militares"
+    ],
+    "correct": 0,
+    "explanation": "Se estableció la paridad burocrática al 50/50 y la alternancia presidencial obligatoria cada cuatro años entre liberales y conservadores.",
+    "citation": "📖 No matarás, pp. 75-84"
+  },
+  {
+    "id": "ABC3",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Cuál fue una de las contradicciones del Frente Nacional?",
+    "options": [
+      "A. Terminó inmediatamente todos los conflictos sociales",
+      "B. Redujo la violencia bipartidista, pero limitó la participación de otros sectores políticos",
+      "C. Permitió que todos los movimientos de izquierda gobernaran"
+    ],
+    "correct": 1,
+    "explanation": "Aunque apaciguó la pugna liberal-conservadora, generó un monopolio político excluyente que clausuró la representación de terceras fuerzas y minorías.",
+    "citation": "📖 No matarás, pp. 75-84"
+  },
+  {
+    "id": "ABC4",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué acontecimiento internacional tuvo una gran influencia sobre América Latina durante los años sesenta?",
+    "options": [
+      "A. La Revolución cubana",
+      "B. La caída del Muro de Berlín",
+      "C. La disolución de la Unión Soviética"
+    ],
+    "correct": 0,
+    "explanation": "La Revolución Cubana de 1959 inspiró movimientos insurgentes y redefinió las doctrinas de seguridad contrainsurgentes en todo el continente.",
+    "citation": "📖 Cap. 7, «Los paradigmas de la Guerra Fría», p. 80"
+  },
+  {
+    "id": "ABC5",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Cómo influyó la Guerra Fría en Colombia?",
+    "options": [
+      "A. Colombia quedó completamente aislada de los conflictos internacionales.",
+      "B. Influyó en la manera de interpretar el comunismo, la insurgencia y la respuesta estatal.",
+      "C. Eliminó los conflictos agrarios."
+    ],
+    "correct": 1,
+    "explanation": "La doctrina de la Guerra Fría llevó a enmarcar cualquier conflicto interno como parte del enfrentamiento bipolar global.",
+    "citation": "📖 Cap. 7, p. 80"
+  },
+  {
+    "id": "ABC6",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué concepto estuvo relacionado con la visión contrainsurgente de la época?",
+    "options": [
+      "A. El «enemigo interno»",
+      "B. El Estado federal",
+      "C. La neutralidad política"
+    ],
+    "correct": 0,
+    "explanation": "El concepto de «enemigo interno» justificó el uso de la fuerza militar contra sectores de la propia población civil percibidos como subversivos.",
+    "citation": "📖 Cap. 7, p. 80"
+  },
+  {
+    "id": "ABC7",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué lugares estuvieron relacionados con las operaciones militares de la primera mitad de los años sesenta?",
+    "options": [
+      "A. Marquetalia, Riochiquito, El Pato y Guayabero",
+      "B. Bogotá, Medellín, Cali y Barranquilla",
+      "C. Cartagena, Santa Marta, Sincelejo y Valledupar"
+    ],
+    "correct": 0,
+    "explanation": "Zonas agrarias de autodefensa campesina calificadas como «repúblicas independientes» por el senador Álvaro Gómez Hurtado.",
+    "citation": "📖 Cap. 8, «Pacificación sin paz», p. 84"
+  },
+  {
+    "id": "ABC8",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Por qué Marquetalia es importante en la historia de las FARC?",
+    "options": [
+      "A. Porque allí surgió el M-19.",
+      "B. Porque la operación militar de 1964 se convirtió en un acontecimiento fundamental para la posterior organización de las FARC.",
+      "C. Porque allí terminó el Frente Nacional."
+    ],
+    "correct": 1,
+    "explanation": "El ataque a Marquetalia en mayo de 1964 provocó la dispersión y reorganización armada del grupo de Manuel Marulanda Vélez, dando origen a las FARC.",
+    "citation": "📖 Caps. 8 y 10, pp. 84 y 102"
+  },
+  {
+    "id": "ABC9",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "Los antecedentes de las FARC estuvieron relacionados principalmente con:",
+    "options": [
+      "A. Autodefensas campesinas y conflictos agrarios.",
+      "B. Movimientos exclusivamente urbanos.",
+      "C. Organizaciones empresariales."
+    ],
+    "correct": 0,
+    "explanation": "Nacieron de núcleos de colonos y campesinos organizados en autodefensas para proteger sus tierras y subsistencia.",
+    "citation": "📖 Cap. 10, «Las FARC», p. 102"
+  },
+  {
+    "id": "ABC10",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué transformación experimentaron algunos grupos campesinos después de las operaciones militares?",
+    "options": [
+      "A. Desaparecieron inmediatamente.",
+      "B. Se desplazaron, reorganizaron y algunos se transformaron en estructuras guerrilleras.",
+      "C. Se incorporaron automáticamente al Gobierno."
+    ],
+    "correct": 1,
+    "explanation": "La presión militar empujó a los núcleos campesinos a zonas de colonización periférica donde consolidaron proyectos guerrilleros de alcance regional y nacional.",
+    "citation": "📖 Caps. 8-10, pp. 84-102"
+  },
+  {
+    "id": "ABC11",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Cuál de las siguientes relaciones es correcta?",
+    "options": [
+      "A. FARC → conflictos agrarios y autodefensas campesinas",
+      "B. FARC → organización exclusivamente urbana",
+      "C. FARC → organización creada en 1974"
+    ],
+    "correct": 0,
+    "explanation": "Las FARC tuvieron un arraigo esencialmente agrario y campesino en sus primeras décadas.",
+    "citation": "📖 Cap. 10, p. 102"
+  },
+  {
+    "id": "ABC12",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué guerrilla recibió una importante influencia de la Revolución cubana?",
+    "options": [
+      "A. ELN",
+      "B. EPL",
+      "C. M-19"
+    ],
+    "correct": 0,
+    "explanation": "El Ejército de Liberación Nacional (ELN) adoptó el modelo foquista y la inspiración revolucionaria de la experiencia cubana.",
+    "citation": "📖 Cap. 11, «Golpear y huir», p. 110"
+  },
+  {
+    "id": "ABC13",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Cuál fue una de las primeras acciones públicas importantes del ELN?",
+    "options": [
+      "A. La toma de Simacota en 1965.",
+      "B. El robo de la espada de Bolívar.",
+      "C. La toma de Marquetalia."
+    ],
+    "correct": 0,
+    "explanation": "El 7 de enero de 1965, el ELN ejecutó la toma de Simacota (Santander), difundiendo su manifiesto fundacional.",
+    "citation": "📖 Cap. 11, p. 110"
+  },
+  {
+    "id": "ABC14",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué figura estuvo relacionada con el ELN?",
+    "options": [
+      "A. Jorge Eliécer Gaitán",
+      "B. Camilo Torres Restrepo",
+      "C. Alfonso López Pumarejo"
+    ],
+    "correct": 1,
+    "explanation": "El sacerdote y sociólogo Camilo Torres Restrepo, pionero de la Teología de la Liberación, se unió al ELN en 1965.",
+    "citation": "📖 Cap. 11, p. 110"
+  },
+  {
+    "id": "ABC15",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿En qué año surgió el EPL?",
+    "options": [
+      "A. 1964",
+      "B. 1967",
+      "C. 1974"
+    ],
+    "correct": 1,
+    "explanation": "El Ejército Popular de Liberación (EPL) se conformó en diciembre de 1967 en las regiones del Alto Sinú y San Jorge.",
+    "citation": "📖 Cap. 11, p. 110"
+  },
+  {
+    "id": "ABC16",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué corriente ideológica tuvo una influencia importante en el EPL?",
+    "options": [
+      "A. Maoísmo",
+      "B. Liberalismo",
+      "C. Conservatismo"
+    ],
+    "correct": 0,
+    "explanation": "El EPL adoptó el marxismo-leninismo línea Mao Tse-Tung (maoísmo) y la doctrina de Guerra Popular Prolongada.",
+    "citation": "📖 Caps. 7 y 11, pp. 80 y 110"
+  },
+  {
+    "id": "ABC17",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué organización política estuvo relacionada con el EPL?",
+    "options": [
+      "A. Partido Comunista de Colombia Marxista-Leninista (PCML)",
+      "B. Partido Liberal",
+      "C. ANAPO"
+    ],
+    "correct": 0,
+    "explanation": "El EPL nació como el brazo armado del PCML tras la ruptura ideológica con el Partido Comunista tradicional.",
+    "citation": "📖 Cap. 11, p. 110"
+  },
+  {
+    "id": "ABC18",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué significa «golpear y huir» dentro de la guerra de guerrillas?",
+    "options": [
+      "A. Una estrategia electoral.",
+      "B. Atacar y retirarse para evitar una confrontación militar convencional prolongada.",
+      "C. Un acuerdo de paz."
+    ],
+    "correct": 1,
+    "explanation": "Táctica asimétrica fundamental para compensar la inferioridad numérica y de armamento frente a las Fuerzas Armadas estatales.",
+    "citation": "📖 Cap. 11, p. 110"
+  },
+  {
+    "id": "ABC19",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué plantea el capítulo «¿Armas o reformas?»?",
+    "options": [
+      "A. La tensión entre la lucha armada y las posibilidades de transformación mediante reformas y movilización social.",
+      "B. El conflicto entre Colombia y Venezuela.",
+      "C. La desaparición de los movimientos sociales."
+    ],
+    "correct": 0,
+    "explanation": "Examina el dilema histórico entre responder a los desequilibrios sociales mediante reformas agrarias profundas o mediante la confrontación bélica.",
+    "citation": "📖 Cap. 13, p. 122"
+  },
+  {
+    "id": "ABC20",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Por qué es importante diferenciar los movimientos sociales de las guerrillas?",
+    "options": [
+      "A. Porque todos los movimientos sociales pertenecían a guerrillas.",
+      "B. Porque campesinos, estudiantes y trabajadores podían movilizarse por sus propias reivindicaciones sin pertenecer a una organización armada.",
+      "C. Porque no existieron movimientos sociales durante el Frente Nacional."
+    ],
+    "correct": 1,
+    "explanation": "La movilización social civil es una expresión democrática autónoma que no debe ser estigmatizada como actividad insurgente armada.",
+    "citation": "📖 Cap. 13, p. 122"
+  },
+  {
+    "id": "ABC21",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué acontecimiento de 1970 evidenció el desgaste del Frente Nacional?",
+    "options": [
+      "A. Las elecciones presidenciales de 1970.",
+      "B. La operación de Marquetalia.",
+      "C. La creación del ELN."
+    ],
+    "correct": 0,
+    "explanation": "Los controvertidos comicios del 19 de abril de 1970 entre Misael Pastrana y el general Gustavo Rojas Pinilla generaron graves denuncias de fraude electoral.",
+    "citation": "📖 Cap. 14, «El agotamiento del pacto», p. 134"
+  },
+  {
+    "id": "ABC22",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué movimiento político estuvo relacionado con Gustavo Rojas Pinilla?",
+    "options": [
+      "A. ANAPO",
+      "B. EPL",
+      "C. ELN"
+    ],
+    "correct": 0,
+    "explanation": "La Alianza Nacional Popular (ANAPO) aglutinó el descontento popular y popular-opositor frente al bipartidismo frentenacionalista.",
+    "citation": "📖 Cap. 14, p. 134"
+  },
+  {
+    "id": "ABC23",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué guerrilla apareció públicamente en 1974?",
+    "options": [
+      "A. FARC",
+      "B. M-19",
+      "C. ELN"
+    ],
+    "correct": 1,
+    "explanation": "El Movimiento 19 de Abril (M-19) surgió reivindicando el presunto fraude de las elecciones presidenciales de 1970.",
+    "citation": "📖 Cap. 15, «¿Abrir la democracia a tiros?», p. 139"
+  },
+  {
+    "id": "ABC24",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué acción realizó el M-19 en 1974?",
+    "options": [
+      "A. Tomó Marquetalia.",
+      "B. Robó la espada de Simón Bolívar de la Quinta de Bolívar.",
+      "C. Tomó Simacota."
+    ],
+    "correct": 1,
+    "explanation": "El 17 de enero de 1974, sustrajeron la espada de Bolívar con el lema: «Bolívar, tu espada vuelve a la lucha».",
+    "citation": "📖 Cap. 15, p. 139"
+  },
+  {
+    "id": "ABC25",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué característica distinguió inicialmente al M-19?",
+    "options": [
+      "A. Su carácter principalmente urbano y nacionalista.",
+      "B. Su origen exclusivamente campesino.",
+      "C. Su carácter exclusivamente sindical."
+    ],
+    "correct": 0,
+    "explanation": "A diferencia de las guerrillas rurales previas, el M-19 combinó operaciones urbanas con alto impacto mediático y símbolos patrios.",
+    "citation": "📖 Cap. 15, p. 139"
+  },
+  {
+    "id": "ABC26",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué ocurrió en 1977?",
+    "options": [
+      "A. Se produjo un importante paro cívico nacional.",
+      "B. Surgieron las FARC.",
+      "C. Comenzó el Frente Nacional."
+    ],
+    "correct": 0,
+    "explanation": "El 14 de septiembre de 1977 se llevó a cabo el Paro Cívico Nacional más multitudinario de la historia reciente de Colombia.",
+    "citation": "📖 Cap. 16, «El paro cívico de 1977», p. 142"
+  },
+  {
+    "id": "ABC27",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Por qué es importante el paro cívico de 1977?",
+    "options": [
+      "A. Porque demostró que toda protesta social pertenecía a las guerrillas.",
+      "B. Porque mostró que el descontento social también se expresaba mediante movilización popular y no solamente mediante la lucha armada.",
+      "C. Porque fue una operación militar."
+    ],
+    "correct": 1,
+    "explanation": "Expresó la fuerza de la ciudadanía urbana y trabajadora exigiendo derechos frente a la inflación y el deterioro salarial.",
+    "citation": "📖 Cap. 16, p. 142"
+  },
+  {
+    "id": "ABC28",
+    "type": "abc",
+    "category": "🟩 Pregunta ABC",
+    "question": "¿Qué proceso describe mejor la transformación de la confrontación entre 1958 y 1978?",
+    "options": [
+      "A. De la violencia bipartidista hacia una confrontación más compleja con insurgencias, Estado, movimientos sociales y factores internacionales.",
+      "B. De una guerra internacional a una guerra exclusivamente económica.",
+      "C. De una democracia completamente abierta a una dictadura militar."
+    ],
+    "correct": 0,
+    "explanation": "El conflicto mutó de una pugna partidista tradicional a una guerra contrainsurgente multifactorial y prolongada.",
+    "citation": "📖 Bloque 1958-1978, pp. 75-149"
+  },
+  {
+    "id": "TF29",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "El Frente Nacional comenzó en 1958.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 0,
+    "explanation": "Inició formalmente en 1958 con la presidencia del liberal Alberto Lleras Camargo.",
+    "citation": "📖 No matarás, p. 75"
+  },
+  {
+    "id": "TF30",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "El Frente Nacional eliminó completamente los conflictos políticos y sociales de Colombia.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 1,
+    "explanation": "Falso. Aunque cesó la violencia abierta entre liberales y conservadores, la exclusión política incubó nuevas formas de insurgencia y descontento.",
+    "citation": "📖 No matarás, pp. 75-84"
+  },
+  {
+    "id": "TF31",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "La Revolución cubana triunfó en 1959.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 0,
+    "explanation": "Verdadero. El 1 de enero de 1959 triunfó el movimiento encabezado por Fidel Castro y Ernesto «Che» Guevara.",
+    "citation": "📖 Cap. 7, p. 80"
+  },
+  {
+    "id": "TF32",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "La Guerra Fría influyó en la manera en que se interpretó la insurgencia colombiana.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 0,
+    "explanation": "Verdadero. Se adoptó la doctrina del choque bipolar y la estigmatización ideológica de las demandas populares.",
+    "citation": "📖 Cap. 7, p. 80"
+  },
+  {
+    "id": "TF33",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "Marquetalia fue una operación militar realizada en 1964.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 0,
+    "explanation": "Verdadero. La llamada «Operación Soberanía» fue lanzada por el Ejército en mayo de 1964.",
+    "citation": "📖 Cap. 8, p. 84"
+  },
+  {
+    "id": "TF34",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "Las FARC surgieron directamente como un movimiento urbano.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 1,
+    "explanation": "Falso. Las FARC tuvieron un origen predominantemente agrario vinculado a las luchas por la tierra y la colonización campesina.",
+    "citation": "📖 Cap. 10, p. 102"
+  },
+  {
+    "id": "TF35",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "Las FARC tuvieron antecedentes anteriores a su consolidación como organización guerrillera.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 0,
+    "explanation": "Verdadero. Se originaron en las autodefensas campesinas liberales y comunistas activas desde los años 50 en el sur del Tolima.",
+    "citation": "📖 Cap. 10, p. 102"
+  },
+  {
+    "id": "TF36",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "El ELN estuvo influenciado por la Revolución cubana.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 0,
+    "explanation": "Verdadero. Sus fundadores viajaron a Cuba con la «Brigada Pro-Liberación José Antonio Galán».",
+    "citation": "📖 Cap. 11, p. 110"
+  },
+  {
+    "id": "TF37",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "El EPL surgió en 1967.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 0,
+    "explanation": "Verdadero. Fue fundado formalmente en diciembre de 1967.",
+    "citation": "📖 Cap. 11, p. 110"
+  },
+  {
+    "id": "TF38",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "El EPL tuvo influencia maoísta.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 0,
+    "explanation": "Verdadero. Adoptó las tesis del Partido Comunista de China y de Mao Tse-Tung.",
+    "citation": "📖 Caps. 7 y 11, pp. 80 y 110"
+  },
+  {
+    "id": "TF39",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "El M-19 surgió en 1964.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 1,
+    "explanation": "Falso. El M-19 apareció públicamente en 1974 tras el denunciado fraude electoral de 1970.",
+    "citation": "📖 Cap. 15, p. 139"
+  },
+  {
+    "id": "TF40",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "El M-19 robó la espada de Simón Bolívar en 1974.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 0,
+    "explanation": "Verdadero. Ocurrió en enero de 1974 en la Quinta de Bolívar en Bogotá.",
+    "citation": "📖 Cap. 15, p. 139"
+  },
+  {
+    "id": "TF41",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "Las FARC, ELN, EPL y M-19 tuvieron exactamente el mismo origen ideológico y social.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 1,
+    "explanation": "Falso. Cada grupo tuvo matrices distintas: FARC (agrario-comunista), ELN (castrista-universitario), EPL (maoísta) y M-19 (nacionalista-urbano).",
+    "citation": "📖 No matarás, pp. 102-140"
+  },
+  {
+    "id": "TF42",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "El paro cívico de 1977 fue exclusivamente una acción guerrillera.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 1,
+    "explanation": "Falso. Fue una huelga cívica ciudadana convocada por las cuatro centrales obreras y múltiples sectores populares.",
+    "citation": "📖 Cap. 16, p. 142"
+  },
+  {
+    "id": "TF43",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "Los movimientos sociales de los años sesenta y setenta pueden considerarse automáticamente organizaciones guerrilleras.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 1,
+    "explanation": "Falso. Las reivindicaciones sociales (tierra, salarios, educación) fueron causas civiles legítimas e independientes de la vía armada.",
+    "citation": "📖 Cap. 13, p. 122"
+  },
+  {
+    "id": "TF44",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "El periodo 1958-1978 puede entenderse como una transición de la «paz política» hacia la «guerra insurgente».",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 0,
+    "explanation": "Verdadero. Es el marco analítico central del tomo «No matarás» de la Comisión de la Verdad.",
+    "citation": "📖 Bloque 1958-1978, p. 75"
+  },
+  {
+    "id": "TF45",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "La confrontación de 1958-1978 fue solamente entre el Estado y las guerrillas.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 1,
+    "explanation": "Falso. Implicó una compleja trama con élites políticas, defensas civiles, movimientos sociales, campesinado y presiones geopolíticas externas.",
+    "citation": "📖 No matarás, p. 75"
+  },
+  {
+    "id": "TF46",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "El agotamiento del Frente Nacional contribuyó al contexto político de los años setenta.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 0,
+    "explanation": "Verdadero. El cierre del sistema bipartidista desgastó la legitimidad institucional y motivó la emergencia de nuevas oposiciones.",
+    "citation": "📖 Cap. 14, p. 134"
+  },
+  {
+    "id": "TF47",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "La aparición del M-19 representó una nueva forma de insurgencia con fuerte dimensión urbana.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 0,
+    "explanation": "Verdadero. El M-19 trasladó el foco insurgente a los centros urbanos con golpes propagandísticos y de alto simbolismo.",
+    "citation": "📖 Cap. 15, p. 139"
+  },
+  {
+    "id": "TF48",
+    "type": "true_false",
+    "category": "🟨 Verdadero o Falso",
+    "question": "Entre 1958 y 1978 la confrontación permaneció exactamente igual, sin transformaciones.",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correct": 1,
+    "explanation": "Falso. El conflicto mutó cualitativamente desde las venganzas partidistas hacia una confrontación armada estructurada con doctrinas militares modernas y nuevas guerrillas.",
+    "citation": "📖 No matarás, pp. 75-149"
+  },
+  {
+    "id": "BONUS1",
+    "type": "bonus",
+    "category": "⭐ Bonificación de Memoria Histórica",
+    "question": "¡Hito Histórico: Pacto de Sitges (1956)!",
+    "options": [
+      "¡Avanzar con sabiduría! (+1 Vida o bendición campesina)"
+    ],
+    "correct": 0,
+    "explanation": "En Sitges (España), Alberto Lleras Camargo y Laureano Gómez acordaron unir a los partidos tradicionales para frenar la dictadura de Gustavo Rojas Pinilla.",
+    "citation": "📖 No matarás, Antecedentes, p. 72"
+  },
+  {
+    "id": "BONUS2",
+    "type": "bonus",
+    "category": "⭐ Bonificación de Memoria Histórica",
+    "question": "¡Reflexión de Paz: El Derecho a la Memoria y la Verdad!",
+    "options": [
+      "¡Comprender el pasado para no repetirlo! (+1 Vida)"
+    ],
+    "correct": 0,
+    "explanation": "La Jurisdicción Especial para la Paz (JEP) y la Comisión de la Verdad (CEV) nos recuerdan que escuchar a las víctimas campesinas es el corazón de la convivencia.",
+    "citation": "📖 Informe Final CEV 2022"
+  }
+]
