@@ -29,3 +29,5 @@ img_b64.txt
 *.jfif
 ChatGPT Image*.png
 *.pdf
+
+.vercel

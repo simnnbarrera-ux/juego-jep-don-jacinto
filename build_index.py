@@ -32,7 +32,7 @@ raw_html = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Juego JEP: Don Jacinto y la Memoria Histórica (1958–1978)</title>
+  <title>Juego JEP: Don Jacinto y la Memoria Histórica (1958-1978)</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -72,24 +72,43 @@ raw_html = """<!DOCTYPE html>
       border-radius: 4px;
     }
 
-    /* Full-body Pawn Walking & Idle Animations */
+    /* Full-body Pawn Animations */
     @keyframes bobWalk {
-      0%, 100% { transform: translate(-50%, -92%) translateY(0) rotate(0deg); }
-      25% { transform: translate(-50%, -92%) translateY(-18px) rotate(-3.5deg); }
-      75% { transform: translate(-50%, -92%) translateY(-18px) rotate(3.5deg); }
+      0%, 100% { transform: translate(-50%, -88%) translateY(0) rotate(0deg); }
+      25% { transform: translate(-50%, -88%) translateY(-22px) rotate(-4deg); }
+      75% { transform: translate(-50%, -88%) translateY(-22px) rotate(4deg); }
     }
     
     .pawn-walking {
-      animation: bobWalk 0.36s infinite ease-in-out;
+      animation: bobWalk 0.38s infinite ease-in-out;
     }
 
     @keyframes idleBreathe {
-      0%, 100% { transform: translate(-50%, -92%) translateY(0) scale(1); filter: drop-shadow(0 10px 18px rgba(0,0,0,0.6)); }
-      50% { transform: translate(-50%, -92%) translateY(-5px) scale(1.025); filter: drop-shadow(0 14px 24px rgba(245, 158, 11, 0.45)); }
+      0%, 100% { transform: translate(-50%, -88%) translateY(0) scale(1); filter: drop-shadow(0 10px 18px rgba(0,0,0,0.55)); }
+      50% { transform: translate(-50%, -88%) translateY(-6px) scale(1.03); filter: drop-shadow(0 14px 24px rgba(245, 158, 11, 0.45)); }
     }
 
     .pawn-idle {
-      animation: idleBreathe 2.4s infinite ease-in-out;
+      animation: idleBreathe 2.6s infinite ease-in-out;
+    }
+
+    @keyframes celebrateBounce {
+      0%, 100% { transform: translate(-50%, -88%) translateY(0) scale(1.05); filter: drop-shadow(0 12px 24px rgba(245, 158, 11, 0.7)); }
+      50% { transform: translate(-50%, -88%) translateY(-18px) scale(1.12); filter: drop-shadow(0 20px 30px rgba(245, 158, 11, 0.9)); }
+    }
+
+    .pawn-celebrating {
+      animation: celebrateBounce 0.6s infinite ease-in-out;
+    }
+
+    @keyframes worryShake {
+      0%, 100% { transform: translate(-50%, -88%) translateX(0) scale(0.98); filter: drop-shadow(0 8px 16px rgba(239, 68, 68, 0.5)); }
+      25% { transform: translate(-50%, -88%) translateX(-6px) rotate(-2deg) scale(0.98); }
+      75% { transform: translate(-50%, -88%) translateX(6px) rotate(2deg) scale(0.98); }
+    }
+
+    .pawn-worried {
+      animation: worryShake 0.5s infinite ease-in-out;
     }
 
     @keyframes shake {
@@ -103,8 +122,8 @@ raw_html = """<!DOCTYPE html>
     }
 
     @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 16px rgba(245, 158, 11, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4); }
-      50% { box-shadow: 0 0 32px rgba(245, 158, 11, 0.95), inset 0 0 20px rgba(255, 255, 255, 0.8); }
+      0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.4); }
+      50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.9), inset 0 0 20px rgba(255, 255, 255, 0.8); }
     }
 
     .tile-active {
@@ -148,20 +167,19 @@ raw_html = """<!DOCTYPE html>
   <canvas id="confetti-canvas"></canvas>
   <div id="root" class="h-full w-full"></div>
 
-  <!-- EMBEDDED DATA STORES (Injected safely via unique tokens) -->
+  <!-- EMBEDDED DATA STORES -->
   <script>
-    window.__QUESTIONS_DATA__ = /*__DATA_QUESTIONS__*/;
-    window.__GEMINI_IMAGES__ = /*__DATA_GEMINI_IMAGES__*/;
-    window.__JACINTO_SPRITES__ = /*__DATA_JACINTO_SPRITES__*/;
-    window.__GONZALO_VOICES__ = /*__DATA_GONZALO_VOICES__*/;
-    window.__QUESTIONS_VOICES__ = /*__DATA_QUESTIONS_VOICES__*/;
+    window.__QUESTIONS_DATA__ = %%DATA_QUESTIONS%%;
+    window.__GEMINI_IMAGES__ = %%DATA_GEMINI_IMAGES%%;
+    window.__JACINTO_SPRITES__ = %%DATA_JACINTO_SPRITES%%;
+    window.__GONZALO_VOICES__ = %%DATA_GONZALO_VOICES%%;
+    window.__QUESTIONS_VOICES__ = %%DATA_QUESTIONS_VOICES%%;
   </script>
 
   <!-- REACT APPLICATION SCRIPT -->
   <script type="text/babel">
     const { useState, useEffect, useRef, useMemo, useCallback } = React;
 
-    // Helper: strip redundant "A)", "B.", "1. " from option strings for pristine presentation
     function cleanOptionText(text) {
       if (!text) return '';
       return text.replace(/^[A-Da-d0-9][\.\)\-\:\s]+\s*/, '');
@@ -248,7 +266,6 @@ raw_html = """<!DOCTYPE html>
         if (b64) {
           this.playB64Voice(b64, onEnded);
         } else {
-          // Fallback to browser SpeechSynthesis
           this.fallbackSpeak(window.__QUESTIONS_DATA__?.[qIdx]?.question || '', onEnded);
         }
       }
@@ -271,7 +288,7 @@ raw_html = """<!DOCTYPE html>
         }
       }
 
-      // Web Audio API Procedural Sound Effects
+      // Procedural Sound Effects
       playDiceRoll() {
         if (this.muted) return;
         this.init();
@@ -314,7 +331,7 @@ raw_html = """<!DOCTYPE html>
         this.init();
         if (!this.ctx) return;
         const now = this.ctx.currentTime;
-        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        const notes = [523.25, 659.25, 783.99, 1046.50];
         notes.forEach((freq, i) => {
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
@@ -398,7 +415,7 @@ raw_html = """<!DOCTYPE html>
 
     const audioCtrl = new GameAudioController();
 
-    // --- 2. BOARD TILES CONFIGURATION (Sinuous Path along scenic coffee landscape) ---
+    // --- 2. BOARD TILES CONFIGURATION ---
     const BOARD_TILES = [
       { id: 1,  x: 7,  y: 75, label: "1. Orígenes", cat: "multiple", color: "#3b82f6", badge: "🟦" },
       { id: 2,  x: 13, y: 69, label: "2. Frente Nal", cat: "abc", color: "#10b981", badge: "🟩" },
@@ -438,7 +455,6 @@ raw_html = """<!DOCTYPE html>
       { level: 8, title: "Hacienda La Esperanza (Máxima)", desc: "¡Reconstrucción total con bandera de Colombia y fiesta comunitaria!", imgKey: "finca_hacienda_victoria" }
     ];
 
-    // Partition algorithm: exactly 24 steps in 8 turns (rolls between 2 and 4)
     function generateDicePlan() {
       const pool = [
         [3, 3, 3, 3, 3, 3, 3, 3],
@@ -451,7 +467,6 @@ raw_html = """<!DOCTYPE html>
       return pool[Math.floor(Math.random() * pool.length)];
     }
 
-    // Confetti generator for victory
     function launchConfetti() {
       const canvas = document.getElementById('confetti-canvas');
       if (!canvas) return;
@@ -509,6 +524,12 @@ raw_html = """<!DOCTYPE html>
       const [farmLevel, setFarmLevel] = useState(0);
       const [score, setScore] = useState(0);
       
+      // Dynamic Emotional State of Don Jacinto: 'saludo', 'celebrando', 'preocupado', 'cosechando'
+      const [jacintoEmotion, setJacintoEmotion] = useState('cosechando');
+      
+      // Visual & Audio Alert for Farm Changes
+      const [farmAlert, setFarmAlert] = useState(null); // { type: 'upgrade' | 'degrade', title, level, text }
+
       // Dice & Movement State
       const [dicePlan] = useState(generateDicePlan);
       const [currentDiceRoll, setCurrentDiceRoll] = useState(dicePlan[0]);
@@ -529,7 +550,6 @@ raw_html = """<!DOCTYPE html>
       const [showFarmModal, setShowFarmModal] = useState(false);
       const [notificationText, setNotificationText] = useState("¡Bienvenido! Lanza el dado para comenzar.");
 
-      // Setup Fullscreen
       const toggleFullscreen = () => {
         if (!document.fullscreenElement) {
           document.documentElement.requestFullscreen().catch(() => {});
@@ -538,8 +558,8 @@ raw_html = """<!DOCTYPE html>
         }
       };
 
-      // Intro Narration
       const startIntro = () => {
+        setJacintoEmotion('cosechando');
         audioCtrl.playNamedVoice('intro');
       };
 
@@ -547,11 +567,12 @@ raw_html = """<!DOCTYPE html>
         audioCtrl.init();
         if (audioCtrl.currentAudio) audioCtrl.currentAudio.pause();
         setGameState('PLAYING');
+        setJacintoEmotion('saludo');
         setNotificationText("¡Turno 1 de 8! Presiona 'Tirar Dado' o la barra espaciadora.");
         audioCtrl.playNamedVoice('dice_1');
       };
 
-      // Keyboard space shortcut
+      // Spacebar listener
       useEffect(() => {
         const handleKeyDown = (e) => {
           if (e.code === 'Space') {
@@ -565,11 +586,11 @@ raw_html = """<!DOCTYPE html>
         return () => window.removeEventListener('keydown', handleKeyDown);
       }, [gameState, isRolling, isWalking, turnNumber]);
 
-      // Dice Roll Handler
       const handleRollDice = () => {
         if (isRolling || isWalking) return;
         audioCtrl.init();
         setIsRolling(true);
+        setFarmAlert(null);
         audioCtrl.playDiceRoll();
 
         const rollValue = dicePlan[turnNumber - 1] || Math.floor(Math.random() * 3) + 2;
@@ -581,9 +602,9 @@ raw_html = """<!DOCTYPE html>
         }, 800);
       };
 
-      // Pawn Movement with step-by-step animation
       const movePawn = (steps) => {
         setIsWalking(true);
+        setJacintoEmotion('saludo');
         let stepCount = 0;
         let startPos = currentStep;
 
@@ -601,11 +622,9 @@ raw_html = """<!DOCTYPE html>
         }, 340);
       };
 
-      // Tile Arrival Handler
       const onTileReached = (tileId) => {
         const tile = BOARD_TILES.find(t => t.id === tileId) || BOARD_TILES[tileId - 1];
         
-        // Pick an unused question matching category or fallback
         const allQuestions = window.__QUESTIONS_DATA__ || [];
         let available = allQuestions.map((q, idx) => ({ q, idx })).filter(item => !usedQuestionIndices.has(item.idx));
         
@@ -632,7 +651,6 @@ raw_html = """<!DOCTYPE html>
         setSelectedAnswer(null);
         setGameState('QUESTION');
 
-        // Play Question Audio
         if (tile.cat === 'star') {
           audioCtrl.playStarBonus();
           setTimeout(() => {
@@ -650,7 +668,7 @@ raw_html = """<!DOCTYPE html>
         });
       };
 
-      // Answer Selection Handler
+      // Answer Selection with Visual & Audio Farm Alerts
       const handleSelectAnswer = (index) => {
         if (selectedAnswer !== null) return;
         setSelectedAnswer(index);
@@ -662,26 +680,61 @@ raw_html = """<!DOCTYPE html>
 
         if (correct) {
           audioCtrl.playCorrect();
+          const nextLevel = Math.min(8, farmLevel + 1);
+          setFarmLevel(nextLevel);
           setScore(prev => prev + (activeQuestion.isSpecialBonus || isBonusTile ? 200 : 100));
-          setFarmLevel(prev => Math.min(8, prev + 1));
           
-          const voiceKeys = ['correct_1', 'correct_2', 'correct_3'];
-          const pickedVoice = (activeQuestion.isSpecialBonus || isBonusTile) ? 'star_bonus' : voiceKeys[Math.floor(Math.random() * voiceKeys.length)];
-          setTimeout(() => audioCtrl.playNamedVoice(pickedVoice), 300);
+          // Emotional State: Don Jacinto Celebrates Joyfully!
+          setJacintoEmotion('celebrando');
+
+          // Farm Upgrade Alert & Narration
+          const upgradeInfo = FARM_LEVELS[nextLevel] || FARM_LEVELS[8];
+          setFarmAlert({
+            type: 'upgrade',
+            level: nextLevel,
+            title: upgradeInfo.title,
+            desc: upgradeInfo.desc
+          });
+
+          // Play Gonzalo Neural Farm Upgrade voice line
+          setTimeout(() => {
+            audioCtrl.playNamedVoice('upgrade_' + nextLevel, () => {
+              const voiceKeys = ['correct_1', 'correct_2', 'correct_3'];
+              const pickedVoice = (activeQuestion.isSpecialBonus || isBonusTile) ? 'star_bonus' : voiceKeys[Math.floor(Math.random() * voiceKeys.length)];
+              audioCtrl.playNamedVoice(pickedVoice);
+            });
+          }, 400);
+
         } else {
           audioCtrl.playWrong();
           setLives(prev => Math.max(0, prev - 1));
           
-          const wrongVoices = ['wrong_1', 'wrong_2', 'wrong_3'];
-          const pickedWrong = wrongVoices[Math.floor(Math.random() * wrongVoices.length)];
-          setTimeout(() => audioCtrl.playNamedVoice(pickedWrong), 300);
+          // Emotional State: Don Jacinto Worried & Sweating!
+          setJacintoEmotion('preocupado');
+
+          // Farm Degradation Alert & Narration
+          setFarmAlert({
+            type: 'degrade',
+            text: '¡Pérdida de 1 Vida! La Finca La Esperanza ha sufrido un deterioro.'
+          });
+
+          // Play Gonzalo Neural Degradation Alert voice line
+          setTimeout(() => {
+            audioCtrl.playNamedVoice('degrade_alert', () => {
+              const wrongVoices = ['wrong_1', 'wrong_2', 'wrong_3'];
+              const pickedWrong = wrongVoices[Math.floor(Math.random() * wrongVoices.length)];
+              audioCtrl.playNamedVoice(pickedWrong);
+            });
+          }, 400);
         }
       };
 
-      // Continue Turn after Feedback
       const handleContinueAfterFeedback = () => {
+        setFarmAlert(null);
+
         if (lives <= 0 && !isAnswerCorrect) {
           setGameState('GAMEOVER');
+          setJacintoEmotion('preocupado');
           audioCtrl.playNamedVoice('game_over');
           return;
         }
@@ -689,6 +742,7 @@ raw_html = """<!DOCTYPE html>
         if (currentStep >= 24 || turnNumber >= 8) {
           setGameState('VICTORY');
           setFarmLevel(8);
+          setJacintoEmotion('celebrando');
           audioCtrl.playVictory();
           launchConfetti();
           setTimeout(() => audioCtrl.playNamedVoice('victory'), 700);
@@ -699,6 +753,7 @@ raw_html = """<!DOCTYPE html>
         const nextTurn = turnNumber + 1;
         setTurnNumber(nextTurn);
         setGameState('PLAYING');
+        setJacintoEmotion('saludo');
         
         const diceVoices = ['dice_1', 'dice_2', 'dice_3'];
         const nextPrompt = diceVoices[(nextTurn - 1) % diceVoices.length];
@@ -706,7 +761,6 @@ raw_html = """<!DOCTYPE html>
         audioCtrl.playNamedVoice(nextPrompt);
       };
 
-      // Restart Game
       const handleRestart = () => {
         setCurrentStep(1);
         setTurnNumber(1);
@@ -714,25 +768,36 @@ raw_html = """<!DOCTYPE html>
         setFarmLevel(0);
         setScore(0);
         setSelectedAnswer(null);
+        setFarmAlert(null);
         setUsedQuestionIndices(new Set());
         setGameState('PLAYING');
+        setJacintoEmotion('saludo');
         setNotificationText("¡Partida reiniciada! Lanza el dado para comenzar.");
         audioCtrl.playNamedVoice('dice_1');
       };
 
-      // Current tile info
       const activeTile = BOARD_TILES.find(t => t.id === currentStep) || BOARD_TILES[0];
       
-      // Full Body Jacinto Sprite (Always full body with hat, ruana, cane, carriel, pants and sandals)
-      const fullBodySprite = window.__JACINTO_SPRITES__?.full_body || window.__JACINTO_SPRITES__?.saludo;
+      // Dynamic Full-Body Sprite based on Emotion
+      const currentJacintoSprite = window.__JACINTO_SPRITES__?.[jacintoEmotion] || window.__JACINTO_SPRITES__?.saludo || window.__JACINTO_SPRITES__?.full_body;
       const backgroundImage = window.__GEMINI_IMAGES__?.paisaje_fondo || '';
       const farmImages = window.__GEMINI_IMAGES__ || {};
+
+      // Dynamic Animation Class for Pawn
+      let pawnAnimClass = 'pawn-idle';
+      if (isWalking) {
+        pawnAnimClass = 'pawn-walking';
+      } else if (jacintoEmotion === 'celebrando') {
+        pawnAnimClass = 'pawn-celebrating';
+      } else if (jacintoEmotion === 'preocupado') {
+        pawnAnimClass = 'pawn-worried';
+      }
 
       return (
         <div className="relative w-full h-full flex flex-col bg-slate-950 overflow-hidden select-none">
           
           {/* ======================================================== */}
-          {/* 1. TOP HEADER / PRESENTER BAR (Non-obstructive HUD)       */}
+          {/* 1. TOP HEADER / PRESENTER BAR                             */}
           {/* ======================================================== */}
           <header className="relative z-30 flex items-center justify-between px-4 md:px-6 py-2.5 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-xl select-none">
             {/* Left: Presentation Branding & Credits */}
@@ -771,7 +836,7 @@ raw_html = """<!DOCTYPE html>
                 ))}
               </div>
 
-              {/* Finca Compact Badge (Clickable Drawer) */}
+              {/* Finca Compact Badge */}
               <button 
                 onClick={() => setShowFarmModal(true)}
                 className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-950/80 to-emerald-900/70 hover:from-emerald-900/90 hover:to-emerald-800/80 border border-emerald-500/40 text-xs font-semibold text-emerald-300 transition-all shadow-sm hover:shadow-emerald-500/20 active:scale-95 cursor-pointer"
@@ -818,10 +883,46 @@ raw_html = """<!DOCTYPE html>
           </header>
 
           {/* ======================================================== */}
-          {/* 2. MAIN BOARD VIEW (Clean Panoramic Scenic Landscape)     */}
+          {/* FLOATING FINCA UPGRADE / DEGRADATION NOTIFICATION TOAST   */}
+          {/* ======================================================== */}
+          {farmAlert && (
+            <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-fade-in">
+              {farmAlert.type === 'upgrade' ? (
+                <div className="flex items-center gap-3.5 px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-950/95 via-emerald-900/95 to-amber-950/95 border-2 border-amber-400 text-white shadow-2xl shadow-emerald-500/40 animate-bounce">
+                  <div className="text-3xl">✨🏡</div>
+                  <div>
+                    <div className="text-xs font-extrabold text-amber-300 font-mono-title tracking-wider uppercase flex items-center gap-2">
+                      <span>¡MEJORA EN LA FINCA LA ESPERANZA!</span>
+                      <span className="px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-bold text-[10px]">NIVEL {farmAlert.level}/8</span>
+                    </div>
+                    <div className="text-sm font-bold text-emerald-100">
+                      {farmAlert.title}
+                    </div>
+                    <div className="text-xs text-slate-300 font-normal">
+                      {farmAlert.desc}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center gap-3.5 px-6 py-3 rounded-2xl bg-gradient-to-r from-rose-950/95 via-rose-900/95 to-slate-950/95 border-2 border-rose-500 text-white shadow-2xl shadow-rose-900/50 shake-error">
+                  <div className="text-3xl">💔⚠️</div>
+                  <div>
+                    <div className="text-xs font-extrabold text-rose-300 font-mono-title tracking-wider uppercase">
+                      ¡DETERIORO EN LA FINCA! (-1 VIDA)
+                    </div>
+                    <div className="text-sm font-semibold text-rose-100">
+                      {farmAlert.text}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ======================================================== */}
+          {/* 2. MAIN BOARD VIEW                                        */}
           {/* ======================================================== */}
           <main className="relative flex-1 w-full h-full overflow-hidden bg-slate-950">
-            {/* Scenic Background Landscape: Pure Panoramic Landscape */}
             {backgroundImage ? (
               <img 
                 src={backgroundImage} 
@@ -832,23 +933,17 @@ raw_html = """<!DOCTYPE html>
               <div className="absolute inset-0 bg-gradient-to-b from-sky-300 via-emerald-700 to-green-950" />
             )}
 
-            {/* Subtle Landscape Vignette Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-slate-950/20 pointer-events-none" />
 
-            {/* SVG Interactive Board Path Connections */}
+            {/* SVG Connections */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
               <defs>
-                <linearGradient id="pathGradientPassed" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="#fbbf24" stopOpacity="0.9" />
-                </linearGradient>
                 <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
                   <feGaussianBlur stdDeviation="3.5" result="blur" />
                   <feComposite in="SourceGraphic" in2="blur" operator="over" />
                 </filter>
               </defs>
 
-              {/* Draw connected lines between consecutive tiles */}
               {BOARD_TILES.map((tile, idx) => {
                 if (idx === BOARD_TILES.length - 1) return null;
                 const nextTile = BOARD_TILES[idx + 1];
@@ -883,7 +978,6 @@ raw_html = """<!DOCTYPE html>
                     style={{ left: `${tile.x}%`, top: `${tile.y}%` }}
                     className="absolute -translate-x-1/2 -translate-y-1/2 group"
                   >
-                    {/* Tile Body */}
                     <div 
                       className={`relative flex items-center justify-center w-9 h-9 md:w-11 md:h-11 rounded-full font-mono-title font-bold text-xs md:text-sm transition-all duration-300 shadow-lg ${
                         isCurrent 
@@ -898,62 +992,55 @@ raw_html = """<!DOCTYPE html>
                     >
                       <span>{tile.id}</span>
                       
-                      {/* Category Small Badge */}
-                      <span className="absolute -top-1.5 -right-1.5 text-[10px]">
+                      <span className="absolute -top-1 -right-1 text-[9px] md:text-[10px]">
                         {tile.badge}
                       </span>
                     </div>
 
-                    {/* Step Title Tooltip */}
-                    <div className="absolute top-11 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap px-2.5 py-1 rounded-lg bg-slate-900/95 border border-slate-700 text-[11px] font-medium text-slate-200 shadow-xl z-30">
+                    <div className="absolute top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap px-2.5 py-1 rounded-lg bg-slate-900/95 border border-slate-700 text-[11px] font-medium text-slate-200 shadow-xl z-30">
                       {tile.label}
                     </div>
                   </div>
                 );
               })}
 
-              {/* ======================================================== */}
-              {/* 3. DON JACINTO FULL-BODY CHARACTER (Standing directly on tile) */}
-              {/* ======================================================== */}
+              {/* 3. DON JACINTO FULL-BODY STANDING PAWN (With Dynamic Emotional Sprites!) */}
               <div 
                 style={{ 
                   left: `${activeTile.x}%`, 
                   top: `${activeTile.y}%`,
-                  transition: isWalking ? 'none' : 'left 0.34s cubic-bezier(0.25, 1, 0.5, 1), top 0.34s cubic-bezier(0.25, 1, 0.5, 1)'
+                  transition: isWalking ? 'none' : 'left 0.35s ease-out, top 0.35s ease-out'
                 }}
-                className={`absolute z-30 pointer-events-none flex flex-col items-center ${isWalking ? 'pawn-walking' : 'pawn-idle'}`}
+                className={`absolute z-30 pointer-events-none ${pawnAnimClass}`}
               >
-                {/* Floating Name Tag */}
-                <div className="whitespace-nowrap px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 font-extrabold text-[10px] md:text-xs shadow-lg border border-amber-200 mb-1">
-                  Don Jacinto
-                </div>
+                {/* Ground Shadow */}
+                <div className="absolute left-1/2 bottom-1.5 -translate-x-1/2 w-16 h-4 bg-slate-950/80 rounded-full blur-[3px] pointer-events-none" />
 
-                {/* Full-Body Sprite Image (Sombrero, ruana, bastón, carriel, piernas, sandalias) */}
+                {/* Full-Body Sprite Image (Crisp, complete, no background) */}
                 <img 
-                  src={fullBodySprite} 
-                  alt="Don Jacinto Campesino Cuerpo Completo" 
+                  src={currentJacintoSprite} 
+                  alt="Don Jacinto Campesino" 
                   className="w-20 md:w-24 lg:w-28 max-h-36 object-contain pointer-events-none drop-shadow-[0_8px_16px_rgba(0,0,0,0.6)]"
                 />
 
-                {/* Ground Shadow under Jacinto's sandals */}
-                <div className="w-14 md:w-18 h-3.5 bg-slate-950/70 rounded-full blur-[2px] pointer-events-none -mt-1" />
+                {/* State Tag Badge */}
+                <div className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-0.5 rounded-full bg-amber-500 text-slate-950 font-bold text-[10px] shadow-lg border border-amber-200">
+                  {jacintoEmotion === 'celebrando' ? '🎉 ¡Don Jacinto Triunfa!' : jacintoEmotion === 'preocupado' ? '😰 Don Jacinto Preocupado' : 'Don Jacinto'}
+                </div>
               </div>
             </div>
 
-            {/* ======================================================== */}
-            {/* 4. BOTTOM FLOATING CONTROLS & NARRATION STRIP           */}
-            {/* ======================================================== */}
-            <div className="absolute bottom-4 left-4 right-4 md:left-6 md:right-6 z-20 flex flex-col sm:flex-row items-center justify-between gap-3 pointer-events-none">
+            {/* 4. BOTTOM FLOATING CONTROLS & NARRATION STRIP */}
+            <div className="absolute bottom-4 left-4 right-4 md:left-6 md:right-6 z-20 flex flex-col md:flex-row items-center justify-between gap-3 pointer-events-none">
               
-              {/* Notification / Dialogue Toast */}
               <div className="pointer-events-auto flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 shadow-2xl max-w-xl">
                 <img 
-                  src={fullBodySprite} 
+                  src={currentJacintoSprite} 
                   alt="Don Jacinto" 
                   className="w-10 h-10 rounded-full object-cover bg-amber-500/20 border border-amber-500/40 p-0.5 shrink-0" 
                 />
                 <div>
-                  <div className="text-[11px] font-bold text-amber-400 flex items-center gap-1.5 font-mono-title">
+                  <div className="text-[11px] font-bold text-amber-400 flex items-center gap-1.5">
                     <span>Don Jacinto:</span>
                     {isNarrating && (
                       <span className="flex items-center gap-0.5 text-emerald-400 text-[10px]">
@@ -964,13 +1051,12 @@ raw_html = """<!DOCTYPE html>
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-slate-200 font-medium">
+                  <p className="text-xs text-slate-200 font-medium leading-tight">
                     «{notificationText}»
                   </p>
                 </div>
               </div>
 
-              {/* Action Button: Tirar Dado */}
               {gameState === 'PLAYING' && (
                 <div className="pointer-events-auto flex items-center gap-3">
                   <button
@@ -982,7 +1068,6 @@ raw_html = """<!DOCTYPE html>
                         : 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 border-2 border-amber-200 shadow-amber-500/40 hover:shadow-amber-500/60 hover:-translate-y-0.5'
                     }`}
                   >
-                    {/* Dice Icon with 3D rolling animation */}
                     <div className={`w-8 h-8 rounded-lg bg-slate-950 text-amber-400 flex items-center justify-center text-lg font-mono-title shadow-inner border border-amber-400/40 ${isRolling ? 'dice-rolling' : ''}`}>
                       {isRolling ? '🎲' : currentDiceRoll}
                     </div>
@@ -994,23 +1079,21 @@ raw_html = """<!DOCTYPE html>
           </main>
 
           {/* ======================================================== */}
-          {/* MODAL 1: INTRO SCREEN CINEMATIC OVERLAY                  */}
+          {/* MODAL 1: INTRO SCREEN CINEMATIC OVERLAY                   */}
           {/* ======================================================== */}
           {gameState === 'INTRO' && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-fade-in">
               <div className="relative w-full max-w-2xl rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950 border border-amber-500/40 shadow-2xl p-6 md:p-8 text-center overflow-hidden">
                 
-                {/* Header Badge */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold mb-4">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold mb-4">
                   <span>🇨🇴</span> Memoria Histórica del Conflicto Armado (1958–1978)
                 </div>
 
-                {/* Don Jacinto Full Character Illustration */}
                 <div className="flex justify-center mb-4">
                   <div className="relative">
-                    <div className="w-36 h-36 md:w-44 md:h-44 rounded-full bg-gradient-to-b from-amber-500/20 to-emerald-500/20 border-2 border-amber-400/40 flex items-center justify-center overflow-hidden shadow-2xl">
+                    <div className="w-32 h-32 md:w-36 md:h-36 rounded-full bg-gradient-to-b from-amber-500/20 to-emerald-500/20 border-2 border-amber-400/40 flex items-center justify-center overflow-hidden shadow-2xl">
                       <img 
-                        src={fullBodySprite} 
+                        src={window.__JACINTO_SPRITES__?.saludo} 
                         alt="Don Jacinto" 
                         className="w-full h-full object-contain transform scale-110 drop-shadow-xl" 
                       />
@@ -1029,15 +1112,13 @@ raw_html = """<!DOCTYPE html>
                   ¡Hola! Soy Don Jacinto
                 </h2>
                 <p className="text-sm md:text-base text-slate-300 leading-relaxed mb-6 max-w-lg mx-auto">
-                  Campesino de nuestras hermosas montañas. Acompáñame por este sendero de 24 casillas. En 8 turnos responderemos preguntas de memoria y verdad histórica, para reconstruir juntos la <strong className="text-amber-400">Finca La Esperanza</strong>.
+                  Campesino de nuestras hermosas montañas. Acompáñame por este sendero de 24 casillas. En 8 turnos responderemos preguntas de memoria y reconstruiremos juntos la <strong className="text-amber-400">Finca La Esperanza</strong>.
                 </p>
 
-                {/* Presenters Credits Footer */}
                 <div className="py-2.5 px-4 rounded-xl bg-slate-800/60 border border-slate-700/60 text-xs text-slate-400 mb-6 max-w-md mx-auto">
                   <span className="font-semibold text-slate-200">Comunidad de Indagación 3:</span> Isabella Ortiz, Alison Cuasquer, Valery Lopez, Valentina Benavidez
                 </div>
 
-                {/* Start Button */}
                 <div className="flex items-center justify-center gap-4">
                   <button
                     onClick={handleStartGame}
@@ -1051,125 +1132,111 @@ raw_html = """<!DOCTYPE html>
           )}
 
           {/* ======================================================== */}
-          {/* MODAL 2: QUESTION DISPLAY (Large, clear, projection-friendly) */}
+          {/* MODAL 2: QUESTION DISPLAY                                 */}
           {/* ======================================================== */}
           {(gameState === 'QUESTION' || gameState === 'FEEDBACK') && activeQuestion && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-slate-950/85 backdrop-blur-md">
-              <div className="relative w-full max-w-3xl rounded-3xl bg-slate-900 border-2 border-slate-700 shadow-2xl p-6 md:p-8 overflow-hidden max-h-[92vh] flex flex-col justify-between">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
+              <div className="relative w-full max-w-3xl rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900/98 to-slate-950 border-2 border-slate-700 shadow-2xl p-6 md:p-8 overflow-hidden">
                 
-                <div>
-                  {/* Category & Status Bar */}
-                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
-                    <div className="flex items-center gap-2.5 flex-wrap">
-                      <span className="px-3.5 py-1 rounded-xl text-xs font-bold text-slate-950 uppercase tracking-wider font-mono-title shadow-sm"
-                            style={{ backgroundColor: activeTile.color }}>
-                        {activeQuestion.category || (activeQuestion.type === 'true_false' ? "🟨 VERDADERO O FALSO" : activeQuestion.type === 'abc' ? "🟩 PREGUNTA ABC" : activeQuestion.type === 'bonus' ? "⭐ BONIFICACIÓN" : "🟦 OPCIÓN MÚLTIPLE")}
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-3 py-1 rounded-xl text-xs font-bold text-slate-950 uppercase tracking-wider font-mono-title shadow-sm"
+                          style={{ backgroundColor: activeTile.color }}>
+                      {activeQuestion.category || "MEMORIA HISTÓRICA"}
+                    </span>
+                    {(activeQuestion.isSpecialBonus || activeQuestion.type === 'bonus') && (
+                      <span className="px-2.5 py-1 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold flex items-center gap-1">
+                        ⭐ Casilla Estrella de Reflexión
                       </span>
-                      {(activeQuestion.isSpecialBonus || activeQuestion.type === 'bonus') && (
-                        <span className="px-2.5 py-1 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold flex items-center gap-1">
-                          ⭐ Casilla Estrella de Reflexión
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      {/* Replay Question Audio Button */}
-                      <button
-                        onClick={() => playQuestionNarration(activeQuestionIdx)}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
-                          isNarrating 
-                            ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' 
-                            : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
-                        }`}
-                        title="Escuchar pregunta con voz de Don Jacinto"
-                      >
-                        <span>{isNarrating ? '🗣️' : '🔊'}</span>
-                        <span>{isNarrating ? 'Narrando...' : 'Escuchar Voz'}</span>
-                      </button>
-                      
-                      <span className="text-xs text-slate-400 font-mono-title hidden sm:inline">
-                        Casilla #{currentStep} • Turno {turnNumber}/8
-                      </span>
-                    </div>
+                    )}
                   </div>
 
-                  {/* Question Statement */}
-                  <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-white leading-snug mb-5 font-mono-title">
-                    {activeQuestion.question}
-                  </h3>
-
-                  {/* Answer Options */}
-                  <div className="space-y-3 mb-4">
-                    {activeQuestion.options.map((opt, idx) => {
-                      const isSelected = selectedAnswer === idx;
-                      const isBonus = activeQuestion.type === 'bonus';
-                      const isCorrectOption = isBonus ? true : (idx === activeQuestion.correct);
-                      
-                      // Badges for ABC / Multiple vs True-False
-                      const isTF = activeQuestion.type === 'true_false' || (activeQuestion.options?.length === 2 && (opt.toLowerCase().includes('verdadero') || opt.toLowerCase().includes('falso')));
-                      let letterBadge = isTF ? (idx === 0 ? 'V' : 'F') : ['A', 'B', 'C', 'D'][idx] || (idx + 1);
-                      if (isBonus) letterBadge = '⭐';
-                      
-                      let btnStyle = "bg-slate-800/90 hover:bg-slate-700/90 border-slate-700 text-slate-200 cursor-pointer";
-                      let badgeStyle = "bg-slate-700 text-slate-300";
-
-                      if (gameState === 'FEEDBACK') {
-                        if (isCorrectOption) {
-                          btnStyle = "bg-emerald-600 text-white border-emerald-400 ring-2 ring-emerald-400/50 font-bold shadow-lg shadow-emerald-500/30";
-                          badgeStyle = "bg-white text-emerald-800 font-extrabold";
-                        } else if (isSelected && !isCorrectOption) {
-                          btnStyle = "bg-rose-600/90 text-white border-rose-400 shake-error font-semibold";
-                          badgeStyle = "bg-white text-rose-800 font-extrabold";
-                        } else {
-                          btnStyle = "bg-slate-900/60 border-slate-800 text-slate-500 opacity-60";
-                        }
-                      }
-
-                      return (
-                        <button
-                          key={idx}
-                          onClick={() => handleSelectAnswer(idx)}
-                          disabled={gameState === 'FEEDBACK'}
-                          className={`w-full flex items-center gap-3.5 p-3.5 md:p-4 rounded-2xl border-2 text-left text-sm md:text-base transition-all duration-200 ${btnStyle}`}
-                        >
-                          <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 font-mono-title shadow-sm ${badgeStyle}`}>
-                            {letterBadge}
-                          </div>
-                          <span className="flex-1 leading-relaxed font-medium">
-                            {cleanOptionText(opt)}
-                          </span>
-                          {gameState === 'FEEDBACK' && isCorrectOption && (
-                            <span className="text-xl shrink-0">✅</span>
-                          )}
-                          {gameState === 'FEEDBACK' && isSelected && !isCorrectOption && (
-                            <span className="text-xl shrink-0">❌</span>
-                          )}
-                        </button>
-                      );
-                    })}
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => playQuestionNarration(activeQuestionIdx)}
+                      className={`flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+                        isNarrating 
+                          ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' 
+                          : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
+                      }`}
+                      title="Escuchar pregunta"
+                    >
+                      <span>{isNarrating ? '🗣️' : '🔊'}</span>
+                      <span>{isNarrating ? 'Narrando...' : 'Escuchar'}</span>
+                    </button>
+                    
+                    <span className="text-xs text-slate-400 font-mono-title">
+                      Casilla #{currentStep} • Turno {turnNumber}/8
+                    </span>
                   </div>
                 </div>
 
-                {/* Historical Feedback Box (Truth Commission CEV 'No Matarás' report citation) */}
+                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-white leading-snug mb-6 font-mono-title">
+                  {activeQuestion.question}
+                </h3>
+
+                <div className="space-y-3 mb-6">
+                  {activeQuestion.options.map((opt, idx) => {
+                    const isSelected = selectedAnswer === idx;
+                    const isCorrectOption = idx === activeQuestion.correct;
+                    const letters = ['A', 'B', 'C', 'D'];
+                    const cleanOpt = cleanOptionText(opt);
+                    
+                    let btnStyle = "bg-slate-800/80 hover:bg-slate-700/90 border-slate-700 text-slate-200 cursor-pointer";
+                    let badgeStyle = "bg-slate-700 text-slate-300";
+
+                    if (gameState === 'FEEDBACK') {
+                      if (isCorrectOption) {
+                        btnStyle = "bg-emerald-600 text-white border-emerald-400 ring-2 ring-emerald-400/50 font-bold shadow-lg shadow-emerald-500/30";
+                        badgeStyle = "bg-white text-emerald-800 font-extrabold";
+                      } else if (isSelected && !isCorrectOption) {
+                        btnStyle = "bg-rose-600/90 text-white border-rose-400 shake-error font-semibold";
+                        badgeStyle = "bg-white text-rose-800 font-extrabold";
+                      } else {
+                        btnStyle = "bg-slate-900/60 border-slate-800 text-slate-500 opacity-60";
+                      }
+                    }
+
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => handleSelectAnswer(idx)}
+                        disabled={gameState === 'FEEDBACK'}
+                        className={`w-full flex items-center gap-3.5 p-3.5 md:p-4 rounded-2xl border-2 text-left text-sm md:text-base transition-all duration-200 ${btnStyle}`}
+                      >
+                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 font-mono-title ${badgeStyle}`}>
+                          {letters[idx] || (idx + 1)}
+                        </div>
+                        <span className="flex-1 leading-relaxed">{cleanOpt}</span>
+                        {gameState === 'FEEDBACK' && isCorrectOption && (
+                          <span className="text-xl">✅</span>
+                        )}
+                        {gameState === 'FEEDBACK' && isSelected && !isCorrectOption && (
+                          <span className="text-xl">❌</span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+
                 {gameState === 'FEEDBACK' && (
-                  <div className="mt-2 p-4 rounded-2xl bg-slate-950/90 border border-slate-800 text-xs md:text-sm text-slate-300">
+                  <div className="mt-4 p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs md:text-sm text-slate-300 animate-fade-in">
                     <div className="flex items-center gap-2 font-bold mb-1.5 font-mono-title text-amber-400">
-                      <span>📖 Explicación Histórica & Verdad (CEV):</span>
+                      <span>📖 Explicación Histórica & Verdad:</span>
                     </div>
                     <p className="leading-relaxed mb-2 text-slate-200">
                       {activeQuestion.explanation}
                     </p>
                     {activeQuestion.citation && (
-                      <div className="text-[11px] text-amber-300/90 font-semibold bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/30 inline-block mb-3">
-                        📜 Cita Oficial: {activeQuestion.citation} • Comisión de la Verdad (CEV), Informe 'No Matarás' (2022)
+                      <div className="text-[11px] text-amber-300/80 font-medium">
+                        Cita oficial: {activeQuestion.citation}
                       </div>
                     )}
                     
-                    {/* Continue Button */}
-                    <div className="flex justify-end">
+                    <div className="mt-4 flex justify-end">
                       <button
                         onClick={handleContinueAfterFeedback}
-                        className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-bold font-mono-title text-sm shadow-lg shadow-amber-500/20 transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
+                        className="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold font-mono-title text-sm shadow-lg shadow-amber-500/20 transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
                       >
                         Continuar Recorrido ➡️
                       </button>
@@ -1181,10 +1248,10 @@ raw_html = """<!DOCTYPE html>
           )}
 
           {/* ======================================================== */}
-          {/* MODAL 3: FINCA PROGRESS DRAWER (Non-obstructive)          */}
+          {/* MODAL 3: FINCA PROGRESS DRAWER                            */}
           {/* ======================================================== */}
           {showFarmModal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-fade-in">
               <div className="relative w-full max-w-2xl rounded-3xl bg-slate-900 border border-emerald-500/40 shadow-2xl p-6 md:p-8 text-center overflow-hidden">
                 <button 
                   onClick={() => setShowFarmModal(false)}
@@ -1200,7 +1267,6 @@ raw_html = """<!DOCTYPE html>
                   {FARM_LEVELS[farmLevel]?.title || "Finca Cafetera"}
                 </p>
 
-                {/* Farm Illustration based on Level */}
                 <div className="relative w-full h-56 rounded-2xl overflow-hidden border border-slate-700 mb-4 shadow-inner">
                   <img 
                     src={farmImages[FARM_LEVELS[farmLevel]?.imgKey] || farmImages.finca_inicial} 
@@ -1215,7 +1281,6 @@ raw_html = """<!DOCTYPE html>
                   </div>
                 </div>
 
-                {/* Progress bar */}
                 <div className="w-full bg-slate-800 h-3 rounded-full overflow-hidden border border-slate-700 mb-4">
                   <div 
                     className="h-full bg-gradient-to-r from-emerald-500 to-amber-400 transition-all duration-500"
@@ -1231,10 +1296,10 @@ raw_html = """<!DOCTYPE html>
           )}
 
           {/* ======================================================== */}
-          {/* MODAL 4: VICTORY SCREEN (Turn 8 / Step 24 reached)       */}
+          {/* MODAL 4: VICTORY SCREEN                                   */}
           {/* ======================================================== */}
           {gameState === 'VICTORY' && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-lg">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-lg animate-fade-in">
               <div className="relative w-full max-w-2xl rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border-2 border-amber-400 shadow-2xl p-6 md:p-8 text-center overflow-hidden">
                 
                 <div className="text-5xl mb-3 animate-bounce">🏆</div>
@@ -1246,7 +1311,6 @@ raw_html = """<!DOCTYPE html>
                   Gracias a su compromiso con la memoria histórica y la verdad, Don Jacinto ha recuperado su hogar y sus cafetales en su máximo esplendor.
                 </p>
 
-                {/* Hacienda Victoria Image */}
                 <div className="relative w-full h-48 rounded-2xl overflow-hidden border border-amber-500/40 mb-5 shadow-2xl">
                   <img 
                     src={farmImages.finca_hacienda_victoria || farmImages.finca_intermedia} 
@@ -1258,7 +1322,6 @@ raw_html = """<!DOCTYPE html>
                   </div>
                 </div>
 
-                {/* Presentation Team Celebration */}
                 <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200 mb-6">
                   <div className="font-bold text-amber-400 mb-1">Comunidad de Indagación 3 (1958–1978):</div>
                   <div>Isabella Ortiz • Alison Cuasquer • Valery Lopez • Valentina Benavidez</div>
@@ -1276,17 +1339,17 @@ raw_html = """<!DOCTYPE html>
           )}
 
           {/* ======================================================== */}
-          {/* MODAL 5: GAME OVER SCREEN                                */}
+          {/* MODAL 5: GAME OVER SCREEN                                 */}
           {/* ======================================================== */}
           {gameState === 'GAMEOVER' && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-lg">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-lg animate-fade-in">
               <div className="relative w-full max-w-md rounded-3xl bg-slate-900 border border-rose-500/40 shadow-2xl p-6 md:p-8 text-center">
                 <div className="text-5xl mb-3">💔</div>
                 <h3 className="text-2xl font-bold text-rose-400 font-mono-title mb-2">
                   Se han agotado las vidas
                 </h3>
                 <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                  Don Jacinto nos recuerda que en el camino hacia la paz y la memoria histórica, cada caída es una oportunidad para reflexionar, aprender de nuestro pasado y volver a empezar.
+                  Don Jacinto nos recuerda que en el camino hacia la paz y la memoria histórica, cada caída es una oportunidad para aprender de nuestro pasado y volver a empezar.
                 </p>
                 <button
                   onClick={handleRestart}
@@ -1302,21 +1365,19 @@ raw_html = """<!DOCTYPE html>
       );
     }
 
-    // Mount using React 18 createRoot
-    const rootElement = document.getElementById('root');
-    const root = ReactDOM.createRoot(rootElement);
+    const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(<App />);
   </script>
 </body>
 </html>
 """
 
-# Replace placeholders safely
-final_html = raw_html.replace('/*__DATA_QUESTIONS__*/', questions_json_str)
-final_html = final_html.replace('/*__DATA_GEMINI_IMAGES__*/', gemini_imgs_str)
-final_html = final_html.replace('/*__DATA_JACINTO_SPRITES__*/', sprites_str)
-final_html = final_html.replace('/*__DATA_GONZALO_VOICES__*/', gonzalo_voices_str)
-final_html = final_html.replace('/*__DATA_QUESTIONS_VOICES__*/', questions_voices_str)
+# Replace unique tokens
+final_html = raw_html.replace('%%DATA_QUESTIONS%%', questions_json_str)
+final_html = final_html.replace('%%DATA_GEMINI_IMAGES%%', gemini_imgs_str)
+final_html = final_html.replace('%%DATA_JACINTO_SPRITES%%', sprites_str)
+final_html = final_html.replace('%%DATA_GONZALO_VOICES%%', gonzalo_voices_str)
+final_html = final_html.replace('%%DATA_QUESTIONS_VOICES%%', questions_voices_str)
 
 with open('index.html', 'w', encoding='utf-8') as f:
     f.write(final_html)
