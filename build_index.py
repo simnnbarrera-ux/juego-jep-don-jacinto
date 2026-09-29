@@ -9,9 +9,12 @@ with open('questions.json', 'r', encoding='utf-8') as f:
 with open('gemini_images_b64.json', 'r', encoding='utf-8') as f:
     gemini_imgs = json.load(f)
 
-# 3. Load Don Jacinto sprites
+# 3. Load Don Jacinto sprites & circular cropped tokens
 with open('jacinto_sprites_b64.json', 'r', encoding='utf-8') as f:
     sprites = json.load(f)
+
+with open('jacinto_tokens_b64.json', 'r', encoding='utf-8') as f:
+    tokens = json.load(f)
 
 # 4. Load Gonzalo Neural TTS voices
 with open('assets/datos/gonzalo_voice_b64.json', 'r', encoding='utf-8') as f:
@@ -24,15 +27,21 @@ with open('assets/datos/questions_voice_b64.json', 'r', encoding='utf-8') as f:
 questions_json_str = json.dumps(questions, ensure_ascii=False)
 gemini_imgs_str = json.dumps(gemini_imgs, ensure_ascii=False)
 sprites_str = json.dumps(sprites, ensure_ascii=False)
+tokens_str = json.dumps(tokens, ensure_ascii=False)
 gonzalo_voices_str = json.dumps(gonzalo_voices, ensure_ascii=False)
 questions_voices_str = json.dumps(questions_voices, ensure_ascii=False)
+
+favicon_b64 = tokens.get('token_saludo', '')
 
 raw_html = """<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Juego JEP: Don Jacinto y la Memoria Histórica (1958-1978)</title>
+  
+  <!-- Favicon: Don Jacinto Avatar Recortado en Base64 -->
+  <link rel="icon" type="image/png" href="%%DATA_DON_JACINTO_FAVICON%%" />
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -50,19 +59,37 @@ raw_html = """<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --sat: env(safe-area-inset-top, 0px);
+      --sab: env(safe-area-inset-bottom, 0px);
+      --sal: env(safe-area-inset-left, 0px);
+      --sar: env(safe-area-inset-right, 0px);
+    }
+
     * {
       box-sizing: border-box;
       font-family: 'Outfit', sans-serif;
       user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
     
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      width: 100%;
+      overflow: hidden;
+      touch-action: manipulation;
+      background-color: #020617;
+    }
+
     .font-mono-title {
       font-family: 'Space Grotesk', sans-serif;
     }
 
-    /* Custom Scrollbar */
+    /* Custom Scrollbars */
     ::-webkit-scrollbar {
-      width: 6px;
+      width: 5px;
+      height: 5px;
     }
     ::-webkit-scrollbar-track {
       background: #0f172a;
@@ -72,11 +99,19 @@ raw_html = """<!DOCTYPE html>
       border-radius: 4px;
     }
 
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-none {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
     /* Full-body Pawn Animations */
     @keyframes bobWalk {
       0%, 100% { transform: translate(-50%, -88%) translateY(0) rotate(0deg); }
-      25% { transform: translate(-50%, -88%) translateY(-22px) rotate(-4deg); }
-      75% { transform: translate(-50%, -88%) translateY(-22px) rotate(4deg); }
+      25% { transform: translate(-50%, -88%) translateY(-18px) rotate(-4deg); }
+      75% { transform: translate(-50%, -88%) translateY(-18px) rotate(4deg); }
     }
     
     .pawn-walking {
@@ -84,8 +119,8 @@ raw_html = """<!DOCTYPE html>
     }
 
     @keyframes idleBreathe {
-      0%, 100% { transform: translate(-50%, -88%) translateY(0) scale(1); filter: drop-shadow(0 10px 18px rgba(0,0,0,0.55)); }
-      50% { transform: translate(-50%, -88%) translateY(-6px) scale(1.03); filter: drop-shadow(0 14px 24px rgba(245, 158, 11, 0.45)); }
+      0%, 100% { transform: translate(-50%, -88%) translateY(0) scale(1); filter: drop-shadow(0 8px 16px rgba(0,0,0,0.55)); }
+      50% { transform: translate(-50%, -88%) translateY(-5px) scale(1.03); filter: drop-shadow(0 12px 20px rgba(245, 158, 11, 0.45)); }
     }
 
     .pawn-idle {
@@ -93,8 +128,8 @@ raw_html = """<!DOCTYPE html>
     }
 
     @keyframes celebrateBounce {
-      0%, 100% { transform: translate(-50%, -88%) translateY(0) scale(1.05); filter: drop-shadow(0 12px 24px rgba(245, 158, 11, 0.7)); }
-      50% { transform: translate(-50%, -88%) translateY(-18px) scale(1.12); filter: drop-shadow(0 20px 30px rgba(245, 158, 11, 0.9)); }
+      0%, 100% { transform: translate(-50%, -88%) translateY(0) scale(1.05); filter: drop-shadow(0 10px 20px rgba(245, 158, 11, 0.7)); }
+      50% { transform: translate(-50%, -88%) translateY(-14px) scale(1.12); filter: drop-shadow(0 16px 26px rgba(245, 158, 11, 0.9)); }
     }
 
     .pawn-celebrating {
@@ -102,9 +137,9 @@ raw_html = """<!DOCTYPE html>
     }
 
     @keyframes worryShake {
-      0%, 100% { transform: translate(-50%, -88%) translateX(0) scale(0.98); filter: drop-shadow(0 8px 16px rgba(239, 68, 68, 0.5)); }
-      25% { transform: translate(-50%, -88%) translateX(-6px) rotate(-2deg) scale(0.98); }
-      75% { transform: translate(-50%, -88%) translateX(6px) rotate(2deg) scale(0.98); }
+      0%, 100% { transform: translate(-50%, -88%) translateX(0) scale(0.98); filter: drop-shadow(0 6px 14px rgba(239, 68, 68, 0.5)); }
+      25% { transform: translate(-50%, -88%) translateX(-5px) rotate(-2deg) scale(0.98); }
+      75% { transform: translate(-50%, -88%) translateX(5px) rotate(2deg) scale(0.98); }
     }
 
     .pawn-worried {
@@ -113,8 +148,8 @@ raw_html = """<!DOCTYPE html>
 
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-8px); }
-      40%, 80% { transform: translateX(8px); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
     }
 
     .shake-error {
@@ -122,8 +157,8 @@ raw_html = """<!DOCTYPE html>
     }
 
     @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.4); }
-      50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.9), inset 0 0 20px rgba(255, 255, 255, 0.8); }
+      0%, 100% { box-shadow: 0 0 12px rgba(245, 158, 11, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.4); }
+      50% { box-shadow: 0 0 24px rgba(245, 158, 11, 0.9), inset 0 0 16px rgba(255, 255, 255, 0.8); }
     }
 
     .tile-active {
@@ -172,6 +207,7 @@ raw_html = """<!DOCTYPE html>
     window.__QUESTIONS_DATA__ = %%DATA_QUESTIONS%%;
     window.__GEMINI_IMAGES__ = %%DATA_GEMINI_IMAGES%%;
     window.__JACINTO_SPRITES__ = %%DATA_JACINTO_SPRITES%%;
+    window.__JACINTO_TOKENS__ = %%DATA_JACINTO_TOKENS%%;
     window.__GONZALO_VOICES__ = %%DATA_GONZALO_VOICES%%;
     window.__QUESTIONS_VOICES__ = %%DATA_QUESTIONS_VOICES%%;
   </script>
@@ -417,42 +453,42 @@ raw_html = """<!DOCTYPE html>
 
     // --- 2. BOARD TILES CONFIGURATION ---
     const BOARD_TILES = [
-      { id: 1,  x: 7,  y: 75, label: "1. Orígenes", cat: "multiple", color: "#3b82f6", badge: "🟦" },
-      { id: 2,  x: 13, y: 69, label: "2. Frente Nal", cat: "abc", color: "#10b981", badge: "🟩" },
-      { id: 3,  x: 19, y: 63, label: "3. Pacto 58", cat: "tf", color: "#f59e0b", badge: "🟨" },
-      { id: 4,  x: 25, y: 57, label: "4. Guerra Fría", cat: "multiple", color: "#3b82f6", badge: "🟦" },
-      { id: 5,  x: 22, y: 47, label: "5. Cuba 1959", cat: "abc", color: "#10b981", badge: "🟩" },
-      { id: 6,  x: 28, y: 40, label: "6. DSN", cat: "tf", color: "#f59e0b", badge: "🟨" },
-      { id: 7,  x: 35, y: 35, label: "7. Pacto Sitges", cat: "star", color: "#fbbf24", badge: "⭐" },
-      { id: 8,  x: 42, y: 42, label: "8. Marquetalia", cat: "abc", color: "#10b981", badge: "🟩" },
-      { id: 9,  x: 38, y: 53, label: "9. Seguridad Nal", cat: "multiple", color: "#3b82f6", badge: "🟦" },
-      { id: 10, x: 45, y: 63, label: "10. Nacen FARC", cat: "abc", color: "#10b981", badge: "🟩" },
-      { id: 11, x: 53, y: 69, label: "11. Origen Agrario", cat: "tf", color: "#f59e0b", badge: "🟨" },
-      { id: 12, x: 60, y: 65, label: "12. Golpear y Huir", cat: "multiple", color: "#3b82f6", badge: "🟦" },
-      { id: 13, x: 65, y: 56, label: "13. ELN Simacota", cat: "abc", color: "#10b981", badge: "🟩" },
-      { id: 14, x: 60, y: 46, label: "14. EPL Maoísmo", cat: "tf", color: "#f59e0b", badge: "🟨" },
-      { id: 15, x: 67, y: 39, label: "15. Memoria y Paz", cat: "star", color: "#fbbf24", badge: "⭐" },
-      { id: 16, x: 74, y: 49, label: "16. Armas o Reformas", cat: "multiple", color: "#3b82f6", badge: "🟦" },
-      { id: 17, x: 80, y: 59, label: "17. Elecciones 70", cat: "abc", color: "#10b981", badge: "🟩" },
-      { id: 18, x: 86, y: 53, label: "18. M-19 Espada", cat: "multiple", color: "#3b82f6", badge: "🟦" },
-      { id: 19, x: 81, y: 43, label: "19. Guerrilla Urbana", cat: "tf", color: "#f59e0b", badge: "🟨" },
-      { id: 20, x: 76, y: 33, label: "20. Paro del 77", cat: "multiple", color: "#3b82f6", badge: "🟦" },
-      { id: 21, x: 83, y: 27, label: "21. Movilización Civil", cat: "abc", color: "#10b981", badge: "🟩" },
-      { id: 22, x: 89, y: 33, label: "22. Narcotráfico", cat: "tf", color: "#f59e0b", badge: "🟨" },
-      { id: 23, x: 93, y: 43, label: "23. No Repetición", cat: "multiple", color: "#3b82f6", badge: "🟦" },
-      { id: 24, x: 95, y: 25, label: "24. Finca La Esperanza", cat: "star", color: "#fbbf24", badge: "🏁" }
+      { id: 1,  x: 6,  y: 72, label: "1. Orígenes", cat: "multiple", color: "#3b82f6", badge: "🟦" },
+      { id: 2,  x: 12, y: 66, label: "2. Frente Nal", cat: "abc", color: "#10b981", badge: "🟩" },
+      { id: 3,  x: 18, y: 60, label: "3. Pacto 58", cat: "tf", color: "#f59e0b", badge: "🟨" },
+      { id: 4,  x: 24, y: 54, label: "4. Guerra Fría", cat: "multiple", color: "#3b82f6", badge: "🟦" },
+      { id: 5,  x: 21, y: 44, label: "5. Cuba 1959", cat: "abc", color: "#10b981", badge: "🟩" },
+      { id: 6,  x: 27, y: 37, label: "6. DSN", cat: "tf", color: "#f59e0b", badge: "🟨" },
+      { id: 7,  x: 34, y: 32, label: "7. Pacto Sitges", cat: "star", color: "#fbbf24", badge: "⭐" },
+      { id: 8,  x: 41, y: 39, label: "8. Marquetalia", cat: "abc", color: "#10b981", badge: "🟩" },
+      { id: 9,  x: 37, y: 50, label: "9. Seguridad Nal", cat: "multiple", color: "#3b82f6", badge: "🟦" },
+      { id: 10, x: 44, y: 60, label: "10. Nacen FARC", cat: "abc", color: "#10b981", badge: "🟩" },
+      { id: 11, x: 52, y: 66, label: "11. Origen Agrario", cat: "tf", color: "#f59e0b", badge: "🟨" },
+      { id: 12, x: 59, y: 62, label: "12. Golpear y Huir", cat: "multiple", color: "#3b82f6", badge: "🟦" },
+      { id: 13, x: 64, y: 53, label: "13. ELN Simacota", cat: "abc", color: "#10b981", badge: "🟩" },
+      { id: 14, x: 59, y: 43, label: "14. EPL Maoísmo", cat: "tf", color: "#f59e0b", badge: "🟨" },
+      { id: 15, x: 66, y: 36, label: "15. Memoria y Paz", cat: "star", color: "#fbbf24", badge: "⭐" },
+      { id: 16, x: 73, y: 46, label: "16. Armas o Reformas", cat: "multiple", color: "#3b82f6", badge: "🟦" },
+      { id: 17, x: 79, y: 56, label: "17. Elecciones 70", cat: "abc", color: "#10b981", badge: "🟩" },
+      { id: 18, x: 85, y: 50, label: "18. M-19 Espada", cat: "multiple", color: "#3b82f6", badge: "🟦" },
+      { id: 19, x: 80, y: 40, label: "19. Guerrilla Urbana", cat: "tf", color: "#f59e0b", badge: "🟨" },
+      { id: 20, x: 75, y: 30, label: "20. Paro del 77", cat: "multiple", color: "#3b82f6", badge: "🟦" },
+      { id: 21, x: 82, y: 24, label: "21. Movilización Civil", cat: "abc", color: "#10b981", badge: "🟩" },
+      { id: 22, x: 88, y: 30, label: "22. Narcotráfico", cat: "tf", color: "#f59e0b", badge: "🟨" },
+      { id: 23, x: 92, y: 40, label: "23. No Repetición", cat: "multiple", color: "#3b82f6", badge: "🟦" },
+      { id: 24, x: 94, y: 23, label: "24. Finca La Esperanza", cat: "star", color: "#fbbf24", badge: "🏁" }
     ];
 
     const FARM_LEVELS = [
-      { level: 0, title: "Choza Inicial Rústica", desc: "Terreno montañoso despejado y choza de adobe rústica.", imgKey: "finca_inicial" },
-      { level: 1, title: "Siembra de Cafetales", desc: "Primeros surcos de café y orquídeas en flor.", imgKey: "finca_inicial" },
-      { level: 2, title: "Ventanas Coloniales", desc: "Ventanas de madera talladas en azul y amarillo.", imgKey: "finca_intermedia" },
-      { level: 3, title: "Muros y Corredores", desc: "Paredes blancas estucadas con zócalo rojo y porche.", imgKey: "finca_intermedia" },
-      { level: 4, title: "Segundo Piso Tradicional", desc: "Balcones antioqueños con chambranas de madera.", imgKey: "finca_intermedia" },
-      { level: 5, title: "Tejado y Pozo de Piedra", desc: "Tejas de barro cocido y fuente artesanal de agua pura.", imgKey: "finca_intermedia" },
-      { level: 6, title: "Establo y Ganadería", desc: "Establo con vacas lecheras y cantinas relucientes.", imgKey: "finca_hacienda_victoria" },
-      { level: 7, title: "Pasera de Secado Solar", desc: "Patio tradicional para secar granos de café dorado.", imgKey: "finca_hacienda_victoria" },
-      { level: 8, title: "Hacienda La Esperanza (Máxima)", desc: "¡Reconstrucción total con bandera de Colombia y fiesta comunitaria!", imgKey: "finca_hacienda_victoria" }
+      { level: 0, title: "Choza Inicial Rústica", desc: "Terreno montañoso despejado y choza de adobe rústica.", imgKey: "finca_nivel_0" },
+      { level: 1, title: "Siembra de Cafetales", desc: "Primeros surcos de café y orquídeas en flor.", imgKey: "finca_nivel_1" },
+      { level: 2, title: "Ventanas Coloniales", desc: "Ventanas de madera talladas en azul y amarillo.", imgKey: "finca_nivel_2" },
+      { level: 3, title: "Muros y Corredores", desc: "Paredes blancas estucadas con zócalo rojo y porche.", imgKey: "finca_nivel_3" },
+      { level: 4, title: "Segundo Piso Tradicional", desc: "Balcones antioqueños con chambranas de madera.", imgKey: "finca_nivel_4" },
+      { level: 5, title: "Tejado y Pozo de Piedra", desc: "Tejas de barro cocido y fuente artesanal de agua pura.", imgKey: "finca_nivel_5" },
+      { level: 6, title: "Establo y Ganadería", desc: "Establo con vacas lecheras y cantinas relucientes.", imgKey: "finca_nivel_6" },
+      { level: 7, title: "Pasera de Secado Solar", desc: "Patio tradicional para secar granos de café dorado.", imgKey: "finca_nivel_7" },
+      { level: 8, title: "Hacienda La Esperanza (Máxima)", desc: "¡Reconstrucción total con bandera de Colombia y fiesta comunitaria!", imgKey: "finca_nivel_8" }
     ];
 
     function generateDicePlan() {
@@ -550,6 +586,30 @@ raw_html = """<!DOCTYPE html>
       const [showFarmModal, setShowFarmModal] = useState(false);
       const [notificationText, setNotificationText] = useState("¡Bienvenido! Lanza el dado para comenzar.");
 
+      const boardContainerRef = useRef(null);
+
+      // Auto-scroll to active tile in mobile horizontal track
+      const scrollToActiveTile = useCallback((tileId) => {
+        if (!boardContainerRef.current) return;
+        const container = boardContainerRef.current;
+        const tile = BOARD_TILES.find(t => t.id === tileId) || BOARD_TILES[0];
+        const scrollWidth = container.scrollWidth;
+        const clientWidth = container.clientWidth;
+        
+        if (scrollWidth > clientWidth) {
+          const tilePixelX = (tile.x / 100) * scrollWidth;
+          const targetScrollLeft = tilePixelX - clientWidth / 2;
+          container.scrollTo({
+            left: Math.max(0, targetScrollLeft),
+            behavior: 'smooth'
+          });
+        }
+      }, []);
+
+      useEffect(() => {
+        scrollToActiveTile(currentStep);
+      }, [currentStep, scrollToActiveTile]);
+
       const toggleFullscreen = () => {
         if (!document.fullscreenElement) {
           document.documentElement.requestFullscreen().catch(() => {});
@@ -570,6 +630,7 @@ raw_html = """<!DOCTYPE html>
         setJacintoEmotion('saludo');
         setNotificationText("¡Turno 1 de 8! Presiona 'Tirar Dado' o la barra espaciadora.");
         audioCtrl.playNamedVoice('dice_1');
+        setTimeout(() => scrollToActiveTile(1), 300);
       };
 
       // Spacebar listener
@@ -613,6 +674,7 @@ raw_html = """<!DOCTYPE html>
           const nextPos = Math.min(24, startPos + stepCount);
           setCurrentStep(nextPos);
           audioCtrl.playStep();
+          scrollToActiveTile(nextPos);
 
           if (stepCount >= steps || nextPos >= 24) {
             clearInterval(interval);
@@ -741,7 +803,6 @@ raw_html = """<!DOCTYPE html>
 
         if (currentStep >= 24 || turnNumber >= 8) {
           setGameState('VICTORY');
-          setFarmLevel(8);
           setJacintoEmotion('celebrando');
           audioCtrl.playVictory();
           launchConfetti();
@@ -774,12 +835,14 @@ raw_html = """<!DOCTYPE html>
         setJacintoEmotion('saludo');
         setNotificationText("¡Partida reiniciada! Lanza el dado para comenzar.");
         audioCtrl.playNamedVoice('dice_1');
+        setTimeout(() => scrollToActiveTile(1), 200);
       };
 
       const activeTile = BOARD_TILES.find(t => t.id === currentStep) || BOARD_TILES[0];
       
       // Dynamic Full-Body Sprite based on Emotion
       const currentJacintoSprite = window.__JACINTO_SPRITES__?.[jacintoEmotion] || window.__JACINTO_SPRITES__?.saludo || window.__JACINTO_SPRITES__?.full_body;
+      const jacintoAvatarToken = window.__JACINTO_TOKENS__?.token_saludo || currentJacintoSprite;
       const backgroundImage = window.__GEMINI_IMAGES__?.paisaje_fondo || '';
       const farmImages = window.__GEMINI_IMAGES__ || {};
 
@@ -797,40 +860,44 @@ raw_html = """<!DOCTYPE html>
         <div className="relative w-full h-full flex flex-col bg-slate-950 overflow-hidden select-none">
           
           {/* ======================================================== */}
-          {/* 1. TOP HEADER / PRESENTER BAR                             */}
+          {/* 1. TOP HEADER / PRESENTER BAR (ULTRA RESPONSIVE HUD)       */}
           {/* ======================================================== */}
-          <header className="relative z-30 flex items-center justify-between px-4 md:px-6 py-2.5 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-xl select-none">
-            {/* Left: Presentation Branding & Credits */}
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center font-bold text-amber-400 font-mono-title text-base shadow-inner">
+          <header 
+            className="relative z-30 flex items-center justify-between px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 shadow-xl select-none shrink-0"
+            style={{ paddingTop: 'max(0.5rem, env(safe-area-inset-top))' }}
+          >
+            {/* Left: Presentation Branding */}
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center font-bold text-amber-400 font-mono-title text-xs sm:text-base shadow-inner">
                 JEP
               </div>
               <div>
-                <h1 className="text-sm md:text-base font-bold text-white tracking-wide font-mono-title flex items-center gap-2">
-                  Camino a la Finca: Don Jacinto y la Memoria Histórica
-                  <span className="text-xs font-normal text-amber-400/90 px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30">
+                <h1 className="text-xs sm:text-sm md:text-base font-bold text-white tracking-wide font-mono-title flex items-center gap-1.5 sm:gap-2">
+                  <span className="hidden sm:inline">Camino a la Finca: </span>
+                  <span>Don Jacinto</span>
+                  <span className="text-[10px] sm:text-xs font-normal text-amber-400/90 px-1.5 sm:px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30">
                     1958–1978
                   </span>
                 </h1>
-                <p className="text-xs text-slate-400 font-medium hidden sm:block">
+                <p className="text-[11px] text-slate-400 font-medium hidden md:block">
                   Comunidad de Indagación 3 • <span className="text-slate-300">Isabella Ortiz, Alison Cuasquer, Valery Lopez, Valentina Benavidez</span>
                 </p>
               </div>
             </div>
 
             {/* Right: Game HUD & Controls */}
-            <div className="flex items-center gap-2 md:gap-3">
+            <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 overflow-x-auto scrollbar-none py-0.5">
               {/* Turn Counter */}
-              <div className="flex items-center gap-1.5 md:gap-2 px-3 py-1.5 rounded-xl bg-slate-800/90 border border-slate-700/70 text-xs font-semibold">
-                <span className="text-base">🎲</span>
+              <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-slate-800/90 border border-slate-700/70 text-[11px] sm:text-xs font-semibold shrink-0">
+                <span className="text-xs sm:text-base">🎲</span>
                 <span className="text-slate-400 hidden sm:inline">Turno</span>
-                <span className="text-amber-400 font-bold font-mono-title text-sm">{gameState === 'INTRO' ? '-' : `${turnNumber} / 8`}</span>
+                <span className="text-amber-400 font-bold font-mono-title text-xs sm:text-sm">{gameState === 'INTRO' ? '-' : `${turnNumber}/8`}</span>
               </div>
 
               {/* Lives (3 Hearts) */}
-              <div className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-800/90 border border-slate-700/70">
+              <div className="flex items-center gap-0.5 sm:gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-slate-800/90 border border-slate-700/70 shrink-0">
                 {[1, 2, 3].map(heartIdx => (
-                  <span key={heartIdx} className={`text-base transition-transform duration-300 ${heartIdx <= lives ? 'scale-100' : 'scale-90 opacity-30 grayscale'}`}>
+                  <span key={heartIdx} className={`text-xs sm:text-base transition-transform duration-300 ${heartIdx <= lives ? 'scale-100' : 'scale-90 opacity-30 grayscale'}`}>
                     {heartIdx <= lives ? '❤️' : '💔'}
                   </span>
                 ))}
@@ -839,13 +906,13 @@ raw_html = """<!DOCTYPE html>
               {/* Finca Compact Badge */}
               <button 
                 onClick={() => setShowFarmModal(true)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-950/80 to-emerald-900/70 hover:from-emerald-900/90 hover:to-emerald-800/80 border border-emerald-500/40 text-xs font-semibold text-emerald-300 transition-all shadow-sm hover:shadow-emerald-500/20 active:scale-95 cursor-pointer"
+                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-gradient-to-r from-emerald-950/80 to-emerald-900/70 hover:from-emerald-900/90 hover:to-emerald-800/80 border border-emerald-500/40 text-[11px] sm:text-xs font-semibold text-emerald-300 transition-all shadow-sm active:scale-95 cursor-pointer shrink-0"
                 title="Ver progreso de la Finca La Esperanza"
               >
-                <span className="text-base">🏡</span>
-                <span className="hidden md:inline">Finca:</span>
+                <span className="text-xs sm:text-base">🏡</span>
+                <span className="hidden sm:inline">Finca:</span>
                 <span className="font-bold text-emerald-200">Nv {farmLevel}/8</span>
-                <span className="text-[10px] bg-emerald-500/20 text-emerald-200 px-1.5 py-0.5 rounded border border-emerald-500/30">
+                <span className="text-[9px] sm:text-[10px] bg-emerald-500/20 text-emerald-200 px-1 sm:px-1.5 py-0.5 rounded border border-emerald-500/30 font-mono-title">
                   {score} pts
                 </span>
               </button>
@@ -853,10 +920,10 @@ raw_html = """<!DOCTYPE html>
               {/* TTS Voice Toggle */}
               <button 
                 onClick={() => setIsVoiceOn(audioCtrl.toggleVoice())}
-                className={`p-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${isVoiceOn ? 'bg-amber-500/20 border-amber-500/50 text-amber-300 hover:bg-amber-500/30' : 'bg-slate-800 border-slate-700 text-slate-400'}`}
+                className={`p-1.5 sm:p-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer shrink-0 ${isVoiceOn ? 'bg-amber-500/20 border-amber-500/50 text-amber-300 hover:bg-amber-500/30' : 'bg-slate-800 border-slate-700 text-slate-400'}`}
                 title={isVoiceOn ? "Voz de Don Jacinto (Gonzalo Neural) Activada" : "Voz Desactivada"}
               >
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1">
                   <span>{isVoiceOn ? '🗣️' : '🔇'}</span>
                   <span className="hidden lg:inline">Voz Jacinto</span>
                 </div>
@@ -865,7 +932,7 @@ raw_html = """<!DOCTYPE html>
               {/* Mute SFX Toggle */}
               <button 
                 onClick={() => setIsMuted(audioCtrl.toggleMute())}
-                className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 text-slate-300 transition-all cursor-pointer"
+                className="p-1.5 sm:p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 text-slate-300 transition-all cursor-pointer shrink-0 text-xs sm:text-sm"
                 title={isMuted ? "Activar Sonido" : "Silenciar"}
               >
                 {isMuted ? '🔇' : '🔊'}
@@ -874,7 +941,7 @@ raw_html = """<!DOCTYPE html>
               {/* Fullscreen Button */}
               <button 
                 onClick={toggleFullscreen}
-                className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 text-slate-300 transition-all cursor-pointer"
+                className="p-1.5 sm:p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 text-slate-300 transition-all cursor-pointer shrink-0 text-xs sm:text-sm hidden xs:block"
                 title="Pantalla Completa"
               >
                 ⛶
@@ -886,31 +953,31 @@ raw_html = """<!DOCTYPE html>
           {/* FLOATING FINCA UPGRADE / DEGRADATION NOTIFICATION TOAST   */}
           {/* ======================================================== */}
           {farmAlert && (
-            <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-fade-in">
+            <div className="fixed top-14 sm:top-16 left-1/2 -translate-x-1/2 z-50 w-[92vw] max-w-md pointer-events-none animate-fade-in">
               {farmAlert.type === 'upgrade' ? (
-                <div className="flex items-center gap-3.5 px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-950/95 via-emerald-900/95 to-amber-950/95 border-2 border-amber-400 text-white shadow-2xl shadow-emerald-500/40 animate-bounce">
-                  <div className="text-3xl">✨🏡</div>
-                  <div>
-                    <div className="text-xs font-extrabold text-amber-300 font-mono-title tracking-wider uppercase flex items-center gap-2">
-                      <span>¡MEJORA EN LA FINCA LA ESPERANZA!</span>
-                      <span className="px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-bold text-[10px]">NIVEL {farmAlert.level}/8</span>
+                <div className="flex items-center gap-3 px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl bg-gradient-to-r from-emerald-950/95 via-emerald-900/95 to-amber-950/95 border-2 border-amber-400 text-white shadow-2xl shadow-emerald-500/40 animate-bounce">
+                  <div className="text-2xl sm:text-3xl shrink-0">✨🏡</div>
+                  <div className="min-w-0">
+                    <div className="text-[10px] sm:text-xs font-extrabold text-amber-300 font-mono-title tracking-wider uppercase flex items-center gap-1.5 flex-wrap">
+                      <span>¡MEJORA EN LA FINCA!</span>
+                      <span className="px-1.5 py-0.2 rounded bg-amber-400 text-slate-950 font-bold text-[9px] sm:text-[10px]">NIVEL {farmAlert.level}/8</span>
                     </div>
-                    <div className="text-sm font-bold text-emerald-100">
+                    <div className="text-xs sm:text-sm font-bold text-emerald-100 truncate">
                       {farmAlert.title}
                     </div>
-                    <div className="text-xs text-slate-300 font-normal">
+                    <div className="text-[11px] text-slate-300 font-normal line-clamp-1">
                       {farmAlert.desc}
                     </div>
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center gap-3.5 px-6 py-3 rounded-2xl bg-gradient-to-r from-rose-950/95 via-rose-900/95 to-slate-950/95 border-2 border-rose-500 text-white shadow-2xl shadow-rose-900/50 shake-error">
-                  <div className="text-3xl">💔⚠️</div>
-                  <div>
-                    <div className="text-xs font-extrabold text-rose-300 font-mono-title tracking-wider uppercase">
+                <div className="flex items-center gap-3 px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl bg-gradient-to-r from-rose-950/95 via-rose-900/95 to-slate-950/95 border-2 border-rose-500 text-white shadow-2xl shadow-rose-900/50 shake-error">
+                  <div className="text-2xl sm:text-3xl shrink-0">💔⚠️</div>
+                  <div className="min-w-0">
+                    <div className="text-[10px] sm:text-xs font-extrabold text-rose-300 font-mono-title tracking-wider uppercase">
                       ¡DETERIORO EN LA FINCA! (-1 VIDA)
                     </div>
-                    <div className="text-sm font-semibold text-rose-100">
+                    <div className="text-xs sm:text-sm font-semibold text-rose-100">
                       {farmAlert.text}
                     </div>
                   </div>
@@ -920,130 +987,145 @@ raw_html = """<!DOCTYPE html>
           )}
 
           {/* ======================================================== */}
-          {/* 2. MAIN BOARD VIEW                                        */}
+          {/* 2. MAIN BOARD VIEW (TOUCH-PAN / SMOOTH TRACKABLE CONTAINER)*/}
           {/* ======================================================== */}
-          <main className="relative flex-1 w-full h-full overflow-hidden bg-slate-950">
-            {backgroundImage ? (
-              <img 
-                src={backgroundImage} 
-                alt="Paisaje Cafetero Cordillera Central" 
-                className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none opacity-95 transition-opacity duration-700"
-              />
-            ) : (
-              <div className="absolute inset-0 bg-gradient-to-b from-sky-300 via-emerald-700 to-green-950" />
-            )}
+          <main 
+            ref={boardContainerRef}
+            className="relative flex-1 w-full h-full overflow-x-auto overflow-y-hidden bg-slate-950 scroll-smooth touch-pan-x select-none"
+            style={{ WebkitOverflowScrolling: 'touch' }}
+          >
+            {/* Mobile swipe helper indicator */}
+            <div className="md:hidden absolute top-2 right-2 z-20 pointer-events-none bg-slate-900/80 backdrop-blur-sm border border-slate-700/60 px-2 py-0.5 rounded-full text-[9px] text-amber-300 font-medium opacity-75">
+              ↔️ Desliza tablero
+            </div>
 
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-slate-950/20 pointer-events-none" />
-
-            {/* SVG Connections */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
-              <defs>
-                <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="3.5" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-              </defs>
-
-              {BOARD_TILES.map((tile, idx) => {
-                if (idx === BOARD_TILES.length - 1) return null;
-                const nextTile = BOARD_TILES[idx + 1];
-                const isPassed = tile.id < currentStep;
-                return (
-                  <line 
-                    key={`line-${tile.id}`}
-                    x1={`${tile.x}%`}
-                    y1={`${tile.y}%`}
-                    x2={`${nextTile.x}%`}
-                    y2={`${nextTile.y}%`}
-                    stroke={isPassed ? '#f59e0b' : '#ffffff'}
-                    strokeOpacity={isPassed ? '0.85' : '0.4'}
-                    strokeWidth={isPassed ? '5' : '3'}
-                    strokeDasharray={isPassed ? 'none' : '6 6'}
-                    strokeLinecap="round"
-                    filter="url(#glowEffect)"
-                  />
-                );
-              })}
-            </svg>
-
-            {/* 24 STONE TILES */}
-            <div className="absolute inset-0 z-10 pointer-events-auto">
-              {BOARD_TILES.map((tile) => {
-                const isCurrent = tile.id === currentStep;
-                const isPassed = tile.id < currentStep;
-                
-                return (
-                  <div
-                    key={tile.id}
-                    style={{ left: `${tile.x}%`, top: `${tile.y}%` }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 group"
-                  >
-                    <div 
-                      className={`relative flex items-center justify-center w-9 h-9 md:w-11 md:h-11 rounded-full font-mono-title font-bold text-xs md:text-sm transition-all duration-300 shadow-lg ${
-                        isCurrent 
-                          ? 'tile-active scale-125 z-20 text-slate-950 font-extrabold bg-gradient-to-br from-amber-300 via-amber-400 to-amber-500 border-2 border-white ring-4 ring-amber-400/60 shadow-amber-500/60' 
-                          : isPassed 
-                            ? 'bg-amber-500/90 text-slate-950 border-2 border-amber-300 shadow-amber-900/40 opacity-90' 
-                            : 'bg-slate-900/90 text-slate-200 border-2 border-slate-600/90 hover:scale-110 hover:border-amber-400'
-                      }`}
-                      style={{
-                        borderColor: isCurrent ? '#ffffff' : (isPassed ? '#f59e0b' : tile.color)
-                      }}
-                    >
-                      <span>{tile.id}</span>
-                      
-                      <span className="absolute -top-1 -right-1 text-[9px] md:text-[10px]">
-                        {tile.badge}
-                      </span>
-                    </div>
-
-                    <div className="absolute top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap px-2.5 py-1 rounded-lg bg-slate-900/95 border border-slate-700 text-[11px] font-medium text-slate-200 shadow-xl z-30">
-                      {tile.label}
-                    </div>
-                  </div>
-                );
-              })}
-
-              {/* 3. DON JACINTO FULL-BODY STANDING PAWN (With Dynamic Emotional Sprites!) */}
-              <div 
-                style={{ 
-                  left: `${activeTile.x}%`, 
-                  top: `${activeTile.y}%`,
-                  transition: isWalking ? 'none' : 'left 0.35s ease-out, top 0.35s ease-out'
-                }}
-                className={`absolute z-30 pointer-events-none ${pawnAnimClass}`}
-              >
-                {/* Ground Shadow */}
-                <div className="absolute left-1/2 bottom-1.5 -translate-x-1/2 w-16 h-4 bg-slate-950/80 rounded-full blur-[3px] pointer-events-none" />
-
-                {/* Full-Body Sprite Image (Crisp, complete, no background) */}
+            {/* Inner Board Wrapper: min-w ensures glorious landscape ratio on mobile portrait */}
+            <div className="relative min-w-[760px] md:min-w-full w-full h-full">
+              {backgroundImage ? (
                 <img 
-                  src={currentJacintoSprite} 
-                  alt="Don Jacinto Campesino" 
-                  className="w-20 md:w-24 lg:w-28 max-h-36 object-contain pointer-events-none drop-shadow-[0_8px_16px_rgba(0,0,0,0.6)]"
+                  src={backgroundImage} 
+                  alt="Paisaje Cafetero Cordillera Central" 
+                  className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none opacity-95 transition-opacity duration-700"
                 />
+              ) : (
+                <div className="absolute inset-0 bg-gradient-to-b from-sky-300 via-emerald-700 to-green-950" />
+              )}
 
-                {/* State Tag Badge */}
-                <div className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-0.5 rounded-full bg-amber-500 text-slate-950 font-bold text-[10px] shadow-lg border border-amber-200">
-                  {jacintoEmotion === 'celebrando' ? '🎉 ¡Don Jacinto Triunfa!' : jacintoEmotion === 'preocupado' ? '😰 Don Jacinto Preocupado' : 'Don Jacinto'}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-slate-950/20 pointer-events-none" />
+
+              {/* SVG Path Connections */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
+                <defs>
+                  <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="3.5" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+
+                {BOARD_TILES.map((tile, idx) => {
+                  if (idx === BOARD_TILES.length - 1) return null;
+                  const nextTile = BOARD_TILES[idx + 1];
+                  const isPassed = tile.id < currentStep;
+                  return (
+                    <line 
+                      key={`line-${tile.id}`}
+                      x1={`${tile.x}%`}
+                      y1={`${tile.y}%`}
+                      x2={`${nextTile.x}%`}
+                      y2={`${nextTile.y}%`}
+                      stroke={isPassed ? '#f59e0b' : '#ffffff'}
+                      strokeOpacity={isPassed ? '0.85' : '0.4'}
+                      strokeWidth={isPassed ? '5' : '3'}
+                      strokeDasharray={isPassed ? 'none' : '6 6'}
+                      strokeLinecap="round"
+                      filter="url(#glowEffect)"
+                    />
+                  );
+                })}
+              </svg>
+
+              {/* 24 STONE TILES */}
+              <div className="absolute inset-0 z-10 pointer-events-auto">
+                {BOARD_TILES.map((tile) => {
+                  const isCurrent = tile.id === currentStep;
+                  const isPassed = tile.id < currentStep;
+                  
+                  return (
+                    <div
+                      key={tile.id}
+                      style={{ left: `${tile.x}%`, top: `${tile.y}%` }}
+                      className="absolute -translate-x-1/2 -translate-y-1/2 group"
+                    >
+                      <div 
+                        className={`relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full font-mono-title font-bold text-[11px] sm:text-xs md:text-sm transition-all duration-300 shadow-lg ${
+                          isCurrent 
+                            ? 'tile-active scale-125 z-20 text-slate-950 font-extrabold bg-gradient-to-br from-amber-300 via-amber-400 to-amber-500 border-2 border-white ring-4 ring-amber-400/60 shadow-amber-500/60' 
+                            : isPassed 
+                              ? 'bg-amber-500/90 text-slate-950 border-2 border-amber-300 shadow-amber-900/40 opacity-90' 
+                              : 'bg-slate-900/90 text-slate-200 border-2 border-slate-600/90 hover:scale-110 hover:border-amber-400'
+                        }`}
+                        style={{
+                          borderColor: isCurrent ? '#ffffff' : (isPassed ? '#f59e0b' : tile.color)
+                        }}
+                      >
+                        <span>{tile.id}</span>
+                        
+                        <span className="absolute -top-1 -right-1 text-[8px] sm:text-[9px] md:text-[10px]">
+                          {tile.badge}
+                        </span>
+                      </div>
+
+                      <div className="absolute top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap px-2.5 py-1 rounded-lg bg-slate-900/95 border border-slate-700 text-[11px] font-medium text-slate-200 shadow-xl z-30 hidden sm:block">
+                        {tile.label}
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {/* 3. DON JACINTO FULL-BODY STANDING PAWN */}
+                <div 
+                  style={{ 
+                    left: `${activeTile.x}%`, 
+                    top: `${activeTile.y}%`,
+                    transition: isWalking ? 'none' : 'left 0.35s ease-out, top 0.35s ease-out'
+                  }}
+                  className={`absolute z-30 pointer-events-none ${pawnAnimClass}`}
+                >
+                  {/* Ground Shadow */}
+                  <div className="absolute left-1/2 bottom-1.5 -translate-x-1/2 w-12 sm:w-16 h-3 sm:h-4 bg-slate-950/80 rounded-full blur-[3px] pointer-events-none" />
+
+                  {/* Full-Body Sprite Image */}
+                  <img 
+                    src={currentJacintoSprite} 
+                    alt="Don Jacinto Campesino" 
+                    className="w-16 sm:w-20 md:w-24 lg:w-28 max-h-28 sm:max-h-36 object-contain pointer-events-none drop-shadow-[0_8px_16px_rgba(0,0,0,0.6)]"
+                  />
+
+                  {/* State Tag Badge */}
+                  <div className="absolute -top-5 sm:-top-6 left-1/2 -translate-x-1/2 whitespace-nowrap px-1.5 sm:px-2 py-0.5 rounded-full bg-amber-500 text-slate-950 font-bold text-[9px] sm:text-[10px] shadow-lg border border-amber-200">
+                    {jacintoEmotion === 'celebrando' ? '🎉 ¡Celebra!' : jacintoEmotion === 'preocupado' ? '😰 Preocupado' : 'Don Jacinto'}
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* 4. BOTTOM FLOATING CONTROLS & NARRATION STRIP */}
-            <div className="absolute bottom-4 left-4 right-4 md:left-6 md:right-6 z-20 flex flex-col md:flex-row items-center justify-between gap-3 pointer-events-none">
-              
-              <div className="pointer-events-auto flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 shadow-2xl max-w-xl">
+            <div 
+              className="fixed sm:absolute bottom-0 left-0 right-0 z-20 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 p-3 sm:p-4 md:p-6 pointer-events-none bg-gradient-to-t from-slate-950/95 via-slate-950/80 to-transparent"
+              style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
+            >
+              {/* Narration notification card */}
+              <div className="pointer-events-auto flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-slate-900/95 backdrop-blur-md border border-slate-700/80 shadow-2xl max-w-full sm:max-w-md md:max-w-xl">
                 <img 
-                  src={currentJacintoSprite} 
+                  src={jacintoAvatarToken} 
                   alt="Don Jacinto" 
-                  className="w-10 h-10 rounded-full object-cover bg-amber-500/20 border border-amber-500/40 p-0.5 shrink-0" 
+                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover bg-amber-500/20 border border-amber-500/40 p-0.5 shrink-0" 
                 />
-                <div>
-                  <div className="text-[11px] font-bold text-amber-400 flex items-center gap-1.5">
+                <div className="min-w-0 flex-1">
+                  <div className="text-[10px] sm:text-[11px] font-bold text-amber-400 flex items-center gap-1.5">
                     <span>Don Jacinto:</span>
                     {isNarrating && (
-                      <span className="flex items-center gap-0.5 text-emerald-400 text-[10px]">
+                      <span className="flex items-center gap-0.5 text-emerald-400 text-[9px] sm:text-[10px]">
                         <span className="w-1 h-2 bg-emerald-400 rounded wave-bar" style={{ animationDelay: '0s' }}></span>
                         <span className="w-1 h-3 bg-emerald-400 rounded wave-bar" style={{ animationDelay: '0.2s' }}></span>
                         <span className="w-1 h-2 bg-emerald-400 rounded wave-bar" style={{ animationDelay: '0.4s' }}></span>
@@ -1051,27 +1133,28 @@ raw_html = """<!DOCTYPE html>
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-slate-200 font-medium leading-tight">
+                  <p className="text-[11px] sm:text-xs text-slate-200 font-medium leading-tight truncate sm:whitespace-normal">
                     «{notificationText}»
                   </p>
                 </div>
               </div>
 
+              {/* Dice button */}
               {gameState === 'PLAYING' && (
-                <div className="pointer-events-auto flex items-center gap-3">
+                <div className="pointer-events-auto flex items-center justify-center sm:justify-end">
                   <button
                     onClick={handleRollDice}
                     disabled={isRolling || isWalking}
-                    className={`flex items-center gap-3 px-6 py-3.5 rounded-2xl font-mono-title font-extrabold text-base shadow-2xl transition-all duration-200 transform active:scale-95 cursor-pointer ${
+                    className={`w-full sm:w-auto flex items-center justify-center gap-2.5 sm:gap-3 px-5 sm:px-6 py-3 sm:py-3.5 rounded-2xl font-mono-title font-extrabold text-sm sm:text-base shadow-2xl transition-all duration-200 transform active:scale-95 cursor-pointer ${
                       isRolling || isWalking 
                         ? 'bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed' 
-                        : 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 border-2 border-amber-200 shadow-amber-500/40 hover:shadow-amber-500/60 hover:-translate-y-0.5'
+                        : 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 border-2 border-amber-200 shadow-amber-500/40 hover:shadow-amber-500/60 active:scale-95'
                     }`}
                   >
-                    <div className={`w-8 h-8 rounded-lg bg-slate-950 text-amber-400 flex items-center justify-center text-lg font-mono-title shadow-inner border border-amber-400/40 ${isRolling ? 'dice-rolling' : ''}`}>
+                    <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-950 text-amber-400 flex items-center justify-center text-base sm:text-lg font-mono-title shadow-inner border border-amber-400/40 ${isRolling ? 'dice-rolling' : ''}`}>
                       {isRolling ? '🎲' : currentDiceRoll}
                     </div>
-                    <span>{isRolling ? 'Lanzando dado...' : isWalking ? 'Avanzando...' : '¡Tirar Dado! (Espacio)'}</span>
+                    <span>{isRolling ? 'Lanzando dado...' : isWalking ? 'Avanzando...' : '¡Tirar Dado!'}</span>
                   </button>
                 </div>
               )}
@@ -1079,28 +1162,28 @@ raw_html = """<!DOCTYPE html>
           </main>
 
           {/* ======================================================== */}
-          {/* MODAL 1: INTRO SCREEN CINEMATIC OVERLAY                   */}
+          {/* MODAL 1: INTRO SCREEN CINEMATIC OVERLAY (MOBILE FRIENDLY) */}
           {/* ======================================================== */}
           {gameState === 'INTRO' && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-fade-in">
-              <div className="relative w-full max-w-2xl rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950 border border-amber-500/40 shadow-2xl p-6 md:p-8 text-center overflow-hidden">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-md animate-fade-in overflow-y-auto">
+              <div className="relative w-full max-w-2xl my-auto rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950 border border-amber-500/40 shadow-2xl p-5 sm:p-6 md:p-8 text-center overflow-hidden max-h-[92dvh] overflow-y-auto">
                 
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold mb-4">
-                  <span>🇨🇴</span> Memoria Histórica del Conflicto Armado (1958–1978)
+                <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] sm:text-xs font-semibold mb-3 sm:mb-4">
+                  <span>🇨🇴</span> Memoria Histórica del Conflicto (1958–1978)
                 </div>
 
-                <div className="flex justify-center mb-4">
+                <div className="flex justify-center mb-3 sm:mb-4">
                   <div className="relative">
-                    <div className="w-32 h-32 md:w-36 md:h-36 rounded-full bg-gradient-to-b from-amber-500/20 to-emerald-500/20 border-2 border-amber-400/40 flex items-center justify-center overflow-hidden shadow-2xl">
+                    <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full bg-gradient-to-b from-amber-500/20 to-emerald-500/20 border-2 border-amber-400/40 flex items-center justify-center overflow-hidden shadow-2xl">
                       <img 
-                        src={window.__JACINTO_SPRITES__?.saludo} 
+                        src={jacintoAvatarToken} 
                         alt="Don Jacinto" 
-                        className="w-full h-full object-contain transform scale-110 drop-shadow-xl" 
+                        className="w-full h-full object-cover transform scale-105 drop-shadow-xl" 
                       />
                     </div>
                     <button 
                       onClick={startIntro}
-                      className="absolute -bottom-1 -right-1 p-2.5 rounded-full bg-amber-500 text-slate-950 hover:bg-amber-400 shadow-lg border border-amber-200 transition-transform active:scale-90 cursor-pointer"
+                      className="absolute -bottom-1 -right-1 p-2 sm:p-2.5 rounded-full bg-amber-500 text-slate-950 hover:bg-amber-400 shadow-lg border border-amber-200 transition-transform active:scale-90 cursor-pointer text-xs sm:text-sm"
                       title="Escuchar saludo de Don Jacinto"
                     >
                       🗣️
@@ -1108,21 +1191,21 @@ raw_html = """<!DOCTYPE html>
                   </div>
                 </div>
 
-                <h2 className="text-2xl md:text-3xl font-extrabold text-white font-mono-title mb-2">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white font-mono-title mb-2">
                   ¡Hola! Soy Don Jacinto
                 </h2>
-                <p className="text-sm md:text-base text-slate-300 leading-relaxed mb-6 max-w-lg mx-auto">
+                <p className="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed mb-4 sm:mb-6 max-w-lg mx-auto">
                   Campesino de nuestras hermosas montañas. Acompáñame por este sendero de 24 casillas. En 8 turnos responderemos preguntas de memoria y reconstruiremos juntos la <strong className="text-amber-400">Finca La Esperanza</strong>.
                 </p>
 
-                <div className="py-2.5 px-4 rounded-xl bg-slate-800/60 border border-slate-700/60 text-xs text-slate-400 mb-6 max-w-md mx-auto">
+                <div className="py-2 px-3 sm:py-2.5 sm:px-4 rounded-xl bg-slate-800/60 border border-slate-700/60 text-[11px] sm:text-xs text-slate-400 mb-4 sm:mb-6 max-w-md mx-auto">
                   <span className="font-semibold text-slate-200">Comunidad de Indagación 3:</span> Isabella Ortiz, Alison Cuasquer, Valery Lopez, Valentina Benavidez
                 </div>
 
-                <div className="flex items-center justify-center gap-4">
+                <div className="flex items-center justify-center">
                   <button
                     onClick={handleStartGame}
-                    className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-bold font-mono-title text-base shadow-xl shadow-amber-500/30 transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
+                    className="w-full sm:w-auto px-8 py-3 sm:py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-bold font-mono-title text-sm sm:text-base shadow-xl shadow-amber-500/30 transition-all transform active:scale-95 cursor-pointer text-center"
                   >
                     ¡Comenzar Recorrido! 🚀
                   </button>
@@ -1132,21 +1215,22 @@ raw_html = """<!DOCTYPE html>
           )}
 
           {/* ======================================================== */}
-          {/* MODAL 2: QUESTION DISPLAY                                 */}
+          {/* MODAL 2: QUESTION DISPLAY (TOUCH & MOBILE OPTIMIZED)      */}
           {/* ======================================================== */}
           {(gameState === 'QUESTION' || gameState === 'FEEDBACK') && activeQuestion && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
-              <div className="relative w-full max-w-3xl rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900/98 to-slate-950 border-2 border-slate-700 shadow-2xl p-6 md:p-8 overflow-hidden">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-950/85 backdrop-blur-md animate-fade-in overflow-y-auto">
+              <div className="relative w-full max-w-3xl my-auto rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900/98 to-slate-950 border-2 border-slate-700 shadow-2xl p-4 sm:p-6 md:p-8 max-h-[92dvh] overflow-y-auto">
                 
-                <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
-                  <div className="flex items-center gap-2.5">
-                    <span className="px-3 py-1 rounded-xl text-xs font-bold text-slate-950 uppercase tracking-wider font-mono-title shadow-sm"
+                {/* Header info */}
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-3 sm:mb-4 pb-2.5 sm:pb-3 border-b border-slate-800">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5">
+                    <span className="px-2.5 sm:px-3 py-1 rounded-xl text-[10px] sm:text-xs font-bold text-slate-950 uppercase tracking-wider font-mono-title shadow-sm"
                           style={{ backgroundColor: activeTile.color }}>
                       {activeQuestion.category || "MEMORIA HISTÓRICA"}
                     </span>
                     {(activeQuestion.isSpecialBonus || activeQuestion.type === 'bonus') && (
-                      <span className="px-2.5 py-1 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold flex items-center gap-1">
-                        ⭐ Casilla Estrella de Reflexión
+                      <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] sm:text-xs font-bold flex items-center gap-1">
+                        ⭐ Casilla Estrella
                       </span>
                     )}
                   </div>
@@ -1154,7 +1238,7 @@ raw_html = """<!DOCTYPE html>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => playQuestionNarration(activeQuestionIdx)}
-                      className={`flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+                      className={`flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-xl text-[11px] sm:text-xs font-semibold border transition-all cursor-pointer ${
                         isNarrating 
                           ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' 
                           : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
@@ -1162,27 +1246,29 @@ raw_html = """<!DOCTYPE html>
                       title="Escuchar pregunta"
                     >
                       <span>{isNarrating ? '🗣️' : '🔊'}</span>
-                      <span>{isNarrating ? 'Narrando...' : 'Escuchar'}</span>
+                      <span className="hidden xs:inline">{isNarrating ? 'Narrando...' : 'Escuchar'}</span>
                     </button>
                     
-                    <span className="text-xs text-slate-400 font-mono-title">
-                      Casilla #{currentStep} • Turno {turnNumber}/8
+                    <span className="text-[10px] sm:text-xs text-slate-400 font-mono-title">
+                      Casilla #{currentStep} • {turnNumber}/8
                     </span>
                   </div>
                 </div>
 
-                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-white leading-snug mb-6 font-mono-title">
+                {/* Question Text */}
+                <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white leading-snug mb-4 sm:mb-6 font-mono-title">
                   {activeQuestion.question}
                 </h3>
 
-                <div className="space-y-3 mb-6">
+                {/* Options organized cleanly in single column */}
+                <div className="space-y-3 mb-4 sm:mb-6">
                   {activeQuestion.options.map((opt, idx) => {
                     const isSelected = selectedAnswer === idx;
                     const isCorrectOption = idx === activeQuestion.correct;
                     const letters = ['A', 'B', 'C', 'D'];
                     const cleanOpt = cleanOptionText(opt);
                     
-                    let btnStyle = "bg-slate-800/80 hover:bg-slate-700/90 border-slate-700 text-slate-200 cursor-pointer";
+                    let btnStyle = "bg-slate-800/80 hover:bg-slate-700/90 border-slate-700 text-slate-200 cursor-pointer active:scale-[0.99]";
                     let badgeStyle = "bg-slate-700 text-slate-300";
 
                     if (gameState === 'FEEDBACK') {
@@ -1200,43 +1286,61 @@ raw_html = """<!DOCTYPE html>
                     return (
                       <button
                         key={idx}
+                        data-option-idx={idx}
                         onClick={() => handleSelectAnswer(idx)}
                         disabled={gameState === 'FEEDBACK'}
-                        className={`w-full flex items-center gap-3.5 p-3.5 md:p-4 rounded-2xl border-2 text-left text-sm md:text-base transition-all duration-200 ${btnStyle}`}
+                        className={`w-full min-h-[48px] flex items-center gap-3 p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 text-left text-xs sm:text-sm md:text-base transition-all duration-200 ${btnStyle}`}
                       >
-                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 font-mono-title ${badgeStyle}`}>
+                        <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 font-mono-title ${badgeStyle}`}>
                           {letters[idx] || (idx + 1)}
                         </div>
                         <span className="flex-1 leading-relaxed">{cleanOpt}</span>
                         {gameState === 'FEEDBACK' && isCorrectOption && (
-                          <span className="text-xl">✅</span>
+                          <span className="text-lg sm:text-xl shrink-0">✅</span>
                         )}
                         {gameState === 'FEEDBACK' && isSelected && !isCorrectOption && (
-                          <span className="text-xl">❌</span>
+                          <span className="text-lg sm:text-xl shrink-0">❌</span>
                         )}
                       </button>
                     );
                   })}
                 </div>
 
+                {/* Feedback Box */}
                 {gameState === 'FEEDBACK' && (
-                  <div className="mt-4 p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs md:text-sm text-slate-300 animate-fade-in">
-                    <div className="flex items-center gap-2 font-bold mb-1.5 font-mono-title text-amber-400">
-                      <span>📖 Explicación Histórica & Verdad:</span>
-                    </div>
-                    <p className="leading-relaxed mb-2 text-slate-200">
-                      {activeQuestion.explanation}
-                    </p>
-                    {activeQuestion.citation && (
-                      <div className="text-[11px] text-amber-300/80 font-medium">
-                        Cita oficial: {activeQuestion.citation}
+                  <div className="mt-3 sm:mt-4 p-3 sm:p-4 rounded-2xl bg-slate-950/90 border border-slate-800 text-xs sm:text-sm text-slate-300 animate-fade-in">
+                    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4 mb-3 pb-3 border-b border-slate-800/80">
+                      <div className="relative shrink-0 flex flex-row sm:flex-col items-center justify-center p-2 rounded-2xl bg-slate-900/90 border border-slate-800 gap-2 sm:gap-0">
+                        <img 
+                          src={selectedAnswer === activeQuestion.correct ? (window.__JACINTO_SPRITES__?.celebrando || window.__JACINTO_SPRITES__?.saludo) : (window.__JACINTO_SPRITES__?.preocupado || window.__JACINTO_SPRITES__?.saludo)} 
+                          alt={selectedAnswer === activeQuestion.correct ? "Don Jacinto Celebrando" : "Don Jacinto Preocupado"} 
+                          className="w-16 h-20 sm:w-20 sm:h-28 md:w-24 md:h-32 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
+                        />
+                        <div className={`whitespace-nowrap px-2 sm:px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold shadow ${
+                          selectedAnswer === activeQuestion.correct ? 'bg-emerald-500 text-slate-950' : 'bg-rose-500 text-white'
+                        }`}>
+                          {selectedAnswer === activeQuestion.correct ? '🎉 ¡Celebra!' : '😰 ¡Preocupado!'}
+                        </div>
                       </div>
-                    )}
+                      <div className="flex-1 text-center sm:text-left">
+                        <div className="flex items-center justify-center sm:justify-start gap-1.5 font-bold mb-1 font-mono-title text-amber-400 text-xs sm:text-sm">
+                          <span>📖 Explicación Histórica & Verdad:</span>
+                        </div>
+                        <p className="leading-relaxed mb-2 text-slate-200 text-xs sm:text-sm">
+                          {activeQuestion.explanation}
+                        </p>
+                        {activeQuestion.citation && (
+                          <div className="text-[10px] sm:text-[11px] text-amber-300/80 font-medium">
+                            Cita oficial: {activeQuestion.citation}
+                          </div>
+                        )}
+                      </div>
+                    </div>
                     
-                    <div className="mt-4 flex justify-end">
+                    <div className="mt-2 flex justify-end">
                       <button
                         onClick={handleContinueAfterFeedback}
-                        className="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold font-mono-title text-sm shadow-lg shadow-amber-500/20 transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
+                        className="w-full sm:w-auto px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold font-mono-title text-sm shadow-lg shadow-amber-500/20 transition-all transform active:scale-95 cursor-pointer text-center"
                       >
                         Continuar Recorrido ➡️
                       </button>
@@ -1251,25 +1355,26 @@ raw_html = """<!DOCTYPE html>
           {/* MODAL 3: FINCA PROGRESS DRAWER                            */}
           {/* ======================================================== */}
           {showFarmModal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-fade-in">
-              <div className="relative w-full max-w-2xl rounded-3xl bg-slate-900 border border-emerald-500/40 shadow-2xl p-6 md:p-8 text-center overflow-hidden">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-md animate-fade-in overflow-y-auto">
+              <div className="relative w-full max-w-2xl my-auto rounded-3xl bg-slate-900 border border-emerald-500/40 shadow-2xl p-5 sm:p-6 md:p-8 text-center overflow-hidden max-h-[92dvh] overflow-y-auto">
                 <button 
                   onClick={() => setShowFarmModal(false)}
-                  className="absolute top-4 right-4 p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 cursor-pointer"
+                  className="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-base font-bold cursor-pointer transition-transform active:scale-90"
+                  aria-label="Cerrar modal"
                 >
                   ✕
                 </button>
 
-                <h3 className="text-xl md:text-2xl font-bold text-emerald-400 font-mono-title mb-1 flex items-center justify-center gap-2">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-emerald-400 font-mono-title mb-1 flex items-center justify-center gap-2">
                   🏡 Finca La Esperanza • Nivel {farmLevel} / 8
                 </h3>
-                <p className="text-xs text-slate-400 mb-4">
+                <p className="text-xs text-slate-400 mb-3 sm:mb-4">
                   {FARM_LEVELS[farmLevel]?.title || "Finca Cafetera"}
                 </p>
 
-                <div className="relative w-full h-56 rounded-2xl overflow-hidden border border-slate-700 mb-4 shadow-inner">
+                <div className="relative w-full h-44 sm:h-56 rounded-2xl overflow-hidden border border-slate-700 mb-3 sm:mb-4 shadow-inner">
                   <img 
-                    src={farmImages[FARM_LEVELS[farmLevel]?.imgKey] || farmImages.finca_inicial} 
+                    src={farmImages[FARM_LEVELS[farmLevel]?.imgKey] || farmImages.finca_nivel_0} 
                     alt="Progreso de la Finca"
                     className="w-full h-full object-cover"
                   />
@@ -1281,7 +1386,7 @@ raw_html = """<!DOCTYPE html>
                   </div>
                 </div>
 
-                <div className="w-full bg-slate-800 h-3 rounded-full overflow-hidden border border-slate-700 mb-4">
+                <div className="w-full bg-slate-800 h-3 rounded-full overflow-hidden border border-slate-700 mb-3 sm:mb-4">
                   <div 
                     className="h-full bg-gradient-to-r from-emerald-500 to-amber-400 transition-all duration-500"
                     style={{ width: `${(farmLevel / 8) * 100}%` }}
@@ -1289,7 +1394,7 @@ raw_html = """<!DOCTYPE html>
                 </div>
 
                 <p className="text-xs text-slate-300">
-                  Cada respuesta correcta hace florecer los cafetales, añade ventanas coloniales, paseras de secado y devuelve la vida a la comunidad campesina.
+                  Cada respuesta correcta suma puntos a la memoria histórica, florece los cafetales, añade ventanas coloniales, paseras de secado y devuelve la vida a la comunidad campesina.
                 </p>
               </div>
             </div>
@@ -1299,30 +1404,30 @@ raw_html = """<!DOCTYPE html>
           {/* MODAL 4: VICTORY SCREEN                                   */}
           {/* ======================================================== */}
           {gameState === 'VICTORY' && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-lg animate-fade-in">
-              <div className="relative w-full max-w-2xl rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border-2 border-amber-400 shadow-2xl p-6 md:p-8 text-center overflow-hidden">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/90 backdrop-blur-lg animate-fade-in overflow-y-auto">
+              <div className="relative w-full max-w-2xl my-auto rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border-2 border-amber-400 shadow-2xl p-5 sm:p-6 md:p-8 text-center overflow-hidden max-h-[92dvh] overflow-y-auto">
                 
-                <div className="text-5xl mb-3 animate-bounce">🏆</div>
+                <div className="text-4xl sm:text-5xl mb-2 sm:mb-3 animate-bounce">🏆</div>
                 
-                <h2 className="text-2xl md:text-3xl font-extrabold text-amber-400 font-mono-title mb-2">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-amber-400 font-mono-title mb-2">
                   ¡Victoria! ¡La Finca La Esperanza ha Renacido!
                 </h2>
-                <p className="text-sm md:text-base text-slate-200 leading-relaxed mb-4 max-w-lg mx-auto">
+                <p className="text-xs sm:text-sm md:text-base text-slate-200 leading-relaxed mb-3 sm:mb-4 max-w-lg mx-auto">
                   Gracias a su compromiso con la memoria histórica y la verdad, Don Jacinto ha recuperado su hogar y sus cafetales en su máximo esplendor.
                 </p>
 
-                <div className="relative w-full h-48 rounded-2xl overflow-hidden border border-amber-500/40 mb-5 shadow-2xl">
+                <div className="relative w-full h-40 sm:h-48 rounded-2xl overflow-hidden border border-amber-500/40 mb-4 sm:mb-5 shadow-2xl">
                   <img 
-                    src={farmImages.finca_hacienda_victoria || farmImages.finca_intermedia} 
+                    src={farmImages[FARM_LEVELS[farmLevel]?.imgKey] || farmImages.finca_nivel_8} 
                     alt="Hacienda La Esperanza Completa"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent flex items-end p-3">
-                    <span className="text-xs font-bold text-amber-300">🏡 Hacienda La Esperanza • ¡Nivel Máximo 8/8!</span>
+                    <span className="text-xs font-bold text-amber-300">🏡 {FARM_LEVELS[farmLevel]?.title || 'Hacienda La Esperanza'} • Nivel {farmLevel}/8 ({score} pts)</span>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200 mb-6">
+                <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200 mb-4 sm:mb-6">
                   <div className="font-bold text-amber-400 mb-1">Comunidad de Indagación 3 (1958–1978):</div>
                   <div>Isabella Ortiz • Alison Cuasquer • Valery Lopez • Valentina Benavidez</div>
                   <div className="text-[11px] text-slate-400 mt-1">«La paz se construye sobre la verdad, la memoria y la no repetición»</div>
@@ -1330,7 +1435,7 @@ raw_html = """<!DOCTYPE html>
 
                 <button
                   onClick={handleRestart}
-                  className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-bold font-mono-title text-base shadow-xl shadow-amber-500/30 transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-bold font-mono-title text-sm sm:text-base shadow-xl shadow-amber-500/30 transition-all transform active:scale-95 cursor-pointer text-center"
                 >
                   🔄 Jugar de Nuevo
                 </button>
@@ -1342,18 +1447,18 @@ raw_html = """<!DOCTYPE html>
           {/* MODAL 5: GAME OVER SCREEN                                 */}
           {/* ======================================================== */}
           {gameState === 'GAMEOVER' && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-lg animate-fade-in">
-              <div className="relative w-full max-w-md rounded-3xl bg-slate-900 border border-rose-500/40 shadow-2xl p-6 md:p-8 text-center">
-                <div className="text-5xl mb-3">💔</div>
-                <h3 className="text-2xl font-bold text-rose-400 font-mono-title mb-2">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/90 backdrop-blur-lg animate-fade-in overflow-y-auto">
+              <div className="relative w-full max-w-md my-auto rounded-3xl bg-slate-900 border border-rose-500/40 shadow-2xl p-5 sm:p-6 md:p-8 text-center max-h-[92dvh] overflow-y-auto">
+                <div className="text-4xl sm:text-5xl mb-2 sm:mb-3">💔</div>
+                <h3 className="text-xl sm:text-2xl font-bold text-rose-400 font-mono-title mb-2">
                   Se han agotado las vidas
                 </h3>
-                <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4 sm:mb-6">
                   Don Jacinto nos recuerda que en el camino hacia la paz y la memoria histórica, cada caída es una oportunidad para aprender de nuestro pasado y volver a empezar.
                 </p>
                 <button
                   onClick={handleRestart}
-                  className="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold font-mono-title text-sm shadow-lg shadow-amber-500/20 transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold font-mono-title text-sm shadow-lg shadow-amber-500/20 transition-all transform active:scale-95 cursor-pointer text-center"
                 >
                   🔄 Intentar de Nuevo
                 </button>
@@ -1373,9 +1478,11 @@ raw_html = """<!DOCTYPE html>
 """
 
 # Replace unique tokens
-final_html = raw_html.replace('%%DATA_QUESTIONS%%', questions_json_str)
+final_html = raw_html.replace('%%DATA_DON_JACINTO_FAVICON%%', favicon_b64)
+final_html = final_html.replace('%%DATA_QUESTIONS%%', questions_json_str)
 final_html = final_html.replace('%%DATA_GEMINI_IMAGES%%', gemini_imgs_str)
 final_html = final_html.replace('%%DATA_JACINTO_SPRITES%%', sprites_str)
+final_html = final_html.replace('%%DATA_JACINTO_TOKENS%%', tokens_str)
 final_html = final_html.replace('%%DATA_GONZALO_VOICES%%', gonzalo_voices_str)
 final_html = final_html.replace('%%DATA_QUESTIONS_VOICES%%', questions_voices_str)
 

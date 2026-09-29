@@ -21,6 +21,7 @@ Thumbs.db
 # Testing & QA Screenshots & Scratch files
 qa_screenshot_*.png
 screenshot_*.png
+mobile_*.png
 test_*.png
 test_*.mp3
 test_*.py
