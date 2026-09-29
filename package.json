@@ -4,7 +4,6 @@
   "description": "Juego JEP: Don Jacinto y la Memoria Histórica (1958–1978) - Experiencia Educativa Interactiva",
   "main": "index.html",
   "scripts": {
-    "build": "python build_index.py",
     "start": "npx serve ."
   },
   "keywords": [
